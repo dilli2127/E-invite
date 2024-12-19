@@ -1,0 +1,149 @@
+body {
+  margin: 0;
+  font-family: Helvetica Neue, Roboto, sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+.ant-menu {
+  color: white !important;
+}
+
+.ant-menu-light .ant-menu-item {
+  color: white !important
+}
+
+.ant-menu-item:not(.ant-menu-item-selected):active {
+  color: black !important
+}
+
+.transaction-card-content {
+  border: 1px #9c0909;
+  padding: 10px;
+  font-weight: bolder;
+  border-radius: 5px;
+  background: #9c0909;
+  color: white;
+  width: 200px;
+}
+
+.transaction-card {
+  display: flex;
+  width: 50%;
+  justify-content: flex-end;
+}
+
+.report-table {
+  border: 1px solid #0000003b;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.report-table th,
+.report-table td {
+  border: 1px solid #0000003b;
+  padding: 0px 5px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.report-table th {
+  height: 40px !important;
+  text-align: center;
+}
+
+.report-table tr {
+  height: 25px !important;
+}
+
+.report-ledgers {
+  font-weight: 500;
+}
+
+.report-values {
+  text-align: right !important;
+}
+
+.report-section {
+  font-weight: bolder;
+  width: 100%;
+  text-align: center;
+  /* Center the text */
+}
+
+.report-headers {
+  font-weight: bolder;
+}
+
+.report-value-total {
+  text-align: right !important;
+}
+
+.report-title {
+  margin: 0;
+}
+
+.report-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0px;
+}
+
+/* Scrollbar for WebKit browsers */
+::-webkit-scrollbar {
+  width: 7px;
+  /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  /* Track background */
+  border-radius: 10px;
+  /* Rounded corners */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  /* Scrollbar color */
+  border-radius: 10px;
+  /* Rounded corners */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  /* Color on hover */
+}
+
+/* Full-width image */
+.image-full-width {
+  width: 100%;
+  height: auto;
+}
+
+/* Map styling */
+#map {
+  height: 400px;
+  width: 100%;
+}
+
+.einvite-page {
+  display: flex;
+  flex-direction: column; 
+  gap: 0;
+  padding: 0;
+}
+
+.image-container {
+  /* Optional: Add styles to customize the container */
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+}
+

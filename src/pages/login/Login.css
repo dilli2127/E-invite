@@ -1,0 +1,24 @@
+.login-card {
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+  
+  .site-form-item-icon {
+    color: #1890ff; /* Icon color */
+  }
+  
+  .login-form-forgot {
+    float: right; /* Align forgot password link to the right */
+  }
+  
+  .login-form-button {
+    height: 48px; /* Button height */
+    font-size: 16px; /* Button font size */
+    background-color: #1890ff; /* Button background color */
+    border: none; /* Remove border */
+  }
+  
+  .login-form-button:hover {
+    background-color: #40a9ff; /* Hover effect */
+  }
+  
