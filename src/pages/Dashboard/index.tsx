@@ -27,21 +27,17 @@ interface AuditType {
 
 const auditTypes: AuditType[] = [
   {
-    title: "Total Patient",
+    title: "Total E-Invites",
     description:0,
   },
   {
-    title: "Today Ops",
+    title: "Today Clients",
     description:0,
   },
 ];
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
-
-  const handleCardClick = (auditTitle: string) => {
-    navigate("/audit-overview", { state: { auditTitle } }); // Pass auditTitle in state
-  };
 
   return (
     <div style={{ padding: "20px" }}>

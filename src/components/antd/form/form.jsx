@@ -1,4 +1,4 @@
-import { Form, Button, Input, Typography, Row, Col } from "antd";
+import { Form, Button, Typography, Row, Col } from "antd";
 import { PlusOutlined, MinusCircleOutlined } from "@ant-design/icons";
 
 const AntdForm = (props) => {
@@ -87,9 +87,9 @@ const AntdForm = (props) => {
               {(fields, { add, remove }) => (
                 <>
                   {fields.map(({ key, name, fieldKey, ...restField }) => (
-                    <Row gutter={[16, 16]} align="middle" key={key}>
+                    <Row gutter={[16,16]} align="middle" key={key}>
                       {nestedInputs.map((input, idx) => (
-                        <Col span={24 / 4} key={idx}>
+                        <Col key={idx}>
                           <Form.Item
                             {...restField}
                             name={[name, input.name]}
@@ -102,22 +102,21 @@ const AntdForm = (props) => {
                             ]}
                             label={input.label}
                           >
-                            <Input placeholder={input.label} />
+                             {input.component}
                           </Form.Item>
                         </Col>
                       ))}
-                      <Col span={2}>
+                      <Col>
                         <MinusCircleOutlined onClick={() => remove(name)} />
                       </Col>
                     </Row>
                   ))}
                   <Row justify="center">
-                    <Col span={6}>
+                    <Col >
                       <Button
-                        type="dashed"
+                        type="primary"
                         onClick={() => add()}
                         icon={<PlusOutlined />}
-                        style={{ width: "100%" }}
                       >
                         Add More Field
                       </Button>

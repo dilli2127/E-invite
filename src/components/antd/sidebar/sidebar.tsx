@@ -18,6 +18,12 @@ const menuItems = [
     label: "Dashboard",
     path: "/home",
   },
+  {
+    key: "E-Invite",
+    icon: <UserOutlined />,
+    label: "E-Invite",
+    path: "/einvite_crud",
+  },
  
 ];
 
