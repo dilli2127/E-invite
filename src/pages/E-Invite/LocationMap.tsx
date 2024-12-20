@@ -39,32 +39,29 @@ const LocationMap: React.FC<LocationMapProps> = ({ latitude, longitude }) => {
   };
 
   return (
-    <>
-      {" "}
-      <Card title="Event Location" style={{ marginTop: 20 }}>
-        <LoadScript googleMapsApiKey={apiKey}>
-          <GoogleMap
-            mapContainerStyle={{ height: "400px", width: "100%" }}
-            center={{ lat: latitude, lng: longitude }}
-            zoom={13}
-          >
-            <Marker
+    <Card title="Event Location" >
+      <LoadScript googleMapsApiKey={apiKey}>
+        <GoogleMap
+          mapContainerStyle={{ height: "400px", width: "100%" }}
+          center={{ lat: latitude, lng: longitude }}
+          zoom={13}
+        >
+          <Marker
+            position={{ lat: latitude, lng: longitude }}
+            onClick={handleMarkerClick}
+          />
+          {showInfoWindow && (
+            <InfoWindow
               position={{ lat: latitude, lng: longitude }}
-              onClick={handleMarkerClick}
-            />
-            {showInfoWindow && (
-              <InfoWindow
-                position={{ lat: latitude, lng: longitude }}
-                onCloseClick={handleInfoWindowClose}
-              >
-                <div>{address}</div>
-              </InfoWindow>
-            )}
-          </GoogleMap>
-        </LoadScript>
-        {address && <div style={{ marginTop: "10px" }}>Address: {address}</div>}
-      </Card>
-    </>
+              onCloseClick={handleInfoWindowClose}
+            >
+              <div>{address}</div>
+            </InfoWindow>
+          )}
+        </GoogleMap>
+      </LoadScript>
+      {address && <div style={{ marginTop: "10px" }}>Address: {address}</div>}
+    </Card>
   );
 };
 

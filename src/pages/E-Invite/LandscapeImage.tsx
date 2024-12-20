@@ -1,5 +1,5 @@
-import React from 'react';
-import { Card } from 'antd';
+import { Col } from "antd";
+import React from "react";
 
 interface LandscapeImageProps {
   imageUrl: string;
@@ -7,9 +7,9 @@ interface LandscapeImageProps {
 
 const LandscapeImage: React.FC<LandscapeImageProps> = ({ imageUrl }) => {
   return (
-    <div className="image-container">
-    <img alt="Landscape" src={imageUrl} className="image-full-width" />
-  </div>
+    <Col className="image-container">
+      <img alt="Landscape" src={imageUrl} className="image-full-width" />
+    </Col>
   );
 };
 
