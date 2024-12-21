@@ -16,7 +16,7 @@ const LocationMap: React.FC<LocationMapProps> = ({ latitude, longitude }) => {
   const [address, setAddress] = useState<string>("");
   const [showInfoWindow, setShowInfoWindow] = useState<boolean>(false);
 
-  const apiKey = "AIzaSyDgT8ciJWh8oSJK4GS2Nb_so8sfl74kGGI";
+  const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY || "";
 
   // useEffect(() => {
   //   // Fetch the address from Google Maps API
