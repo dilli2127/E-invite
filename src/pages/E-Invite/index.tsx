@@ -34,7 +34,7 @@ const EInvitePage: React.FC = () => {
   }, []);
   const slide = [
     { url: "https://freshfocuzstudio.s3.ap-south-1.amazonaws.com/IMG_0492.JPG" },
-    { url: "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/062A6124.JPG" },
+    { url: "https://freshfocuzstudio.s3.ap-south-1.amazonaws.com/IMG_0491.JPG" },
   ];
   return (
     <>
@@ -52,8 +52,8 @@ const EInvitePage: React.FC = () => {
         </Col>
         <Col>
           <LocationMap
-            latitude={13.090602524240074}
-            longitude={79.4262046063622}
+            latitude={13.09061709376011}
+            longitude={79.42620179429223}
           />
         </Col>
       </Col>
