@@ -1,104 +1,97 @@
-import React from 'react';
-import { Layout, Typography, Space, Button, Row, Col } from 'antd';
+import React, { useState } from "react";
+import { Layout, Menu, Drawer, Button } from "antd";
+import { MenuOutlined } from "@ant-design/icons";
+import "./Header.css";
 
 const { Header } = Layout;
-const { Title, Text } = Typography;
 
-const ModernHeader: React.FC = () => {
+const AppHeader: React.FC = () => {
+  const [visible, setVisible] = useState(false);
+
+  // Open mobile menu
+  const showDrawer = () => {
+    setVisible(true);
+  };
+
+  // Close mobile menu
+  const onClose = () => {
+    setVisible(false);
+  };
+
   return (
-    <Header style={styles.header}>
-      <Row align="middle" justify="space-between" style={styles.container}>
-        {/* Logo and Title Section */}
-        <Col xs={24} md={8} style={styles.centered}>
-          <Space align="center">
-            <img
-              src="https://via.placeholder.com/50"
-              alt="Logo"
-              style={styles.logo}
-            />
-            <div style={{ textAlign: 'center' ,justifyContent:"center"}}>
-              <Title level={4} style={styles.title}>
-                FreshFocuzStudio
-              </Title>
-              {/* <Text style={styles.tagline}>Your Memories, Our Passion</Text> */}
-            </div>
-          </Space>
-        </Col>
+    <Header className="header">
+      {/* Logo */}
+      <div className="logo">
+        <a href="#">
+          <img
+            src="https://freshfocuzstudio.s3.ap-south-1.amazonaws.com/ffs+logo.png"
+            alt="Fresh Focuz Studio Logo"
+          />
+          Fresh Focuz Studio
+        </a>
+      </div>
 
-        {/* Navigation Section */}
-        <Col xs={0} md={16} style={styles.navSection}>
-          <Space size="large" style={{ justifyContent: 'center' }}>
-            <Button type="link" style={styles.navButton}>
-              Home
-            </Button>
-            <Button type="link" style={styles.navButton}>
-              Services
-            </Button>
-            <Button type="link" style={styles.navButton}>
-              Contact Us
-            </Button>
-            <Button type="primary" shape="round" size="large" style={styles.ctaButton}>
-              Book Now
-            </Button>
-          </Space>
-        </Col>
-      </Row>
+      {/* Desktop Navigation */}
+      <div className="desktop-nav">
+        <Menu
+          mode="horizontal"
+          theme="dark"
+          className="nav-links"
+          style={{ background: "transparent", borderBottom: "none" }}
+        >
+          <Menu.Item key="home">
+            <a href="#">Home</a>
+          </Menu.Item>
+          <Menu.Item key="gallery">
+            <a href="#">Gallery</a>
+          </Menu.Item>
+          <Menu.Item key="services">
+            <a href="#">Services</a>
+          </Menu.Item>
+          <Menu.Item key="contact">
+            <a href="#">Contact</a>
+          </Menu.Item>
+        </Menu>
+      </div>
+
+      {/* Mobile Navigation */}
+      <div className="mobile-nav">
+        <Button
+          type="primary"
+          icon={<MenuOutlined />}
+          onClick={showDrawer}
+          className="menu-icon"
+        />
+        <Drawer
+          title={<span className="drawer-title">🎉 Menu</span>}
+          placement="right"
+          onClose={onClose}
+          visible={visible}
+          width={250}
+        >
+          <Menu
+            mode="vertical"
+            theme="light"
+            className="mobile-nav-links"
+            onClick={onClose}
+          >
+            <Menu.Item key="home">
+              <a href="#">Home</a>
+            </Menu.Item>
+            <Menu.Item key="gallery">
+              <a href="#">Gallery</a>
+            </Menu.Item>
+            <Menu.Item key="services">
+              <a href="#">Services</a>
+            </Menu.Item>
+            <Menu.Item key="contact">
+              <a href="#">Contact</a>
+            </Menu.Item>
+          </Menu>
+        </Drawer>
+      </div>
     </Header>
   );
 };
 
-const styles: Record<string, React.CSSProperties> = {
-  header: {
-    backgroundColor: '#001529',
-    padding: '0 20px',
-    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)',
-    display: 'flex',
-    alignItems: 'center',
-    height: '64px',
-  },
-  container: {
-    width: '100%',
-    maxWidth: '1200px',
-    margin: '0 auto',
-  },
-  centered: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    textAlign: 'center',
-  },
-  logo: {
-    width: '40px',
-    height: '40px',
-    borderRadius: '50%',
-    objectFit: 'cover',
-    justifyContent:"center",
-    display:"flex"
-  },
-  title: {
-    color: '#ffffff',
-    margin: 0,
-  },
-  tagline: {
-    color: '#ffcc00',
-    fontSize: '14px',
-  },
-  navSection: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  navButton: {
-    color: '#ffffff',
-    fontWeight: '500',
-    fontSize: '16px',
-  },
-  ctaButton: {
-    backgroundColor: '#ff4d4f',
-    borderColor: '#ff4d4f',
-    color: '#ffffff',
-    fontWeight: 'bold',
-  },
-};
-
-export default ModernHeader;
+export default AppHeader;

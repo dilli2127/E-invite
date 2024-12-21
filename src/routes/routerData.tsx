@@ -15,7 +15,7 @@ const routerData: RouteConfig[] = [
   {
     key: "login",
     path: "/",
-    component: <Login />,
+    component: <Einvite />,
     children: [],
   },
   {

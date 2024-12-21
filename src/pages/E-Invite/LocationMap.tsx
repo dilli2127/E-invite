@@ -85,24 +85,44 @@ const LocationMap: React.FC<LocationMapProps> = ({ latitude, longitude }) => {
                 >
                   {address}
                   <Button
-                  type="primary"
-                  onClick={() => {
-                    navigator.clipboard.writeText(address);
-                  }}
-                >
-                  Directions
-                </Button>
+                    type="primary"
+                    onClick={() => {
+                      navigator.clipboard.writeText(address);
+                    }}
+                  >
+                    Directions
+                  </Button>
                 </a>
-               
               </div>
             </InfoWindow>
           )}
         </GoogleMap>
       </LoadScript>
       {address && (
-        <div style={{ marginTop: "10px" }}>
-          Address:{" "}
-          <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer">
+        <div
+          style={{
+            marginTop: "10px",
+            backgroundColor: "#f0f8ff",
+            padding: "15px",
+            borderRadius: "10px",
+            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+            textAlign: "center",
+          }}
+        >
+          <h3 style={{ color: "#1d3557", fontFamily: "Arial, sans-serif" }}>
+            Event Address
+          </h3>
+          <a
+            href={googleMapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              textDecoration: "none",
+              color: "#0b1687",
+              fontWeight: "bold",
+              fontSize: "18px",
+            }}
+          >
             {address}
           </a>
         </div>
