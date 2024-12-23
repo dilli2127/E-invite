@@ -4,56 +4,50 @@ import PhotoSlider from "./PhotoSlider";
 import LocationMap from "./LocationMap";
 import { Col } from "antd";
 import Header from "../../components/Header/Header";
-
-interface EInviteData {
-  landscapeImage: string;
-  photos: { url: string }[];
-  location: {
-    latitude: number;
-    longitude: number;
-  };
-}
+import { useParams } from "react-router-dom";
 
 const EInvitePage: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
   const [imageUrl, setImageUrl] = useState<string>("");
-  const [photos, setPhotos] = useState<{ url: string }[]>([]);
-  const [location, setLocation] = useState<{
+  const [photos, setPhotos] = useState<string []>([]);
+  const [location, setLatitude] = useState<{
     latitude: number;
     longitude: number;
-  }>({ latitude: 0, longitude: 0 });
-
+  }>({ latitude: 0.0, longitude: 0.0 });
+console.log("id",location)
   useEffect(() => {
-    // Fetch data from your API
-    fetch("/api/einvite")
-      .then((res) => res.json())
-      .then((data: EInviteData) => {
-        setImageUrl(data.landscapeImage);
-        setPhotos(data.photos);
-        setLocation(data.location);
-      });
-  }, []);
-  const slide = [
-    { url: "https://freshfocuzstudio.s3.ap-south-1.amazonaws.com/IMG_0492.JPG" },
-    { url: "https://freshfocuzstudio.s3.ap-south-1.amazonaws.com/IMG_0491.JPG" },
-  ];
+    if (id) {
+      fetch(`http://localhost:8247/e_invite/${id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          const result = data.result;
+          setImageUrl(result?.invite_url || "");
+          setPhotos(result?.images || []);
+          setLatitude({
+            latitude: result?.latitude || 0.0,
+            longitude: result?.longitude || 0.0,
+          });
+        })
+        .catch((error) => {
+          console.error("Error fetching invite details:", error);
+        });
+    }
+  }, [id]);
+
   return (
     <>
       <Header />
       <Col className="einvite-page">
-        <Col >
-          <LandscapeImage
-            imageUrl={
-              "https://freshfocuzstudio.s3.ap-south-1.amazonaws.com/Pink+And+Green+Floral+Wedding+Invitation+Landscape+.jpg"
-            }
-          />
+        <Col>
+          <LandscapeImage imageUrl={imageUrl} />
         </Col>
-        <Col style={{ marginTop:"-3px" }}>
-          <PhotoSlider photos={slide} />
+        <Col style={{ marginTop: "-3px" }}>
+          <PhotoSlider photos={photos} />
         </Col>
         <Col>
           <LocationMap
-            latitude={13.09061709376011}
-            longitude={79.42620179429223}
+            latitude={location.latitude}
+            longitude={location.longitude}
           />
         </Col>
       </Col>

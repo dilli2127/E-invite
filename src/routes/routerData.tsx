@@ -13,15 +13,15 @@ const routerData: RouteConfig[] = [
     children: [],
   },
   {
-    key: "login",
-    path: "/",
+    key: "Einvite",
+    path: "/:id",
     component: <Einvite />,
     children: [],
   },
   {
     key: "einvite",
-    path: "/einvite",
-    component: <Einvite />,
+    path: "/einvite:id",
+    component: <Einvite/>,
     children: [],
   },
   {
