@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./LandingPage.css"; // For custom styling
 import Header from "../../components/Header/Header";
+import AppHeader from "../../components/Header/Header";
 
 const LandingPage: React.FC = () => {
   const [brideName, setBrideName] = useState("");
@@ -18,6 +19,7 @@ const LandingPage: React.FC = () => {
 
   return (
     <>
+     <AppHeader/>
       <div className="landing-page">
         <div className="content-container">
           <h1>Welcome to the Wedding Invitation</h1>

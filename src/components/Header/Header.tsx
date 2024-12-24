@@ -1,12 +1,11 @@
-import React, { ReactNode, useState } from "react";
+import React, { useState } from "react";
 import { Layout, Menu, Drawer, Button } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import "./Header.css";
-interface HeaderProps {children: ReactNode;}
 
 const { Header } = Layout;
 
-const AppHeader: React.FC<HeaderProps> = (children) => {
+const AppHeader: React.FC = () => {
   const [visible, setVisible] = useState(false);
 
   // Open mobile menu
@@ -23,7 +22,7 @@ const AppHeader: React.FC<HeaderProps> = (children) => {
     <Header className="header">
       {/* Logo */}
       <div className="logo">
-        <a href="#">
+        <a href="/">
           <img
             src="https://freshfocuzstudio.s3.ap-south-1.amazonaws.com/ffs+logo.png"
             alt="Fresh Focuz Studio Logo"
