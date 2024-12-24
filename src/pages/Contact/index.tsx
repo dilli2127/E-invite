@@ -5,12 +5,10 @@ import {
   MailOutlined,
 } from "@ant-design/icons";
 import "./ContactPage.css";
-import Header from "../../components/Header/Header";
 
 const ContactPage: React.FC = () => {
   return (
     <>
-     <Header />
       <div className="contact-page">
         <div className="contact-overlay">
           <div className="contact-content">

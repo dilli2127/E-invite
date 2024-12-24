@@ -12,13 +12,12 @@ const LandingPage: React.FC = () => {
     e.preventDefault();
     if (brideName && groomName) {
       // Redirect to the invite page with bride and groom names
-      navigate(`/einvite/${brideName}weds${groomName}`);
+      navigate(`/einvite/${groomName}weds${brideName}`);
     }
   };
 
   return (
     <>
-      <Header />
       <div className="landing-page">
         <div className="content-container">
           <h1>Welcome to the Wedding Invitation</h1>
@@ -40,7 +39,7 @@ const LandingPage: React.FC = () => {
               />
             </div>
             <button type="submit" className="submit-btn">
-              Create Invitation
+              Get Invitation
             </button>
           </form>
           <br/>

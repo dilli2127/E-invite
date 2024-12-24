@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./ComingSoon.css";
-import Header from "../../components/Header/Header";
 
 const ComingSoon: React.FC = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -34,7 +33,6 @@ const ComingSoon: React.FC = () => {
 
   return (
     <>
-      <Header />
       <div className="coming-soon-page">
         <div className="overlay">
           <div className="content">

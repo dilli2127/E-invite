@@ -3,7 +3,6 @@ import LandscapeImage from "./LandscapeImage";
 import PhotoSlider from "./PhotoSlider";
 import LocationMap from "./LocationMap";
 import { Col } from "antd";
-import Header from "../../components/Header/Header";
 import { useParams } from "react-router-dom";
 
 const EInvitePage: React.FC = () => {
@@ -14,7 +13,6 @@ const EInvitePage: React.FC = () => {
     latitude: number;
     longitude: number;
   }>({ latitude: 0.0, longitude: 0.0 });
-console.log("id",location)
   useEffect(() => {
     if (id) {
       fetch(`http://13.203.125.153:8246/e_invite/${id}`)
@@ -36,7 +34,6 @@ console.log("id",location)
 
   return (
     <>
-      <Header />
       <Col className="einvite-page">
         <Col>
           <LandscapeImage imageUrl={imageUrl} />

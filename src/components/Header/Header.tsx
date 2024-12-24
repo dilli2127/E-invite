@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 import { Layout, Menu, Drawer, Button } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import "./Header.css";
+interface HeaderProps {children: ReactNode;}
 
 const { Header } = Layout;
 
-const AppHeader: React.FC = () => {
+const AppHeader: React.FC<HeaderProps> = (children) => {
   const [visible, setVisible] = useState(false);
 
   // Open mobile menu
