@@ -7,7 +7,6 @@ import EInviteCrud from "../pages/E-InviteCrud/crud";
 import LandingPage from "../pages/LadingPage";
 import ComingSoon from "../pages/ComingSoon";
 import ContactPage from "../pages/Contact";
-import AppHeader from "../../src/components/Header/Header";
 
 const routerData: RouteConfig[] = [
   {
@@ -50,9 +49,7 @@ const routerData: RouteConfig[] = [
     key: "Contact",
     path: "/contact",
     component: (
-      <AppHeader>
         <ContactPage  />
-      </AppHeader>
     ),
     children: [],
   },
