@@ -1,0 +1,127 @@
+/* Full page with gradient background */
+.contact-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ff6a00, #ee0979); /* Beautiful gradient */
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+  }
+  
+  /* Overlay for darkening the background */
+  .contact-overlay {
+    background: rgba(0, 0, 0, 0.6); /* Dark overlay */
+    padding: 40px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 600px;
+  }
+  
+  /* Contact content styling */
+  .contact-content {
+    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.7); /* Dark background for the content */
+    border-radius: 15px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4); /* Soft shadow for 3D effect */
+  }
+  
+  /* Form title */
+  .contact-title {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+    letter-spacing: 2px;
+  }
+  
+  /* Description text */
+  .contact-description {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #eaeaea;
+  }
+  
+  /* Contact information styling */
+  .contact-info {
+    margin-top: 20px;
+  }
+  
+  /* Contact items with icons */
+  .contact-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+    color: #f1f1f1;
+  }
+  
+  .contact-item strong {
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-left: 10px;
+  }
+  
+  /* Contact item text */
+  .contact-item p {
+    font-size: 1rem;
+    margin-top: 5px;
+    color: #d1d1d1;
+  }
+  
+  /* Icons styling */
+  .contact-icon {
+    font-size: 2rem;
+    color: #ffeb3b; /* Bright icon color */
+    transition: transform 0.3s;
+    margin-right: 15px;
+  }
+  
+  /* Icon hover effect */
+  .contact-icon:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Hover effects for contact info items */
+  .contact-item:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 10px;
+    transition: background-color 0.3s;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .contact-title {
+      font-size: 2rem;
+    }
+  
+    .contact-content {
+      padding: 20px;
+    }
+  
+    .contact-info {
+      margin-top: 20px;
+    }
+  
+    .contact-item {
+      font-size: 1rem;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .contact-icon {
+      font-size: 1.7rem;
+      margin-bottom: 10px;
+    }
+  
+    .contact-item strong {
+      font-size: 1.1rem;
+    }
+  
+    .contact-item p {
+      font-size: 0.9rem;
+    }
+  }
+  

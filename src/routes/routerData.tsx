@@ -5,6 +5,8 @@ import HomePage from "../pages/Dashboard";
 import Einvite from "../pages/E-Invite";
 import EInviteCrud from "../pages/E-InviteCrud/crud";
 import LandingPage from "../pages/LadingPage";
+import ComingSoon from "../pages/ComingSoon";
+import ContactPage from "../pages/Contact";
 
 const routerData: RouteConfig[] = [
   {
@@ -23,6 +25,30 @@ const routerData: RouteConfig[] = [
     key: "einvite",
     path: "/einvite/:id",
     component: <Einvite/>,
+    children: [],
+  },
+  {
+    key: "Home",
+    path: "/home",
+    component: <LandingPage/>,
+    children: [],
+  },
+  {
+    key: "Gallery",
+    path: "/gallery",
+    component: <ComingSoon/>,
+    children: [],
+  },
+  {
+    key: "Services",
+    path: "/services",
+    component: <ComingSoon/>,
+    children: [],
+  },
+  {
+    key: "Contact",
+    path: "/contact",
+    component: <ContactPage/>,
     children: [],
   },
   {

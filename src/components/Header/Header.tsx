@@ -40,16 +40,16 @@ const AppHeader: React.FC = () => {
           style={{ background: "transparent", borderBottom: "none" }}
         >
           <Menu.Item key="home">
-            <a href="#">Home</a>
+            <a href="/home">Home</a>
           </Menu.Item>
           <Menu.Item key="gallery">
-            <a href="#">Gallery</a>
+            <a href="/gallery">Gallery</a>
           </Menu.Item>
           <Menu.Item key="services">
-            <a href="#">Services</a>
+            <a href="/services">Services</a>
           </Menu.Item>
-          <Menu.Item key="contact">
-            <a href="#">Contact</a>
+          <Menu.Item key="Contact">
+            <a href="/contact">Contact</a>
           </Menu.Item>
         </Menu>
       </div>
@@ -76,16 +76,16 @@ const AppHeader: React.FC = () => {
             onClick={onClose}
           >
             <Menu.Item key="home">
-              <a href="#">Home</a>
+              <a href="/home">Home</a>
             </Menu.Item>
             <Menu.Item key="gallery">
-              <a href="#">Gallery</a>
+              <a href="/gallery">Gallery</a>
             </Menu.Item>
             <Menu.Item key="services">
-              <a href="#">Services</a>
+              <a href="/services">Services</a>
             </Menu.Item>
             <Menu.Item key="contact">
-              <a href="#">Contact</a>
+              <a href="/contact">Contact</a>
             </Menu.Item>
           </Menu>
         </Drawer>
