@@ -4,6 +4,7 @@ import Sidebar from "../components/antd/sidebar/sidebar";
 import HomePage from "../pages/Dashboard";
 import Einvite from "../pages/E-Invite";
 import EInviteCrud from "../pages/E-InviteCrud/crud";
+import LandingPage from "../pages/LadingPage";
 
 const routerData: RouteConfig[] = [
   {
@@ -13,14 +14,14 @@ const routerData: RouteConfig[] = [
     children: [],
   },
   {
-    key: "Einvite",
-    path: "/:id",
-    component: <Einvite />,
+    key: "LandingPage",
+    path: "/",
+    component: <LandingPage />,
     children: [],
   },
   {
     key: "einvite",
-    path: "/einvite:id",
+    path: "/einvite/:id",
     component: <Einvite/>,
     children: [],
   },

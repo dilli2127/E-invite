@@ -1,0 +1,138 @@
+/* Full page background with gradient and centered content */
+.landing-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(255, 105, 135, 0.8), rgba(255, 181, 85, 0.8)); /* Gradient background */
+    color: white;
+    font-family: 'Arial', sans-serif;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .landing-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../../assets/img/ffslogo.png'); /* Background logo */
+    background-size: 500px; /* Medium-sized logo */
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.3; /* Apply opacity to the logo */
+    z-index: 0;
+  }
+  
+  .content-container {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background for readability */
+    padding: 40px;
+    border-radius: 10px;
+    width: 40%;
+    max-width: 500px;
+    z-index: 1; /* Make sure content is on top of the background */
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  .input-group {
+    margin-bottom: 15px;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: none;
+    margin-top: 5px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+  }
+  
+  .input-group input:focus {
+    border: 2px solid #fe6b8b;
+    outline: none;
+  }
+  
+  .submit-btn {
+    padding: 15px 25px;
+    background-color: #fe6b8b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+  
+  .submit-btn:hover {
+    background-color: #ff8e53;
+    transform: scale(1.05); /* Slight scale-up effect */
+  }
+  
+  .submit-btn:active {
+    background-color: #ff5722;
+    transform: scale(1);
+  }
+  
+  @media (max-width: 768px) {
+    /* Smaller screen styles */
+    .landing-page {
+      padding: 20px; /* Reduce padding on mobile for better fit */
+    }
+  
+    .content-container {
+      width: 90%; /* Make container almost full width */
+      padding: 30px;
+    }
+  
+    h1 {
+      font-size: 2rem; /* Smaller header size */
+      margin-bottom: 10px;
+    }
+  
+    .input-group input {
+      font-size: 1.1rem; /* Increase input font size slightly for readability */
+      padding: 14px; /* Larger padding for easier tapping */
+    }
+  
+    .submit-btn {
+      width: 100%; /* Button takes full width on mobile */
+      font-size: 1.5rem; /* Slightly larger font size */
+      padding: 18px; /* Larger padding for better usability */
+    }
+  
+    /* Optional: Adjust background logo size for mobile */
+    .landing-page::before {
+      background-size: 200px; /* Slightly smaller logo on mobile */
+    }
+  }
+  
+  /* Very small screen adjustments (e.g., mobile phones in portrait) */
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 1.8rem; /* Further reduce font size for very small screens */
+    }
+  
+    .content-container {
+      padding: 25px; /* Slightly less padding for very small screens */
+    }
+  
+    .submit-btn {
+      font-size: 1.4rem; /* Adjust button font size */
+      padding: 15px; /* Adjust button padding for small screens */
+    }
+  }
+  
