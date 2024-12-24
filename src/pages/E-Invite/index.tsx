@@ -17,7 +17,7 @@ const EInvitePage: React.FC = () => {
 console.log("id",location)
   useEffect(() => {
     if (id) {
-      fetch(`http://localhost:8247/e_invite/${id}`)
+      fetch(`http://13.203.125.153:8246/e_invite/${id}`)
         .then((res) => res.json())
         .then((data) => {
           const result = data.result;
