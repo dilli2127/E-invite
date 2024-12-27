@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Layout, Menu, Drawer, Button } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import "./Header.css";
+import { Link } from "react-router-dom";
 
 const { Header } = Layout;
 
@@ -22,13 +23,13 @@ const AppHeader: React.FC = () => {
     <Header className="header">
       {/* Logo */}
       <div className="logo">
-        <a href="/">
+        <Link to="/">
           <img
             src="https://freshfocuzstudio.s3.ap-south-1.amazonaws.com/ffs+logo.png"
             alt="Fresh Focuz Studio Logo"
           />
           Fresh Focuz Studio
-        </a>
+        </Link>
       </div>
 
       {/* Desktop Navigation */}
@@ -40,16 +41,16 @@ const AppHeader: React.FC = () => {
           style={{ background: "transparent", borderBottom: "none" }}
         >
           <Menu.Item key="home">
-            <a href="/home">Home</a>
+            <Link to="/">Home</Link>
           </Menu.Item>
           <Menu.Item key="gallery">
-            <a href="/gallery">Gallery</a>
+            <Link to="/gallery">Gallery</Link>
           </Menu.Item>
           <Menu.Item key="services">
-            <a href="/services">Services</a>
+            <Link to="/services">Services</Link>
           </Menu.Item>
-          <Menu.Item key="Contact">
-            <a href="/contact">Contact</a>
+          <Menu.Item key="contact">
+            <Link to="/contact">Contact</Link>
           </Menu.Item>
         </Menu>
       </div>
@@ -76,16 +77,16 @@ const AppHeader: React.FC = () => {
             onClick={onClose}
           >
             <Menu.Item key="home">
-              <a href="/home">Home</a>
+              <Link to="/">Home</Link>
             </Menu.Item>
             <Menu.Item key="gallery">
-              <a href="/gallery">Gallery</a>
+              <Link to="/gallery">Gallery</Link>
             </Menu.Item>
             <Menu.Item key="services">
-              <a href="/services">Services</a>
+              <Link to="/services">Services</Link>
             </Menu.Item>
             <Menu.Item key="contact">
-              <a href="/contact">Contact</a>
+              <Link to="/contact">Contact</Link>
             </Menu.Item>
           </Menu>
         </Drawer>

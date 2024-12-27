@@ -16,65 +16,46 @@ const routerData: RouteConfig[] = [
     children: [],
   },
   {
-    key: "LandingPage",
+    key: "landingPage",
     path: "/",
     component: <LandingPage />,
     children: [],
   },
   {
-    key: "einvite",
+    key: "einviteDetail",
     path: "/einvite/:id",
-    component: <Einvite/>,
+    component: <Einvite />,
     children: [],
   },
   {
-    key: "Home",
-    path: "/home",
-    component: <LandingPage/>,
-    children: [],
-  },
-  {
-    key: "Gallery",
+    key: "gallery",
     path: "/gallery",
-    component: <ComingSoon/>,
+    component: <ComingSoon />,
     children: [],
   },
   {
-    key: "Services",
+    key: "services",
     path: "/services",
-    component: <ComingSoon/>,
+    component: <ComingSoon />,
     children: [],
   },
   {
-    key: "Contact",
+    key: "contact",
     path: "/contact",
-    component: (
-        <ContactPage  />
-    ),
+    component: <ContactPage />,
     children: [],
   },
   {
-    key: "einvite",
+    key: "einviteCrud",
     path: "/einvite_crud",
     component: (
       <Sidebar>
         <EInviteCrud items={[]} />
       </Sidebar>
     ),
-    // component: <EInviteCrud />,
-    children: [],
-  },
-  
-  {
-    key: "home",
-    path: "/home",
-    component: (
-      <Sidebar>
-        <HomePage />
-      </Sidebar>
-    ),
     children: [],
   },
 ];
+
 
 export default routerData;
