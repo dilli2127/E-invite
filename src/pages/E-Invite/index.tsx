@@ -4,7 +4,6 @@ import PhotoSlider from "./PhotoSlider";
 import LocationMap from "./LocationMap";
 import { Col } from "antd";
 import { useParams } from "react-router-dom";
-import AppHeader from "../../components/Header/Header";
 
 const EInvitePage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -35,7 +34,6 @@ const EInvitePage: React.FC = () => {
 
   return (
     <>
-    <AppHeader/>
       <Col className="einvite-page">
         <Col>
           <LandscapeImage imageUrl={imageUrl} />
