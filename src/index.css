@@ -152,3 +152,8 @@ code {
   margin: 0 auto;
 }
 
+@media (max-width: 768px) { 
+  .image-full-width-slider {
+    height: auto; 
+  }
+}

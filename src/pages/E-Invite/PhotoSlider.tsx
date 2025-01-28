@@ -7,8 +7,7 @@ interface PhotoSliderProps {
 
 const PhotoSlider: React.FC<PhotoSliderProps> = ({ photos }) => {
   return (
-    console.log("photos",photos),
-    <Carousel autoplay style={{backgroundImage: 'url(https://freshfocuzstudio.s3.ap-south-1.amazonaws.com/background-1814372_1920.jpg)' }}>
+    <Carousel autoplay >
       {photos.map((photo, index) => (
       <div key={index}>
         <img
