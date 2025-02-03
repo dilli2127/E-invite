@@ -3,7 +3,7 @@ import { Form, Input, Button, Checkbox, message, Row, Col, Card } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import "./Login.css"; // Optional: for custom styling
-import auditBackground from "../../assets/img/audit.jpg";
+import LogoBackground from "../../assets/img/ffslogo.png";
 
 const Login: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -30,7 +30,7 @@ const Login: React.FC = () => {
       <Col
         span={12}
         style={{
-          background: `url(${auditBackground}) no-repeat center center`,
+          background: `url(${LogoBackground}) no-repeat center center`,
           backgroundSize: "cover",
           filter: "brightness(0.8)", // Darken background for contrast
         }}
