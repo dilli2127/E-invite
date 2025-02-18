@@ -9,7 +9,7 @@ import {
 } from "antd";
 
 const GOOGLE_API_KEY = "AIzaSyAKpQZVawfF5Mq6zhr-S-PMgrf_Mlpy-zg";
-const FOLDER_ID = "1BRFdSl05T4ZxVCSfTTBDDzCqqQUSmytf";
+const FOLDER_ID = "1rKWgo0s7aPZg69kmIzu_ErN9gKa924os";
 
 const GoogleDriveGallery: React.FC = () => {
   const [files, setFiles] = useState<any[]>([]);
