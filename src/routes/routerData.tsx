@@ -7,6 +7,8 @@ import EInviteCrud from "../pages/E-InviteCrud/crud";
 import LandingPage from "../pages/LadingPage";
 import ComingSoon from "../pages/ComingSoon";
 import ContactPage from "../pages/Contact";
+import AlbumPage from "../pages/Gallery";
+import PhotoGallery from "../pages/Gallery/photoGallery";
 
 const routerData: RouteConfig[] = [
   {
@@ -30,7 +32,13 @@ const routerData: RouteConfig[] = [
   {
     key: "gallery",
     path: "/gallery",
-    component: <ComingSoon />,
+    component: <AlbumPage />,
+    children: [],
+  },
+  {
+    key: "gallery",
+    path: "/gallery/:id",
+    component: <PhotoGallery />,
     children: [],
   },
   {

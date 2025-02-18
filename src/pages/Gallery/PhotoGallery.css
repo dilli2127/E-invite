@@ -1,0 +1,19 @@
+/* PhotoGallery.css (No changes needed from the previous example) */
+/* ... your existing CSS ... */
+
+.image-container {
+    /* ... existing styles */
+    aspect-ratio: 1/1; /* Maintain aspect ratio for grid items */
+  }
+  
+  @media (max-width: 768px) {
+      .image-container {
+          aspect-ratio: 1/1; /* Maintain aspect ratio for grid items */
+      }
+  }
+  
+  @media (max-width: 576px) {
+      .image-container {
+          aspect-ratio: 1/1; /* Maintain aspect ratio for grid items */
+      }
+  }
