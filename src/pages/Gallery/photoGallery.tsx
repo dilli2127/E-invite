@@ -1,12 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Typography, Card, Image, Row, Col, Skeleton, Button, Modal } from "antd";
-import { LeftOutlined, RightOutlined } from "@ant-design/icons"; // Import icons
+import { Typography, Card, Image, Row, Col, Skeleton, Button } from "antd";
+import {
+  LeftOutlined,
+  RightOutlined,
+} from "@ant-design/icons";
 
 const GOOGLE_API_KEY = "AIzaSyAKpQZVawfF5Mq6zhr-S-PMgrf_Mlpy-zg";
 const FOLDER_ID = "1BRFdSl05T4ZxVCSfTTBDDzCqqQUSmytf";
 
+type FileType = {
+  id: string;
+  name: string;
+  mimeType?: string;
+  thumbnailLink?: string;
+};
+
 const GoogleDriveGallery: React.FC = () => {
-  const [files, setFiles] = useState<any[]>([]);
+  const [files, setFiles] = useState<FileType[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
@@ -27,17 +37,19 @@ const GoogleDriveGallery: React.FC = () => {
       });
   }, []);
 
-  const handleNext = () => {
-    if (selectedIndex !== null) {
-      setSelectedIndex((prevIndex) => (prevIndex! + 1) % files.length);
+  const nextImage = () => {
+    if (selectedIndex !== null && selectedIndex < files.length - 1) {
+      setSelectedIndex(selectedIndex + 1);
     }
   };
 
-  const handlePrev = () => {
-    if (selectedIndex !== null) {
-      setSelectedIndex((prevIndex) => (prevIndex! - 1 + files.length) % files.length);
+  const prevImage = () => {
+    if (selectedIndex !== null && selectedIndex > 0) {
+      setSelectedIndex(selectedIndex - 1);
     }
   };
+
+ 
 
   return (
     <div style={{ padding: "20px", margin: "0 auto" }}>
@@ -48,7 +60,7 @@ const GoogleDriveGallery: React.FC = () => {
       {loading ? (
         <Row gutter={[16, 16]}>
           {Array.from({ length: 8 }).map((_, index) => (
-            <Col key={index} xs={24} sm={12} md={8} lg={6}>
+            <Col key={index} xs={12} sm={12} md={8} lg={6}>
               <Card hoverable>
                 <Skeleton.Image style={{ width: "100%", height: "200px" }} />
                 <Skeleton active paragraph={{ rows: 1 }} />
@@ -66,7 +78,7 @@ const GoogleDriveGallery: React.FC = () => {
                   style={{ cursor: "pointer", textAlign: "center" }}
                 >
                   <Image
-                     src={`https://lh3.googleusercontent.com/d/${file.id}=w800-h600`}
+                    src={`https://lh3.googleusercontent.com/d/${file.id}=w800-h600`}
                     alt={file.name}
                     width="100%"
                     style={{
@@ -79,74 +91,82 @@ const GoogleDriveGallery: React.FC = () => {
                   />
                 </div>
 
-                <div style={{ display: "flex", justifyContent: "center", marginTop: "10px" }}>
-                  <a
-                    href={`https://drive.google.com/uc?export=download&id=${file.id}`}
-                    download
-                  >
-                    <Button type="primary">Download Original</Button>
-                  </a>
-                </div>
+              
               </Card>
             </Col>
           ))}
         </Row>
       )}
 
-      <Modal
-        open={selectedIndex !== null}
-        onCancel={() => setSelectedIndex(null)}
-        footer={null}
-        width={800}
-        centered
-      >
-        {selectedIndex !== null && (
+      {selectedIndex !== null && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(0, 0, 0, 0.9)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+            zIndex: 1000,
+            touchAction: "none", // Fix swipe gestures
+          }}
+        >
           <div
             style={{
+              width: "100%",
               display: "flex",
-              alignItems: "center",
               justifyContent: "center",
-              position: "relative",
-              padding:"10px"
+              alignItems: "center",
             }}
           >
-            {/* Previous Icon */}
-            <LeftOutlined
-              onClick={handlePrev}
-              style={{
-                fontSize: "24px",
-                cursor: "pointer",
-                position: "absolute",
-                left: "10px",
-                zIndex: 10,
-              }}
-            />
-
-            {/* Image Preview */}
             <iframe
               src={`https://drive.google.com/file/d/${files[selectedIndex].id}/preview`}
               style={{
-                width: "100%",
-                height: "500px",
+                width: "90%",
+                height: "80vh",
                 borderRadius: "8px",
                 border: "none",
               }}
             />
-
-            {/* Next Icon */}
-            <RightOutlined
-              onClick={handleNext}
-              style={{
-                fontSize: "24px",
-                cursor: "pointer",
-                position: "absolute",
-                right: "10px",
-                zIndex: 10,
-              }}
-            />
           </div>
-        )}
-      </Modal>
+          <Button
+            shape="circle"
+            icon={<LeftOutlined />}
+            onClick={prevImage}
+            style={{
+              position: "absolute",
+              left: "20px",
+              top: "50%",
+              transform: "translateY(-50%)",
+              backgroundColor: "rgba(255,255,255,0.5)",
+            }}
+          />
+          <Button
+            shape="circle"
+            icon={<RightOutlined />}
+            onClick={nextImage}
+            style={{
+              position: "absolute",
+              right: "20px",
+              top: "50%",
+              transform: "translateY(-50%)",
+              backgroundColor: "rgba(255,255,255,0.5)",
+            }}
+          />
+          <Button
+            type="primary"
+            danger
+            onClick={() => setSelectedIndex(null)}
+            style={{ position: "absolute", top: "20px", right: "20px" }}
+          >
+            Close
+          </Button>
+        </div>
+      )}
     </div>
   );
 };
