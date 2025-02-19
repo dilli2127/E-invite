@@ -6,7 +6,7 @@ import {
 } from "@ant-design/icons";
 
 const GOOGLE_API_KEY = "AIzaSyAKpQZVawfF5Mq6zhr-S-PMgrf_Mlpy-zg";
-const FOLDER_ID = "15lqifNQaxxfbtxC_ARLs1oQtBxkxR1m_";
+const FOLDER_ID = "1BRFdSl05T4ZxVCSfTTBDDzCqqQUSmytf";
 
 type FileType = {
   id: string;
