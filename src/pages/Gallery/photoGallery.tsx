@@ -6,7 +6,7 @@ import {
 } from "@ant-design/icons";
 
 const GOOGLE_API_KEY = "AIzaSyAKpQZVawfF5Mq6zhr-S-PMgrf_Mlpy-zg";
-const FOLDER_ID = "1BRFdSl05T4ZxVCSfTTBDDzCqqQUSmytf";
+const FOLDER_ID = "15lqifNQaxxfbtxC_ARLs1oQtBxkxR1m_";
 
 type FileType = {
   id: string;
@@ -20,22 +20,35 @@ const GoogleDriveGallery: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
+  const fetchFiles = async (pageToken: string | null = null) => {
+    let url = `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents&key=${GOOGLE_API_KEY}&fields=nextPageToken,files(id,name,mimeType,thumbnailLink)&pageSize=100`;
+    if (pageToken) {
+      url += `&pageToken=${pageToken}`;
+    }
+
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+
+      if (data.files) {
+        setFiles((prevFiles) => [...prevFiles, ...data.files]);
+      }
+
+      if (data.nextPageToken) {
+        await fetchFiles(data.nextPageToken); // Fetch next page
+      } else {
+        setLoading(false);
+      }
+    } catch (error) {
+      console.error("Error fetching files:", error);
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    fetch(
-      `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents&key=${GOOGLE_API_KEY}&fields=files(id,name,mimeType,thumbnailLink)`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.files) {
-          setFiles(data.files);
-        }
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching files:", error);
-        setLoading(false);
-      });
+    fetchFiles();
   }, []);
+
 
   const nextImage = () => {
     if (selectedIndex !== null && selectedIndex < files.length - 1) {
