@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Spin, List, Typography, Modal } from "antd";
+import { Typography, Card, Image, Row, Col, Skeleton, Button } from "antd";
 
 const GOOGLE_API_KEY = "AIzaSyAKpQZVawfF5Mq6zhr-S-PMgrf_Mlpy-zg";
-const FOLDER_ID = "1rKWgo0s7aPZg69kmIzu_ErN9gKa924os";
+const FOLDER_ID = "1BRFdSl05T4ZxVCSfTTBDDzCqqQUSmytf";
 
 const GoogleDriveGallery: React.FC = () => {
   const [files, setFiles] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedFile, setSelectedFile] = useState<string | null>(null);
-  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     fetch(
@@ -16,58 +14,78 @@ const GoogleDriveGallery: React.FC = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        setFiles(data.files);
+        if (data.files) {
+          setFiles(data.files);
+        }
         setLoading(false);
       })
-      .catch((error) => console.error("Error fetching files:", error));
+      .catch((error) => {
+        console.error("Error fetching files:", error);
+        setLoading(false);
+      });
   }, []);
 
-  const openModal = (fileId: string) => {
-    setSelectedFile(fileId);
-    setModalVisible(true);
-  };
-
   return (
-    <div style={{ padding: 20 }}>
-      <Typography.Title level={2}>Google Drive Gallery</Typography.Title>
+    <div style={{ padding: "20px", margin: "0 auto" }}>
+      <Typography.Title level={2} style={{ textAlign: "center" }}>
+        Google Drive Gallery
+      </Typography.Title>
       {loading ? (
-        <Spin size="large" />
+        <Row gutter={[16, 16]}>
+          {Array.from({ length: 8 }).map((_, index) => (
+            <Col key={index} xs={24} sm={12} md={8} lg={6}>
+              <Card hoverable>
+                <Skeleton.Image style={{ width: "100%", height: "200px" }} />
+                <Skeleton active paragraph={{ rows: 1 }} />
+              </Card>
+            </Col>
+          ))}
+        </Row>
       ) : (
-        <List
-          grid={{ gutter: 16, column: 4 }}
-          dataSource={files}
-          renderItem={(file) => (
-            <List.Item>
-              <div
-                style={{ cursor: "pointer" }}
-                onClick={() => openModal(file.id)}
-              >
-                <img
-                  src={file.thumbnailLink || "https://via.placeholder.com/150"}
-                  alt={file.name}
-                  style={{ width: "100%", borderRadius: "8px" }}
-                />
-                <Typography.Text>{file.name}</Typography.Text>
-              </div>
-            </List.Item>
-          )}
-        />
+        <Image.PreviewGroup>
+          <Row gutter={[16, 16]} align="middle">
+            {files.map((file) => (
+              <Col key={file.id} xs={24} sm={12} md={8} lg={6}>
+                <Card hoverable>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      gap: "10px",
+                    }}
+                  >
+                    <Image
+                      src={`https://lh3.googleusercontent.com/d/${file.id}=w800-h600`}
+                      alt={file.name}
+                      width="100%"
+                      style={{
+                        height: "200px",
+                        objectFit: "cover",
+                        borderRadius: "8px",
+                        minHeight: "200px",
+                        maxWidth: "800px", // Ensures image is centered with max width
+                      }}
+                      preview={true}
+                    />
+
+                    <div style={{ display: "flex", gap: "10px" }}>
+                      <a
+                        href={`https://drive.google.com/uc?export=download&id=${file.id}`}
+                        download
+                      >
+                        <Button type="primary">Download</Button>
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* <Typography.Text strong>{file.name}</Typography.Text> */}
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        </Image.PreviewGroup>
       )}
-      <Modal
-        visible={modalVisible}
-        onCancel={() => setModalVisible(false)}
-        footer={null}
-        width={800}
-      >
-        {selectedFile && (
-          <iframe
-            src={`https://drive.google.com/file/d/${selectedFile}/preview`}
-            width="100%"
-            height="500px"
-            style={{ border: "none" }}
-          ></iframe>
-        )}
-      </Modal>
     </div>
   );
 };

@@ -157,3 +157,11 @@ code {
     height: auto; 
   }
 }
+
+
+:where(.css-dev-only-do-not-override-vryruh).ant-card .ant-card-body {
+  padding: 5px !important;
+}
+:where(.css-dev-only-do-not-override-vryruh).ant-modal .ant-modal-content {
+  padding: 5px !important;
+}
