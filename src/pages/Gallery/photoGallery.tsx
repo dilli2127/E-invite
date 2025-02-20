@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Typography, Card, Image, Row, Col, Skeleton, Button } from "antd";
 import {
+  DownloadOutlined,
   LeftOutlined,
   RightOutlined,
 } from "@ant-design/icons";
@@ -147,6 +148,19 @@ const GoogleDriveGallery: React.FC = () => {
             />
           </div>
           <Button
+            type="primary"
+            icon={<DownloadOutlined />}
+            href={`https://drive.google.com/uc?export=download&id=${files[selectedIndex].id}`}
+            // target="_blank"
+            style={{
+              marginTop: "10px",
+              backgroundColor: "#1890ff",
+              borderColor: "#1890ff",
+            }}
+          >
+            Download
+          </Button>
+          <Button
             shape="circle"
             icon={<LeftOutlined />}
             onClick={prevImage}
@@ -174,7 +188,7 @@ const GoogleDriveGallery: React.FC = () => {
             type="primary"
             danger
             onClick={() => setSelectedIndex(null)}
-            style={{ position: "absolute", top: "20px", right: "20px" }}
+            style={{ position: "absolute", top: "5px", right: "20px" }}
           >
             Close
           </Button>
