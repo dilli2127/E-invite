@@ -44,7 +44,7 @@ const LandingPage: React.FC = () => {
             </button>
           </form>
           <br/>
-           freshfcouzstudio
+           freshfocuzstudio
         </div>
       </div>
     </>
