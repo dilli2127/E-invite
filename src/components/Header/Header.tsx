@@ -9,19 +9,16 @@ const { Header } = Layout;
 const AppHeader: React.FC = () => {
   const [visible, setVisible] = useState(false);
 
-  // Open mobile menu
   const showDrawer = () => {
     setVisible(true);
   };
 
-  // Close mobile menu
   const onClose = () => {
     setVisible(false);
   };
 
   return (
     <Header className="header">
-      {/* Logo */}
       <div className="logo">
         <Link to="/">
           <img
@@ -46,6 +43,12 @@ const AppHeader: React.FC = () => {
           <Menu.Item key="gallery">
             <Link to="/gallery">Gallery</Link>
           </Menu.Item>
+          <Menu.Item key="e-invite">
+              <Link to="/gallery">E-invite</Link>
+            </Menu.Item>
+            <Menu.Item key="e-album">
+              <Link to="/gallery">E-album</Link>
+            </Menu.Item>
           <Menu.Item key="services">
             <Link to="/services">Services</Link>
           </Menu.Item>
@@ -81,6 +84,12 @@ const AppHeader: React.FC = () => {
             </Menu.Item>
             <Menu.Item key="gallery">
               <Link to="/gallery">Gallery</Link>
+            </Menu.Item>
+            <Menu.Item key="gallery">
+              <Link to="/gallery">E-invite</Link>
+            </Menu.Item>
+            <Menu.Item key="gallery">
+              <Link to="/gallery">E-album</Link>
             </Menu.Item>
             <Menu.Item key="services">
               <Link to="/services">Services</Link>
