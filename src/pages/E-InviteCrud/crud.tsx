@@ -24,7 +24,7 @@ const formItems = [
     label: "Mobile Number",
     name: "MobileNumber",
     rules: [{ required: true, message: "Please Enter Mobile Number!" }],
-    component: <InputNumber />,
+    component: <InputNumber style={{width:"100%"}} />,
   },
 
   {
@@ -49,13 +49,13 @@ const formItems = [
     label: "Latitude",
     name: "latitude",
     rules: [{ required: true, message: "Please Enter Latitude!" }],
-    component: <InputNumber />,
+    component: <InputNumber style={{width:"100%"}} />,
   },
   {
     label: "Longitude",
     name: "longitude",
     rules: [{ required: true, message: "Please Enter Longitude!" }],
-    component: <InputNumber />,
+    component: <InputNumber style={{width:"100%"}}/>,
   },
   
 ];
