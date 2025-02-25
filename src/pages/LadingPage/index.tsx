@@ -1,27 +1,32 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "./LandingPage.css"; // For custom styling
 import AppHeader from "../../components/Header/Header";
 
 const LandingPage: React.FC = () => {
+  const location = useLocation();
+  const pageName = location.pathname.split("/").filter(Boolean).pop();
   const [brideName, setBrideName] = useState("");
   const [groomName, setGroomName] = useState("");
   const navigate = useNavigate();
-
+  console.log("page_url", pageName);
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (brideName && groomName) {
-      // Redirect to the invite page with bride and groom names
       navigate(`/einvite/${groomName}weds${brideName}`);
     }
   };
-
+  const pageTitle =
+    pageName === "ealbum"
+      ? "Welcome to the E-Album"
+      : "Welcome to the E-Invite";
+  const Button = pageName === "ealbum" ? "Get E-Album" : "Get E-Invite";
   return (
     <>
-    <AppHeader/>
+      <AppHeader />
       <div className="landing-page">
         <div className="content-container">
-          <h1>Welcome to the Wedding Invitation</h1>
+          <h1>{pageTitle}</h1>
           <form onSubmit={handleSubmit}>
             <div className="input-group">
               <input
@@ -40,11 +45,11 @@ const LandingPage: React.FC = () => {
               />
             </div>
             <button type="submit" className="submit-btn">
-              Get Invitation
+              {Button}
             </button>
           </form>
-          <br/>
-           freshfocuzstudio
+          <br />
+          freshfocuzstudio
         </div>
       </div>
     </>

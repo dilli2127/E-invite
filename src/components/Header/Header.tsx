@@ -44,16 +44,19 @@ const AppHeader: React.FC = () => {
             <Link to="/gallery">Gallery</Link>
           </Menu.Item>
           <Menu.Item key="e-invite">
-              <Link to="/gallery">E-invite</Link>
+              <Link to="/einvite">E-invite</Link>
             </Menu.Item>
             <Menu.Item key="e-album">
-              <Link to="/gallery">E-album</Link>
+              <Link to="/ealbum">E-album</Link>
             </Menu.Item>
           <Menu.Item key="services">
             <Link to="/services">Services</Link>
           </Menu.Item>
           <Menu.Item key="contact">
             <Link to="/contact">Contact</Link>
+          </Menu.Item>
+          <Menu.Item key="login">
+            <Link to="/login">Login</Link>
           </Menu.Item>
         </Menu>
       </div>

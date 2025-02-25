@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from "react";
 import { RouteConfig } from "./types/routeConfig";
 import Sidebar from "../components/antd/sidebar/sidebar";
+import EAlbum from "../pages/E-Album";
 
 const Login = lazy(() => import("../pages/login/login"));
 const Einvite = lazy(() => import("../pages/E-Invite"));
@@ -35,11 +36,41 @@ const routerData: RouteConfig[] = [
     children: [],
   },
   {
+    key: "einvite",
+    path: "/einvite",
+    component: (
+      <Suspense fallback={<Loader />}>
+        <LandingPage />
+      </Suspense>
+    ),
+    children: [],
+  },
+  {
+    key: "ealbum",
+    path: "/ealbum",
+    component: (
+      <Suspense fallback={<Loader />}>
+        <LandingPage />
+      </Suspense>
+    ),
+    children: [],
+  },
+  {
     key: "einviteDetail",
     path: "/einvite/:id",
     component: (
       <Suspense fallback={<Loader />}>
         <Einvite />
+      </Suspense>
+    ),
+    children: [],
+  },
+  {
+    key: "ealbumDetail",
+    path: "/ealbum/:id",
+    component: (
+      <Suspense fallback={<Loader />}>
+        <EAlbum />
       </Suspense>
     ),
     children: [],
