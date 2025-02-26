@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from "react";
 import { RouteConfig } from "./types/routeConfig";
 import Sidebar from "../components/antd/sidebar/sidebar";
 import EAlbum from "../pages/E-Album";
+import Playground from "../components/antd/sidebar/ProjectLayout";
 
 const Login = lazy(() => import("../pages/login/login"));
 const Einvite = lazy(() => import("../pages/E-Invite"));
@@ -120,9 +121,7 @@ const routerData: RouteConfig[] = [
     path: "/einvite_crud",
     component: (
       <Suspense fallback={<Loader />}>
-        <Sidebar>
-          <EInviteCrud items={[]} />
-        </Sidebar>
+          <Playground  />
       </Suspense>
     ),
     children: [],
