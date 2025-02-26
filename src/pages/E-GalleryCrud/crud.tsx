@@ -6,51 +6,18 @@ import { UploadOutlined } from "@ant-design/icons";
 const formColumns = 2;
 const formItems = [
   {
-    label: "Name",
-    name: "Name",
+    label: "Tittle",
+    name: "tittle",
     rules: [{ required: true, message: "Please Enter Name!" }],
     component: <Input />,
   },
   {
-    label: "Mobile Number",
-    name: "MobileNumber",
+    label: "Drive Folder Id",
+    name: "drivefolderid",
     rules: [{ required: true, message: "Please Enter Mobile Number!" }],
     component: <InputNumber style={{ width: "100%" }} />,
   },
 
-  {
-    label: "E-Mail",
-    name: "Email",
-    rules: [{ required: true, message: "Please Enter E-Mail!" }],
-    component: <Input />,
-  },
-  {
-    label: "Event Address1",
-    name: "EventAddress1",
-    rules: [{ required: true, message: "Please Enter Address1!" }],
-    component: <Input />,
-  },
-  {
-    label: "EventAddress2",
-    name: "EventAddress2",
-    rules: [{ required: true, message: "Please Enter Address2!" }],
-    component: <Input />,
-  },
-  {
-    label: "Latitude",
-    name: "latitude",
-    rules: [{ required: true, message: "Please Enter Latitude!" }],
-    component: <InputNumber style={{ width: "100%" }} />,
-  },
-  {
-    label: "Longitude",
-    name: "longitude",
-    rules: [{ required: true, message: "Please Enter Longitude!" }],
-    component: <InputNumber style={{ width: "100%" }} />,
-  },
-];
-
-const nestedInputs = [
   {
     label: "Image",
     name: "Image",
@@ -116,7 +83,7 @@ const EGalleryCrud: React.FC = ({}) => {
           alignItems: "flex-start",
         }}
       >
-        <h1>E-Invite List</h1>
+        <h1>E-Gallery List</h1>
         <div style={{ display: "flex", gap: "16px" }}>
           <Input
             placeholder="Search Patients"
@@ -125,14 +92,14 @@ const EGalleryCrud: React.FC = ({}) => {
             style={{ width: 300 }}
           />
           <Button type="primary" onClick={handleDrawerOpen}>
-            Add E-Invite
+            Add Gallery
           </Button>
         </div>
       </Row>
       <Table columns={columns} dataSource={[]} rowKey="id" />
 
       <Drawer
-        title="Add New Invite"
+        title="Add New Gallery"
         placement="right"
         onClose={handleDrawerClose}
         open={drawerVisible}
@@ -140,8 +107,6 @@ const EGalleryCrud: React.FC = ({}) => {
       >
         <AntdForm
           formItems={formItems}
-          nestedInputs={nestedInputs}
-          nested={true}
           FormValue={FormValue}
           formColumns={formColumns}
           onChildCancel={handleDrawerClose}

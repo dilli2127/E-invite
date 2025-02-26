@@ -52,7 +52,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
           position: "fixed",
           top: "0",
           zIndex: 100,
-          background: "linear-gradient(90deg, #3A6073, #3A539B)",
+          background: "linear-gradient(90deg, #ff7e5f, #feb47b)",
           width: "100%",
           boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
         }}
@@ -71,7 +71,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
             color: "#ffffff",
           }}
         >
-          Olmms Management
+          Fresh Focuz Studio
         </h2>
         <Button
           type="primary"
@@ -98,12 +98,11 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
             top: 64,
             color: "white",
             height: "100vh",
-            // background: "linear-gradient(180deg, #2C3E50, #4CA1AF)",
+            background: "linear-gradient(180deg, #2C3E50, #4CA1AF)",
             boxShadow: "2px 0 10px rgba(0, 0, 0, 0.2)",
-            overflow: "hidden", // Prevent overflow due to background image
+            overflow: "hidden", 
           }}
         >
-          {/* Background Image with Overlay */}
           <div
             style={{
               position: "absolute",

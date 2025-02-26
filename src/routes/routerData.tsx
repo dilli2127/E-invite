@@ -14,7 +14,7 @@ const PhotoGallery = lazy(() => import("../pages/Gallery/photoGallery"));
 // admin imports
 const EInviteCrud = lazy(() => import("../pages/E-InviteCrud/crud"));
 const EGalleryCrud = lazy(() => import("../pages/E-GalleryCrud/crud"));
-const EAlbumCrud = lazy(() => import("../pages/E-GalleryCrud/crud"));
+const EAlbumCrud = lazy(() => import("../pages/E-AlbumCrud/crud"));
 
 const Loader = () => <div>Loading...</div>;
 

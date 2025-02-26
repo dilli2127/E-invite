@@ -10,19 +10,19 @@ export  const menuItems = [
   {
     key: "E-Invite Crud",
     icon: <UserOutlined />,
-    label: "E-Invite Crud",
+    label: "E-Invite",
     path: "einvite_crud",
   },
   {
     key: "E-Album Crud",
     icon: <UserOutlined />,
-    label: "E-Album Crud",
+    label: "E-Album",
     path: "ealbum_crud",
   },
   {
     key: "E-Gallery Crud",
     icon: <UserOutlined />,
-    label: "E-Gallery Crud",
+    label: "E-Gallery",
     path: "egallery_crud",
   },
 ];
