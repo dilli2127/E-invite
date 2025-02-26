@@ -59,7 +59,6 @@ const EInvitePage: React.FC = () => {
   // }, [id]);
   return (
     <>
-      <AppHeader />
       <Col className="einvite-page">
         <Col>
           <LandscapeImage imageUrl={imageUrl} />

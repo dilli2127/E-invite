@@ -10,7 +10,6 @@ import AppHeader from "../../components/Header/Header";
 const ContactPage: React.FC = () => {
   return (
     <>
-    <AppHeader/>
       <div className="contact-page">
         <div className="contact-overlay">
           <div className="contact-content">

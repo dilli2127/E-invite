@@ -23,7 +23,6 @@ const LandingPage: React.FC = () => {
   const Button = pageName === "ealbum" ? "Get E-Album" : "Get E-Invite";
   return (
     <>
-      <AppHeader />
       <div className="landing-page">
         <div className="content-container">
           <h1>{pageTitle}</h1>

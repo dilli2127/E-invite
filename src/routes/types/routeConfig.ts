@@ -1,10 +1,12 @@
 // src/router/types.ts
 
+import { ReactNode } from "react";
+
 export interface RouteConfig {
   key: string;
   path: string;
-  component: JSX.Element;
-  children: RouteConfig[];
+  element?: ReactNode;
+  children?: RouteConfig[];
 }
 
 

@@ -35,7 +35,6 @@ const AlbumPage: React.FC = () => {
 
   return (
     <>
-      <AppHeader />
       <div style={{ padding: 20 }}>
         <h1 style={{ textAlign: "center", marginBottom: 20 }}>Photo Albums</h1>
         <Row gutter={[16, 16]}>

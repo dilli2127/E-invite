@@ -65,7 +65,6 @@ const GoogleDriveGallery: React.FC = () => {
 
   return (
     <>
-      <AppHeader/>{" "}
       <div style={{ padding: "20px", margin: "0 auto" }}>
         <Typography.Title level={2} style={{ textAlign: "center" }}>
          Gallery

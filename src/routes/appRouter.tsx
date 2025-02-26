@@ -8,8 +8,8 @@ import NotFound from '../pages/notFound';
 
 const renderRoutes = (routes: RouteConfig[]) =>
 {
-  return routes.map(({ path, component, children }, index) => (
-    <Route key={index} path={path} element={component}>
+  return routes.map(({ path, element, children }, index) => (
+    <Route key={index} path={path} element={element}>
       {children && children.length > 0 && renderRoutes(children)}
     </Route>
   ));

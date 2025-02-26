@@ -3,15 +3,19 @@ import { RouteConfig } from "./types/routeConfig";
 import Sidebar from "../components/antd/sidebar/sidebar";
 import EAlbum from "../pages/E-Album";
 import { Outlet } from "react-router-dom";
-// user web imports
+import PackageDetails from "../pages/service";
+import AppHeader from "../components/Header/Header";
+import PhotographyLandingPage from "../pages/Home";
+
+// User web imports
 const Login = lazy(() => import("../pages/login/login"));
 const Einvite = lazy(() => import("../pages/E-Invite"));
 const LandingPage = lazy(() => import("../pages/LadingPage"));
-const ComingSoon = lazy(() => import("../pages/ComingSoon"));
 const ContactPage = lazy(() => import("../pages/Contact"));
 const AlbumPage = lazy(() => import("../pages/Gallery"));
 const PhotoGallery = lazy(() => import("../pages/Gallery/photoGallery"));
-// admin imports
+
+// Admin imports
 const EInviteCrud = lazy(() => import("../pages/E-InviteCrud/crud"));
 const EGalleryCrud = lazy(() => import("../pages/E-GalleryCrud/crud"));
 const EAlbumCrud = lazy(() => import("../pages/E-AlbumCrud/crud"));
@@ -22,108 +26,101 @@ const routerData: RouteConfig[] = [
   {
     key: "login",
     path: "/login",
-    component: (
+    element: (
       <Suspense fallback={<Loader />}>
         <Login />
       </Suspense>
     ),
     children: [],
   },
+  // user web
   {
-    key: "landingPage",
+    key: "userweb",
     path: "/",
-    component: (
+    element: (
       <Suspense fallback={<Loader />}>
-        <LandingPage />
+        <AppHeader />
+        <Outlet />
       </Suspense>
     ),
-    children: [],
+    children: [
+      {
+        key: "landingPage",
+        path: "/",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <PhotographyLandingPage />
+          </Suspense>
+        ),
+      },
+      {
+        key: "einvite",
+        path: "/einvite",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <LandingPage />
+          </Suspense>
+        ),
+        children: [],
+      },
+      {
+        key: "ealbum",
+        path: "/ealbum",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <LandingPage />
+          </Suspense>
+        ),
+        children: [],
+      },
+      {
+        key: "gallery",
+        path: "/gallery",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <AlbumPage />
+          </Suspense>
+        ),
+        children: [],
+      },
+      {
+        key: "galleryDetail",
+        path: "/gallery/:id",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <PhotoGallery />
+          </Suspense>
+        ),
+        children: [],
+      },
+      {
+        key: "services",
+        path: "/services",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <PackageDetails />
+          </Suspense>
+        ),
+        children: [],
+      },
+      {
+        key: "contact",
+        path: "/contact",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <ContactPage />
+          </Suspense>
+        ),
+        children: [],
+      },
+    ],
   },
-  {
-    key: "einvite",
-    path: "/einvite",
-    component: (
-      <Suspense fallback={<Loader />}>
-        <LandingPage />
-      </Suspense>
-    ),
-    children: [],
-  },
-  {
-    key: "ealbum",
-    path: "/ealbum",
-    component: (
-      <Suspense fallback={<Loader />}>
-        <LandingPage />
-      </Suspense>
-    ),
-    children: [],
-  },
-  {
-    key: "einviteDetail",
-    path: "/einvite/:id",
-    component: (
-      <Suspense fallback={<Loader />}>
-        <Einvite />
-      </Suspense>
-    ),
-    children: [],
-  },
-  {
-    key: "ealbumDetail",
-    path: "/ealbum/:id",
-    component: (
-      <Suspense fallback={<Loader />}>
-        <EAlbum />
-      </Suspense>
-    ),
-    children: [],
-  },
-  {
-    key: "gallery",
-    path: "/gallery",
-    component: (
-      <Suspense fallback={<Loader />}>
-        <AlbumPage />
-      </Suspense>
-    ),
-    children: [],
-  },
-  {
-    key: "galleryDetail",
-    path: "/gallery/:id",
-    component: (
-      <Suspense fallback={<Loader />}>
-        <PhotoGallery />
-      </Suspense>
-    ),
-    children: [],
-  },
-  {
-    key: "services",
-    path: "/services",
-    component: (
-      <Suspense fallback={<Loader />}>
-        <ComingSoon />
-      </Suspense>
-    ),
-    children: [],
-  },
-  {
-    key: "contact",
-    path: "/contact",
-    component: (
-      <Suspense fallback={<Loader />}>
-        <ContactPage />
-      </Suspense>
-    ),
-    children: [],
-  },
-  // admin Routes
+
+  // Admin Routes
   {
     key: "admin",
     path: "admin",
-    component: (
+    element: (
       <Suspense fallback={<Loader />}>
         <Sidebar>
           <Outlet />
@@ -134,7 +131,7 @@ const routerData: RouteConfig[] = [
       {
         key: "einviteCrud",
         path: "einvite_crud",
-        component: (
+        element: (
           <Suspense fallback={<Loader />}>
             <EInviteCrud />
           </Suspense>
@@ -144,7 +141,7 @@ const routerData: RouteConfig[] = [
       {
         key: "egalleryCrud",
         path: "egallery_crud",
-        component: (
+        element: (
           <Suspense fallback={<Loader />}>
             <EGalleryCrud />
           </Suspense>
@@ -154,7 +151,7 @@ const routerData: RouteConfig[] = [
       {
         key: "ealbumCrud",
         path: "ealbum_crud",
-        component: (
+        element: (
           <Suspense fallback={<Loader />}>
             <EAlbumCrud />
           </Suspense>

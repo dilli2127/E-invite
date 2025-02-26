@@ -34,7 +34,6 @@ const ComingSoon: React.FC = () => {
 
   return (
     <>
-    <AppHeader/>
       <div className="coming-soon-page">
         <div className="overlay">
           <div className="content">

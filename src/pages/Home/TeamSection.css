@@ -1,0 +1,49 @@
+.team-section-container {
+    /* Container styles */
+    padding: 50px;
+    text-align: center;
+  }
+  
+  .section-title {
+    /* Section title styles */
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .section-subtitle {
+    /* Section subtitle styles */
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .section-description {
+    /* Section description styles */
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 30px;
+  }
+  
+  .team-member-card {
+    /* Team member card styles */
+  }
+  
+  .team-member-avatar {
+    /* Team member avatar styles */
+    margin-bottom: 10px;
+  }
+  
+  .team-member-info {
+    /* Team member info styles */
+  }
+  
+  .team-member-name {
+    /* Team member name styles */
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+  }
+  
+  .team-member-role {
+    /* Team member role styles */
+    font-size: 1rem;
+    color: #666;
+  }
