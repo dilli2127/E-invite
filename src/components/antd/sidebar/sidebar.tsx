@@ -1,57 +1,42 @@
-import React, { ReactNode, useState } from 'react';
-import { AppstoreOutlined, UserOutlined, LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+import React, { ReactNode, useState } from "react";
+import {
+  AppstoreOutlined,
+  UserOutlined,
+  LogoutOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+} from "@ant-design/icons";
 import { Layout, Menu, Modal, Button } from "antd";
 import { useNavigate } from "react-router-dom";
+import { menuItems } from "./menu";
 // import auditBackground from '../../../assets/img/audit.jpg';
 
 const { Header, Content, Sider } = Layout;
 
-interface SidebarProps
-{
+interface SidebarProps {
   children: ReactNode;
 }
 
-const menuItems = [
-  {
-    key: "dashboard",
-    icon: <AppstoreOutlined />,
-    label: "Dashboard",
-    path: "/home",
-  },
-  {
-    key: "E-Invite",
-    icon: <UserOutlined />,
-    label: "E-Invite",
-    path: "/einvite_crud",
-  },
- 
-];
-
-const Sidebar: React.FC<SidebarProps> = ({ children }) =>
-{
+const Sidebar: React.FC<SidebarProps> = ({ children }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
-  const [selectedKey, setSelectedKey] = useState('dashboard'); // Track selected menu item
+  const [selectedKey, setSelectedKey] = useState("dashboard"); // Track selected menu item
   const navigate = useNavigate();
 
-  const showLogoutConfirm = () =>
-  {
+  const showLogoutConfirm = () => {
     setIsModalVisible(true);
   };
 
-  const handleOk = () =>
-  {
+  const handleOk = () => {
     setIsModalVisible(false);
-    navigate('/login');
+    navigate("/login");
   };
 
-  const handleCancel = () =>
-  {
+  const handleCancel = () => {
     setIsModalVisible(false);
   };
 
-  const handleMenuClick = (key: string, path?: string) =>
-  {
+  const handleMenuClick = (key: string, path?: string) => {
     setSelectedKey(key);
     if (path) navigate(path);
   };
@@ -78,11 +63,24 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) =>
           onClick={() => setCollapsed(!collapsed)}
           style={{ marginRight: 16, color: "white" }}
         />
-        <h2 style={{ margin: 0, flexGrow: 1, textAlign: "center", color: "#ffffff" }}>Olmms Management</h2>
+        <h2
+          style={{
+            margin: 0,
+            flexGrow: 1,
+            textAlign: "center",
+            color: "#ffffff",
+          }}
+        >
+          Olmms Management
+        </h2>
         <Button
           type="primary"
           icon={<LogoutOutlined />}
-          style={{ alignSelf: "center", backgroundColor: "#ff4d4f", borderColor: "#ff4d4f" }}
+          style={{
+            alignSelf: "center",
+            backgroundColor: "#ff4d4f",
+            borderColor: "#ff4d4f",
+          }}
           onClick={showLogoutConfirm}
         >
           Logout
@@ -139,7 +137,8 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) =>
                 icon={item.icon}
                 onClick={() => handleMenuClick(item.key, item.path)}
                 style={{
-                  backgroundColor: selectedKey === item.key ? "#16A085" : "transparent", // Highlight active item
+                  backgroundColor:
+                    selectedKey === item.key ? "#16A085" : "transparent", // Highlight active item
                   color: selectedKey === item.key ? "#ffffff" : "#ffffff",
                 }}
               >

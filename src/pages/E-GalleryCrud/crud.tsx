@@ -62,7 +62,7 @@ const nestedInputs = [
     ),
   },
 ];
-const EInviteCrud: React.FC = ({}) => {
+const EGalleryCrud: React.FC = ({}) => {
   const [drawerVisible, setDrawerVisible] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [filteredItems, setFilteredItems] = useState();
@@ -151,4 +151,4 @@ const EInviteCrud: React.FC = ({}) => {
   );
 };
 
-export default memo(EInviteCrud);
+export default memo(EGalleryCrud);

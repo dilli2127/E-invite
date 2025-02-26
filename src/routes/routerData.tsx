@@ -2,15 +2,19 @@ import React, { Suspense, lazy } from "react";
 import { RouteConfig } from "./types/routeConfig";
 import Sidebar from "../components/antd/sidebar/sidebar";
 import EAlbum from "../pages/E-Album";
-
+import { Outlet } from "react-router-dom";
+// user web imports
 const Login = lazy(() => import("../pages/login/login"));
 const Einvite = lazy(() => import("../pages/E-Invite"));
-const EInviteCrud = lazy(() => import("../pages/E-InviteCrud/crud"));
 const LandingPage = lazy(() => import("../pages/LadingPage"));
 const ComingSoon = lazy(() => import("../pages/ComingSoon"));
 const ContactPage = lazy(() => import("../pages/Contact"));
 const AlbumPage = lazy(() => import("../pages/Gallery"));
 const PhotoGallery = lazy(() => import("../pages/Gallery/photoGallery"));
+// admin imports
+const EInviteCrud = lazy(() => import("../pages/E-InviteCrud/crud"));
+const EGalleryCrud = lazy(() => import("../pages/E-GalleryCrud/crud"));
+const EAlbumCrud = lazy(() => import("../pages/E-GalleryCrud/crud"));
 
 const Loader = () => <div>Loading...</div>;
 
@@ -115,17 +119,49 @@ const routerData: RouteConfig[] = [
     ),
     children: [],
   },
+  // admin Routes
   {
-    key: "einviteCrud",
-    path: "/einvite_crud",
+    key: "admin",
+    path: "admin",
     component: (
       <Suspense fallback={<Loader />}>
         <Sidebar>
-          <EInviteCrud items={[]} />
+          <Outlet />
         </Sidebar>
       </Suspense>
     ),
-    children: [],
+    children: [
+      {
+        key: "einviteCrud",
+        path: "einvite_crud",
+        component: (
+          <Suspense fallback={<Loader />}>
+            <EInviteCrud />
+          </Suspense>
+        ),
+        children: [],
+      },
+      {
+        key: "egalleryCrud",
+        path: "egallery_crud",
+        component: (
+          <Suspense fallback={<Loader />}>
+            <EGalleryCrud />
+          </Suspense>
+        ),
+        children: [],
+      },
+      {
+        key: "ealbumCrud",
+        path: "ealbum_crud",
+        component: (
+          <Suspense fallback={<Loader />}>
+            <EAlbumCrud />
+          </Suspense>
+        ),
+        children: [],
+      },
+    ],
   },
 ];
 
