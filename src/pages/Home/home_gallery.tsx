@@ -20,13 +20,14 @@ const HomeGallery: React.FC = () => {
       <h2 className="gallery-title">Gallery</h2>
       <Row gutter={[16, 16]} justify="center">
         {images.map((img, index) => (
-          <Col xs={24} sm={12} md={8} lg={6} key={index}>
+          <Col xs={24} sm={12} md={8} lg={5} key={index}>
             <motion.div
               whileHover={{ scale: 1.05, boxShadow: "0px 10px 20px rgba(0,0,0,0.3)" }}
               className="gallery-card"
             >
               <Card className="gallery-image-card">
-                <Image src={img} alt={`Gallery Image ${index + 1}`} className="gallery-image" />
+                <Image src={img} alt={`Gallery Image ${index + 1}`} className="gallery-image" 
+                 style={{ height: "200px", objectFit: "cover", width: "100%" }}/>
               </Card>
             </motion.div>
           </Col>
