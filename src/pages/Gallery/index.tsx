@@ -17,7 +17,8 @@ const albums = [
   {
     id: 3,
     title: "Birthday Celebrations",
-    cover: "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/20240630_101612.jpg",
+    cover:
+      "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/20240630_101612.jpg",
   },
   {
     id: 4,
@@ -42,7 +43,18 @@ const AlbumPage: React.FC = () => {
             <Col xs={24} sm={12} md={8} lg={6} key={album.id}>
               <Card
                 hoverable
-                cover={<img alt={album.title} src={album.cover} />}
+                cover={
+                  <img
+                    alt={album.title}
+                    src={album.cover}
+                    style={{
+                      height: "200px",
+                      objectFit: "cover",
+                      borderRadius: "8px",
+                      minHeight: "200px",
+                    }}
+                  />
+                }
                 onClick={() => openGallery(album.id)}
               >
                 <Card.Meta title={album.title} />
