@@ -1,49 +1,138 @@
+/* 🎨 Simple Background */
 .team-section-container {
-    /* Container styles */
-    padding: 50px;
-    text-align: center;
+  padding: 80px 20px;
+  text-align: center;
+  background-color: #f4f4f4; /* Light Grey */
+  color: #333;
+}
+
+/* 🏆 Section Title */
+.section-title {
+  font-size: 2.8rem;
+  font-weight: bold;
+  color: #d35400; /* Vibrant Orange */
+  margin-bottom: 10px;
+}
+
+/* ✨ Section Subtitle */
+.section-subtitle {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* 📖 Section Description */
+.section-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto 40px;
+}
+
+/* 🎭 Team Member Card */
+.team-member-card {
+  background: linear-gradient(135deg, #ff9f43, #ff6b6b); /* Rich Gradient */
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  color: white;
+  border: none;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background 0.3s ease-in-out;
+  perspective: 1000px; /* 3D Effect */
+}
+
+/* 🌟 Hover Effect - 3D & Color Change */
+.team-member-card:hover {
+  transform: scale(1.05) rotateX(5deg) rotateY(5deg);
+  box-shadow: 0 15px 30px rgba(255, 107, 107, 0.5);
+  background: linear-gradient(135deg, #ff6b6b, #ff4757); /* Color Change */
+}
+
+/* 🖼️ Avatar Container */
+.avatar-container {
+  position: relative;
+  display: inline-block;
+  border-radius: 50%;
+  padding: 5px;
+  margin-bottom: 15px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* 🏅 Avatar Image */
+.team-member-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid white;
+}
+
+/* 🎥 Icon Overlay */
+.icon-overlay {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ff6b6b;
+  font-size: 18px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 🏷️ Team Member Info */
+.team-member-info {
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* 👤 Team Member Name */
+.team-member-name {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 5px;
+}
+
+/* 🏅 Team Member Role */
+.team-member-role {
+  font-size: 1rem;
+  color: #fce38a;
+}
+
+/* 🔄 Responsive Adjustments */
+@media (max-width: 768px) {
+  .team-section-container {
+    padding: 60px 15px;
   }
-  
-  .section-title {
-    /* Section title styles */
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-  }
-  
-  .section-subtitle {
-    /* Section subtitle styles */
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-  }
-  
-  .section-description {
-    /* Section description styles */
-    font-size: 1rem;
-    line-height: 1.5;
-    margin-bottom: 30px;
-  }
-  
+
   .team-member-card {
-    /* Team member card styles */
+    padding: 15px;
   }
-  
+
   .team-member-avatar {
-    /* Team member avatar styles */
-    margin-bottom: 10px;
+    width: 100px;
+    height: 100px;
   }
-  
-  .team-member-info {
-    /* Team member info styles */
+
+  .icon-overlay {
+    width: 25px;
+    height: 25px;
+    font-size: 16px;
   }
-  
-  .team-member-name {
-    /* Team member name styles */
-    font-size: 1.2rem;
-    margin-bottom: 5px;
+
+  .section-title {
+    font-size: 2.2rem;
   }
-  
-  .team-member-role {
-    /* Team member role styles */
-    font-size: 1rem;
-    color: #666;
+
+  .section-subtitle {
+    font-size: 1.4rem;
   }
+}

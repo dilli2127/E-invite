@@ -17,12 +17,12 @@ const Footer: React.FC = () => {
         <Col xs={24} sm={24} md={8} lg={8}>
           <div className="footer-section">
             <img
-              src="path/to/your/logo.svg" // Replace with your logo path
+              src="https://freshfocuzstudio.s3.ap-south-1.amazonaws.com/ffs+logo.png"
               alt="Wedding Photography Logo"
               className="footer-logo"
             />
             <Title level={5} className="footer-title">
-              WEDDING PHOTOGRAPHY
+              Fresh Focuz Studio
             </Title>
             <p>
               We absolutely love weddings. It's why we chosen to specialize in
@@ -40,15 +40,15 @@ const Footer: React.FC = () => {
             </Title>
             <ul className="contact-list">
               <li>
-                <a href="tel:+8801973311177">+8801973311177</a>
+                <a href="tel:9677894094">9677894094</a>
               </li>
               <li>
-                <a href="mailto:info@weddingphotography.com">
-                  info@weddingphotography.com
+                <a href="mailto:freshfocuzstudio@gmail.com">
+                  freshfocuzstudio@gmail.com
                 </a>
               </li>
-              <li>House#23, Road#1, Sector#9</li>
-              <li>Uttara, Dhaka, Bangladesh - 1230</li>
+              <li>Kg Knadigai</li>
+              <li>Thiruvallur</li>
             </ul>
           </div>
         </Col>
@@ -109,7 +109,7 @@ const Footer: React.FC = () => {
       </Row>
       <div className="copyright">
         <p>
-          ©Copyright 2023 Wedding Photography. All rights reserved. |{" "}
+          ©Copyright 2025 Wedding Fresh Focuz Studio. All rights reserved. |{" "}
           <Link href="#">FAQ</Link> | <Link href="#">Privacy Policy</Link> |{" "}
           <Link href="#">Terms & Conditions</Link>
         </p>

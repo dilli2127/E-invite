@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./WeddingBanner.css";
 import AboutUs from "./about";
 import TeamSection from "./team_section";
 import Footer from "./footer";
+import HomeGallery from "./home_gallery";
 
 const images = [
   "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/062A6124.JPG",
@@ -15,8 +16,30 @@ const images = [
 const WeddingBanner: React.FC = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [transition, setTransition] = useState("slide-in");
+  const [isVisible, setIsVisible] = useState(true);
+  const bannerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.5 } // Activate when 50% of the component is visible
+    );
+
+    if (bannerRef.current) {
+      observer.observe(bannerRef.current);
+    }
+
+    return () => {
+      if (bannerRef.current) {
+        observer.unobserve(bannerRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible) return; 
     const interval = setInterval(() => {
       setTransition("slide-out");
       setTimeout(() => {
@@ -26,11 +49,11 @@ const WeddingBanner: React.FC = () => {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [images]);
+  }, [isVisible, currentImageIndex]); 
 
   return (
     <>
-      <div className="banner-container">
+      <div ref={bannerRef} className="banner-container">
         <div
           className={`image-container ${transition}`}
           style={{ backgroundImage: `url('${images[currentImageIndex]}')` }}
@@ -50,6 +73,7 @@ const WeddingBanner: React.FC = () => {
       </div>
       <div>
         <AboutUs />
+        <HomeGallery />
         <TeamSection />
         <Footer />
       </div>

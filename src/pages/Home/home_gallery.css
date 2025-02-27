@@ -1,0 +1,64 @@
+/* Gallery Container */
+.gallery-container {
+    padding: 50px;
+    background: #f4f4f4; 
+    /* min-height: 100vh; */
+    text-align: center;
+  }
+  
+  /* Section Title */
+  .gallery-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    /* color: #fff; */
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Section Subtitle */
+  .gallery-subtitle {
+    font-size: 1.5rem;
+    color: #f1f1f1;
+    margin-bottom: 40px;
+  }
+  
+  /* Gallery Grid */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  /* Gallery Card */
+  .gallery-card {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #f17934; /* Light background for contrast */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Image */
+  .gallery-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  /* Hover Effects */
+  .gallery-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 25px rgba(255, 105, 135, 0.4); /* Soft glow effect */
+  }
+  
+  .gallery-card:hover img {
+    transform: scale(1.1);
+    filter: brightness(1.1);
+  }
+  
+  
