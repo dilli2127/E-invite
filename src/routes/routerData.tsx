@@ -88,6 +88,16 @@ const routerData: RouteConfig[] = [
         children: [],
       },
       {
+        key: "ealbum",
+        path: "/ealbum/:id",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <EAlbum />
+          </Suspense>
+        ),
+        children: [],
+      },
+      {
         key: "gallery",
         path: "/gallery",
         element: (

@@ -4,7 +4,7 @@ import { getDocument, GlobalWorkerOptions } from "pdfjs-dist";
 
 // PDF URL
 const pdfUrl =
-  "https://freshfocuzstudio.s3.ap-south-1.amazonaws.com/harish-reception.pdf";
+  "https://freshfocuzstudio.s3.ap-south-1.amazonaws.com/dhinraj-pdf_compressed.pdf";
 
 // PDF.js Worker
 GlobalWorkerOptions.workerSrc =
@@ -58,7 +58,7 @@ const EAlbum: React.FC = () => {
     <div
       style={{
         width: "1200px",
-        height: "600px",
+        height: "800px",
         margin: "auto",
         padding: "20px",
       }}
@@ -68,7 +68,7 @@ const EAlbum: React.FC = () => {
       ) : pages.length > 0 ? (
         <HTMLFlipBook
           width={1200}
-          height={600}
+          height={800}
           size="stretch"
           minWidth={400}
           maxWidth={1200}

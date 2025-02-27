@@ -9,11 +9,12 @@ const LandingPage: React.FC = () => {
   const [brideName, setBrideName] = useState("");
   const [groomName, setGroomName] = useState("");
   const navigate = useNavigate();
-  console.log("page_url", pageName);
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (brideName && groomName) {
-      navigate(`/einvite/${groomName}weds${brideName}`);
+      if (pageName === "ealbum")
+        navigate(`/ealbum/${groomName}weds${brideName}`);
+      else navigate(`/einvite/${groomName}weds${brideName}`);
     }
   };
   const pageTitle =
