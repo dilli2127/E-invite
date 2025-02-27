@@ -7,7 +7,7 @@ import {
 } from "@ant-design/icons";
 import AppHeader from "../../components/Header/Header";
 
-const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY || "";
+const GOOGLE_API_KEY = "AIzaSyAKpQZVawfF5Mq6zhr-S-PMgrf_Mlpy-zg";
 const FOLDER_ID = "1BRFdSl05T4ZxVCSfTTBDDzCqqQUSmytf";
 
 type FileType = {

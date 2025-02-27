@@ -9,6 +9,7 @@ import PhotographyLandingPage from "../pages/Home";
 import PrivacyPolicy from "../pages/policy/privacy_policy";
 import TermsAndConditions from "../pages/policy/terms_and_onditions";
 import ReturnAndRefundPolicy from "../pages/policy/return_and_refund_policy";
+import EInvitePage from "../pages/E-Invite";
 
 // User web imports
 const Login = lazy(() => import("../pages/login/login"));
@@ -62,6 +63,16 @@ const routerData: RouteConfig[] = [
         element: (
           <Suspense fallback={<Loader />}>
             <LandingPage />
+          </Suspense>
+        ),
+        children: [],
+      },
+      {
+        key: "einvite",
+        path: "/einvite/:id",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <EInvitePage />
           </Suspense>
         ),
         children: [],
