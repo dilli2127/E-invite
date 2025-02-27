@@ -1,0 +1,165 @@
+.testimonial-container {
+    width: 80%;
+    margin: 60px auto;
+    /* padding: 40px; */
+    background: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    position: relative; /* For decorative elements */
+}
+
+.testimonial-card {
+    text-align: center;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-header {
+    margin-bottom: 30px;
+}
+
+.testimonial-header h2 {
+    color: #333;
+    font-size: 28px; /* Increased font size */
+    margin-bottom: 10px;
+    font-weight: 600;
+    position: relative; /* For the line */
+}
+
+.testimonial-header h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -5px; /* Adjust as needed */
+    width: 50px; /* Adjust as needed */
+    height: 2px;
+    background-color: #e44d26; /* Example line color */
+    transform: translateX(-50%);
+}
+
+.testimonial-quote {
+    font-style: italic;
+    font-size: 20px; /* Increased font size */
+    color: #666;
+    margin-bottom: 30px;
+    line-height: 1.8; /* Increased line height */
+}
+
+.author-info {
+    display: flex;
+    flex-direction: column; /* Stack avatar and details */
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.author-details {
+    text-align: center;
+    margin-top: 10px; /* Space between avatar and details */
+}
+
+.author-name {
+    font-weight: 500;
+    color: #333;
+    font-size: 16px;
+}
+
+.author-location {
+    color: #999;
+    font-size: 14px;
+}
+
+.ant-rate {
+    margin-bottom: 20px; /* Space between title and rating */
+}
+
+.ant-rate-star-full .ant-rate-star-first,
+.ant-rate-star-full .ant-rate-star-second {
+    color: #ffb300;
+}
+
+.ant-carousel .slick-dots li button {
+    background: #ddd;
+}
+
+.ant-carousel .slick-dots li.slick-active button {
+    background: #ffb300;
+}
+
+/* Decorative elements (adjust as needed) */
+.testimonial-container::before,
+.testimonial-container::after {
+    content: '';
+    position: absolute;
+    width: 100px; /* Adjust width */
+    height: 100px; /* Adjust height */
+    background: rgba(255, 200, 200, 0.3); /* Example color */
+    border-radius: 50%;
+    opacity: 0.5;
+}
+
+.testimonial-container::before {
+    top: -30px; /* Adjust position */
+    left: -30px; /* Adjust position */
+}
+
+.testimonial-container::after {
+    bottom: -30px; /* Adjust position */
+    right: -30px; /* Adjust position */
+}
+
+/* Navigation arrows (customize as needed) */
+.ant-carousel .slick-prev,
+.ant-carousel .slick-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    font-size: 20px; /* Adjust size */
+    color: #999; /* Adjust color */
+    background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+    border-radius: 50%;
+    width: 40px; /* Adjust width */
+    height: 40px; /* Adjust height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.ant-carousel .slick-prev {
+    left: -40px; /* Adjust position */
+}
+
+.ant-carousel .slick-next {
+    right: -40px; /* Adjust position */
+}
+.rating-container {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.review-text { /* Add these styles */
+    font-size: 14px;
+    color: #777;
+    margin-top: 5px;
+}
+
+.ant-rate-star-full .ant-rate-star-first,
+.ant-rate-star-full .ant-rate-star-second {
+    color: #ffb300;
+}
+
+.ant-rate-star-half .ant-rate-star-first,
+.ant-rate-star-half .ant-rate-star-second {
+    color: #ffb300;
+}

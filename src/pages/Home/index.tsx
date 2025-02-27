@@ -4,6 +4,7 @@ import AboutUs from "./about";
 import TeamSection from "./team_section";
 import Footer from "./footer";
 import HomeGallery from "./home_gallery";
+import Testimonial from "./testimonial";
 
 const images = [
   "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/062A6124.JPG",
@@ -74,6 +75,7 @@ const WeddingBanner: React.FC = () => {
       <div>
         <AboutUs />
         <HomeGallery />
+        <Testimonial/>
         <TeamSection />
         <Footer />
       </div>

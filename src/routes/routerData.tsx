@@ -6,6 +6,9 @@ import { Outlet } from "react-router-dom";
 import PackageDetails from "../pages/service";
 import AppHeader from "../components/Header/Header";
 import PhotographyLandingPage from "../pages/Home";
+import PrivacyPolicy from "../pages/policy/privacy_policy";
+import TermsAndConditions from "../pages/policy/terms_and_onditions";
+import ReturnAndRefundPolicy from "../pages/policy/return_and_refund_policy";
 
 // User web imports
 const Login = lazy(() => import("../pages/login/login"));
@@ -109,6 +112,36 @@ const routerData: RouteConfig[] = [
         element: (
           <Suspense fallback={<Loader />}>
             <ContactPage />
+          </Suspense>
+        ),
+        children: [],
+      },
+      {
+        key: "TermsAndConditions",
+        path: "/privacy_policy",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <PrivacyPolicy />
+          </Suspense>
+        ),
+        children: [],
+      },
+      {
+        key: "TermsAndConditions",
+        path: "/terms_and_conditions",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <TermsAndConditions />
+          </Suspense>
+        ),
+        children: [],
+      },
+      {
+        key: "ReturnAndRefundPolicy",
+        path: "/return_and_refund_policy",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <ReturnAndRefundPolicy />
           </Suspense>
         ),
         children: [],

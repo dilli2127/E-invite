@@ -110,8 +110,9 @@ const Footer: React.FC = () => {
       <div className="copyright">
         <p>
           ©Copyright 2025 Wedding Fresh Focuz Studio. All rights reserved. |{" "}
-          <Link href="#">FAQ</Link> | <Link href="#">Privacy Policy</Link> |{" "}
-          <Link href="#">Terms & Conditions</Link>
+          <Link href="/privacy_policy">FAQ</Link> | <Link href="#">Privacy Policy</Link> |{" "}
+          <Link href="/terms_and_conditions">Terms & Conditions</Link> |{" "}
+          <Link href="/return_and_refund_policy">Return & RefundPolicy</Link>
         </p>
       </div>
     </footer>
