@@ -12,17 +12,17 @@ const albums = [
   {
     id: 2,
     title: "Engagement Shoots",
-    cover: "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/062A6124.JPG",
+    cover: "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/005A6658.jpg",
   },
   {
     id: 3,
     title: "Birthday Celebrations",
-    cover: "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/062A6124.JPG",
+    cover: "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/20240630_101612.jpg",
   },
   {
     id: 4,
     title: "Corporate Events",
-    cover: "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/062A6124.JPG",
+    cover: "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/0E9A1768.jpg",
   },
 ];
 

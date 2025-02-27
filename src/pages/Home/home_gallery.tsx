@@ -5,12 +5,12 @@ import "./home_gallery.css";
 
 const images = [
   "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/062A6124.JPG",
-  "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/062A6124.JPG",
-  "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/062A6124.JPG",
-  "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/062A6124.JPG",
-  "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/062A6124.JPG",
-  "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/062A6124.JPG",
-  "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/062A6124.JPG",
+  "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/005A6658.jpg",
+  "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/005A7695.jpg",
+  "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/0E9A1768.jpg",
+  "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/20240630_101612.jpg",
+  "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/062A6868.jpg",
+  "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/005A7736.jpg",
   "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/062A6124.JPG",
 ];
 
