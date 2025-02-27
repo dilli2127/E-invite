@@ -21,7 +21,7 @@ const packages: Package[] = [
       "Perfect for small events.",
       "Great for individual portraits.",
     ],
-    features: ["Up to 2 hours.", "1 Photographer.", "50 Edited Photos."],
+    features: ["Up to 5 hours.", "2 Photographer.", "50 Edited Photos.", "1 Video.", "1 Album."],
     primaryColor: "#64B5F6", // Blue
     secondaryColor: "#BBDEFB",
     textColor: "#212121",
@@ -30,7 +30,7 @@ const packages: Package[] = [
     name: "Standard Package",
     price: 55000,
     description: ["Ideal for family photoshoots.", "Enhanced coverage."],
-    features: ["Up to 4 hours.", "1 Photographer.", "100 Edited Photos."],
+    features: ["Up to 4 hours.", "1 Photographer.", "100 Edited Photos.","1 Video.", "2 Album."],
     primaryColor: "#FFB74D", // Orange
     secondaryColor: "#FFE0B2",
     textColor: "#212121",
@@ -39,7 +39,7 @@ const packages: Package[] = [
     name: "Premium Package",
     price: 75000,
     description: ["Large events & special occasions.", "Second photographer."],
-    features: ["Up to 6 hours.", "2 Photographers.", "150 Edited Photos."],
+    features: ["Up to 6 hours.", "2 Photographers.", "150 Edited Photos.","1 Video.", "3 Album."],
     primaryColor: "#81C784", // Green
     secondaryColor: "#C8E6C9",
     textColor: "#212121",
@@ -47,7 +47,7 @@ const packages: Package[] = [
   {
     name: "Luxury Package",
     price: 120000,
-    description: ["Top-tier package.", "Full-day coverage."],
+    description: ["Top-tier package.", "Full-day coverage.","1 Video.", "4 Album."],
     features: [
       "Full-day coverage.",
       "Photographers & Videographer.",
