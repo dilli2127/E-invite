@@ -6,13 +6,12 @@ interface ReturnAndRefundPolicyProps {
 
 const ReturnAndRefundPolicy: React.FC<ReturnAndRefundPolicyProps> = () => {
   return (
-    <div  style={{ padding: "20px" }}>
-      <h1>Return and Refund Policy</h1>
+    <div style={{ padding: "20px" }}>
+      <h1>Refund Policy</h1>
       <p>
-        We have a 5-day return policy, which means you have 5 days after
-        receiving your item to request a return. Once the return product is
-        received it will be inspected and the return will be approved within 2
-        days
+        Once the refund request is approved. The refunded amount will be
+        processed and credited within 10 to 15 working days to the original
+        mode of payment.
       </p>
     </div>
   );

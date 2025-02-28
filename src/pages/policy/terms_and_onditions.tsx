@@ -21,7 +21,7 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = () => {
           freshfocuzstudio.com.
         </li>
         <li>
-          <strong>Platform Ownership:</strong> The Platform (freshfocuzstudio.com) is owned by freshfocuzstudio, a company
+          <strong>Platform Ownership:</strong> The Platform (freshfocuzstudio.com) is owned by K Dillibabu, a company
           incorporated under the Companies Act, 1956, with its registered office
           at kg kandigai.
         </li>
@@ -117,7 +117,7 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = () => {
         </li>
         <li>
           <strong>Jurisdiction:</strong> Disputes are subject to the exclusive
-          jurisdiction of courts in (Enter City and State).
+          jurisdiction of courts in (Tiruthani,Tamil Nadu).
         </li>
         <li>
           <strong>Contact Information:</strong> Concerns or communications

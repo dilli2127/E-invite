@@ -39,6 +39,9 @@ const Footer: React.FC = () => {
               Contacts
             </Title>
             <ul className="contact-list">
+            <li>
+                <a href="tel:9677894094">K Dillibabu</a>
+              </li>
               <li>
                 <a href="tel:9677894094">9677894094</a>
               </li>

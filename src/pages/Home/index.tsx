@@ -75,7 +75,7 @@ const WeddingBanner: React.FC = () => {
       <div>
         <AboutUs />
         <HomeGallery />
-        <Testimonial/>
+        {/* <Testimonial/> */}
         <TeamSection />
         <Footer />
       </div>

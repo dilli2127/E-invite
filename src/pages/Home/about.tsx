@@ -55,7 +55,7 @@ const AboutUs: React.FC = () => {
               <h3 className="service-title">{service.title}</h3>
               <p className="service-description">{service.description}</p>
               <List className="service-features" dataSource={service.features} renderItem={(item) => <List.Item>{item}</List.Item>} />
-              <a href="#" className="learn-more">Learn More</a>
+              {/* <a href="#" className="learn-more">Learn More</a> */}
             </Card>
           </Col>
         ))}
