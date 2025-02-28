@@ -21,10 +21,9 @@ const EAlbum: React.FC = () => {
     setLoading(true);
     try {
       const pdf = await getDocument(pdfUrl).promise;
-      const images: string[] = [];
-      for (let i = 1; i <= pdf.numPages; i++) {
-        const page = await pdf.getPage(i);
-        const viewport = page.getViewport({ scale: 2 });
+      const loadPage = async (pageNumber: number) => {
+        const page = await pdf.getPage(pageNumber);
+        const viewport = page.getViewport({ scale: 1.5 }); // Adjusted scale for performance
 
         const canvas = document.createElement("canvas");
         canvas.width = viewport.width;
@@ -33,10 +32,15 @@ const EAlbum: React.FC = () => {
         const context = canvas.getContext("2d");
         if (context) {
           await page.render({ canvasContext: context, viewport }).promise;
-          images.push(canvas.toDataURL("image/png"));
+          return canvas.toDataURL("image/png");
         }
-      }
-      setPages(images);
+        return null;
+      };
+
+      // Load all pages in parallel
+      const pagesPromises = Array.from({ length: pdf.numPages }, (_, i) => loadPage(i + 1));
+      const images = await Promise.all(pagesPromises);
+      setPages(images.filter((img): img is string => img !== null)); // Filter out any null pages
     } catch (error) {
       console.error("Error loading PDF:", error);
     } finally {
@@ -48,7 +52,6 @@ const EAlbum: React.FC = () => {
     loadPdf();
   }, []);
 
-  // Keyboard handling for space + drag (desktop only)
   const handleKeyDown = (e: KeyboardEvent) => {
     if (e.code === "Space") {
       e.preventDefault();
@@ -80,7 +83,6 @@ const EAlbum: React.FC = () => {
 
   const handleFullScreen = () => document.documentElement.requestFullscreen();
 
-  // Desktop mouse drag (with space key)
   const handleMouseDown = (e: React.MouseEvent) => {
     if (zoom > 1 && isSpacePressed) {
       setIsDragging(true);
@@ -95,7 +97,6 @@ const EAlbum: React.FC = () => {
 
   const handleMouseUp = () => setIsDragging(false);
 
-  // Mobile touch drag (single finger)
   const handleTouchStart = (e: React.TouchEvent) => {
     if (zoom > 1 && e.touches.length === 1) {
       setIsDragging(true);
@@ -127,7 +128,7 @@ const EAlbum: React.FC = () => {
           transform: `scale(${zoom}) translate(${dragOffset.x}px, ${dragOffset.y}px)`,
           transition: isDragging ? "none" : "transform 0.1s ease-out",
           cursor: zoom > 1 && isSpacePressed ? "grab" : "default",
-          touchAction: "none", // Prevent browser gestures
+          touchAction: "none",
         }}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
@@ -160,9 +161,9 @@ const EAlbum: React.FC = () => {
             autoSize={true}
             maxShadowOpacity={0.5}
             showPageCorners={true}
-            disableFlipByClick={zoom > 1} 
-            swipeDistance={zoom > 1 ? 9999 : 30} 
-            mobileScrollSupport={zoom === 1} 
+            disableFlipByClick={zoom > 1}
+            swipeDistance={zoom > 1 ? 9999 : 30}
+            mobileScrollSupport={zoom === 1}
           >
             {pages.map((page, index) => (
               <div key={index} className="album-page">
