@@ -3,11 +3,9 @@ import HTMLFlipBook from "react-pageflip";
 import { getDocument, GlobalWorkerOptions } from "pdfjs-dist";
 import "./e-album.css";
 
-GlobalWorkerOptions.workerSrc =
-  "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js";
+GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js";
 
-const pdfUrl =
-  "https://freshfocuzstudio.s3.ap-south-1.amazonaws.com/dhinraj-pdf_compressed.pdf";
+const pdfUrl = "https://freshfocuzstudio.s3.ap-south-1.amazonaws.com/dhinraj-pdf_compressed.pdf";
 
 const EAlbum: React.FC = () => {
   const [pages, setPages] = useState<string[]>([]);
@@ -16,14 +14,9 @@ const EAlbum: React.FC = () => {
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
-  const [isTwoFingerTouch, setIsTwoFingerTouch] = useState(false);
-  const [lastTouchDistance, setLastTouchDistance] = useState<number | null>(
-    null
-  );
   const [isSpacePressed, setIsSpacePressed] = useState(false);
   const albumRef = useRef<HTMLDivElement>(null);
 
-  // PDF Loading Function
   const loadPdf = async () => {
     setLoading(true);
     try {
@@ -53,88 +46,71 @@ const EAlbum: React.FC = () => {
 
   useEffect(() => {
     loadPdf();
-  }, []); // Run only once on mount
+  }, []);
 
-  // Keyboard Event Handlers
+  // Keyboard handling for space + drag (desktop only)
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.code === "Space") {
+      e.preventDefault();
+      setIsSpacePressed(true);
+    }
+  };
+
+  const handleKeyUp = (e: KeyboardEvent) => {
+    if (e.code === "Space") {
+      setIsSpacePressed(false);
+      setIsDragging(false);
+    }
+  };
+
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.code === "Space") setIsSpacePressed(true);
-    };
-    const handleKeyUp = (e: KeyboardEvent) => {
-      if (e.code === "Space") {
-        setIsSpacePressed(false);
-        setIsDragging(false); // Reset dragging on Space release
-      }
-    };
-
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
-
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
     };
   }, []);
 
-  // Zoom & Fullscreen Handlers
   const handleZoomIn = () => setZoom((prev) => Math.min(prev + 0.2, 2));
   const handleZoomOut = () => {
     setZoom((prev) => Math.max(prev - 0.2, 1));
-    setDragOffset({ x: 0, y: 0 }); // Reset drag offset when zooming out
+    setDragOffset({ x: 0, y: 0 });
   };
+
   const handleFullScreen = () => document.documentElement.requestFullscreen();
 
-  // Mouse Drag Handlers
+  // Desktop mouse drag (with space key)
   const handleMouseDown = (e: React.MouseEvent) => {
     if (zoom > 1 && isSpacePressed) {
       setIsDragging(true);
-      setDragStart({
-        x: e.clientX - dragOffset.x,
-        y: e.clientY - dragOffset.y,
-      });
+      setDragStart({ x: e.clientX - dragOffset.x, y: e.clientY - dragOffset.y });
     }
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!isDragging) return;
-    setDragOffset({
-      x: e.clientX - dragStart.x,
-      y: e.clientY - dragStart.y,
-    });
+    setDragOffset({ x: e.clientX - dragStart.x, y: e.clientY - dragStart.y });
   };
 
   const handleMouseUp = () => setIsDragging(false);
 
-  // Touch (Pinch-to-Zoom) Handlers
+  // Mobile touch drag (single finger)
   const handleTouchStart = (e: React.TouchEvent) => {
-    if (e.touches.length === 2) {
-      setIsTwoFingerTouch(true); // 2 fingers - enable drag
-      const touchDistance = Math.hypot(
-        e.touches[0].clientX - e.touches[1].clientX,
-        e.touches[0].clientY - e.touches[1].clientY
-      );
-      setLastTouchDistance(touchDistance);
-    } else {
-      setIsTwoFingerTouch(false); // 1 finger - allow flip
+    if (zoom > 1 && e.touches.length === 1) {
+      setIsDragging(true);
+      const touch = e.touches[0];
+      setDragStart({ x: touch.clientX - dragOffset.x, y: touch.clientY - dragOffset.y });
     }
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    if (e.touches.length === 2 && lastTouchDistance !== null) {
-      const newDistance = Math.hypot(
-        e.touches[0].clientX - e.touches[1].clientX,
-        e.touches[0].clientY - e.touches[1].clientY
-      );
-      const zoomFactor = newDistance / lastTouchDistance;
-      setZoom((prev) => Math.max(1, Math.min(prev * zoomFactor, 2)));
-      setLastTouchDistance(newDistance);
-    }
+    if (!isDragging || e.touches.length !== 1) return;
+    const touch = e.touches[0];
+    setDragOffset({ x: touch.clientX - dragStart.x, y: touch.clientY - dragStart.y });
   };
 
-  const handleTouchEnd = () => {
-    setLastTouchDistance(null);
-    if (isTwoFingerTouch) setIsTwoFingerTouch(false); // Reset on touch end
-  };
+  const handleTouchEnd = () => setIsDragging(false);
 
   return (
     <div className="album-wrapper">
@@ -149,8 +125,9 @@ const EAlbum: React.FC = () => {
         ref={albumRef}
         style={{
           transform: `scale(${zoom}) translate(${dragOffset.x}px, ${dragOffset.y}px)`,
-          transition: "transform 0.1s ease-out",
+          transition: isDragging ? "none" : "transform 0.1s ease-out",
           cursor: zoom > 1 && isSpacePressed ? "grab" : "default",
+          touchAction: "none", // Prevent browser gestures
         }}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
@@ -171,29 +148,25 @@ const EAlbum: React.FC = () => {
             minHeight={200}
             maxHeight={600}
             showCover={true}
-            mobileScrollSupport={true}
             className="album-flipbook"
             style={{}}
             startPage={0}
             drawShadow={true}
             flippingTime={1000}
-            useMouseEvents={!isTwoFingerTouch} // Disable mouse events when dragging
-            clickEventForward={!isTwoFingerTouch} // Allow page flip when not dragging
+            useMouseEvents={true}
+            clickEventForward={true}
             usePortrait={true}
             startZIndex={0}
             autoSize={true}
             maxShadowOpacity={0.5}
             showPageCorners={true}
-            disableFlipByClick={isTwoFingerTouch}
-            swipeDistance={30} // Add this line
+            disableFlipByClick={zoom > 1} 
+            swipeDistance={zoom > 1 ? 9999 : 30} 
+            mobileScrollSupport={zoom === 1} 
           >
             {pages.map((page, index) => (
               <div key={index} className="album-page">
-                <img
-                  src={page}
-                  alt={`Page ${index + 1}`}
-                  className="album-image"
-                />
+                <img src={page} alt={`Page ${index + 1}`} className="album-image" />
               </div>
             ))}
           </HTMLFlipBook>

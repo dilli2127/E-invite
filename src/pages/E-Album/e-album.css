@@ -49,3 +49,7 @@
 .loading {
   font-size: 20px;
 }
+html,
+body {
+  overscroll-behavior: none;
+}
