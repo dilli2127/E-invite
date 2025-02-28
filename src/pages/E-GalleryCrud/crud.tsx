@@ -2,6 +2,11 @@ import React, { memo, useState } from "react";
 import { Table, Button, Row, Drawer, Input, InputNumber, Upload } from "antd";
 import AntdForm from "../../components/antd/form/form";
 import { UploadOutlined } from "@ant-design/icons";
+import { ApiRequest } from "../../services/api/apiService";
+import { dynamic_request } from "../../services/redux";
+import { useDispatch } from "react-redux";
+import { Dispatch } from "redux";
+import { API_ROUTES } from "../../services/api/utils";
 
 const formColumns = 2;
 const formItems = [
@@ -33,7 +38,13 @@ const EGalleryCrud: React.FC = ({}) => {
   const [drawerVisible, setDrawerVisible] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [filteredItems, setFilteredItems] = useState();
-
+  const dispatch: Dispatch<any> = useDispatch();
+  const callBackServer = React.useCallback(
+    (variables: ApiRequest, key: string) => {
+      dispatch(dynamic_request(variables, key));
+    },
+    [dispatch]
+  );
   const columns = [
     {
       title: "ID",
@@ -69,8 +80,32 @@ const EGalleryCrud: React.FC = ({}) => {
   //   setFilteredItems(filtered);
   // };
 
-  const FormValue = (values: any) => {
+  const FormValue = async (values: any) => {
     console.log("Form Values:", values);
+
+    try {
+      const response = await fetch("http://localhost:8247/upload-album", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values), // send form data
+      });
+
+      const result = await response.json();
+      console.log("API Response:", result);
+
+      if (response.ok) {
+        // Handle success (maybe show notification or update UI)
+        console.log("Album uploaded successfully");
+      } else {
+        // Handle error (show error message)
+        console.error("Failed to upload album:", result);
+      }
+    } catch (error) {
+      console.error("API Error:", error);
+    }
+
     setDrawerVisible(false);
   };
 
