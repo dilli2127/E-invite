@@ -16,7 +16,10 @@ const EAlbum: React.FC = () => {
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
-  const [lastTouchDistance, setLastTouchDistance] = useState<number | null>(null);
+  const [isTwoFingerTouch, setIsTwoFingerTouch] = useState(false);
+  const [lastTouchDistance, setLastTouchDistance] = useState<number | null>(
+    null
+  );
   const [isSpacePressed, setIsSpacePressed] = useState(false);
   const albumRef = useRef<HTMLDivElement>(null);
 
@@ -105,11 +108,14 @@ const EAlbum: React.FC = () => {
   // Touch (Pinch-to-Zoom) Handlers
   const handleTouchStart = (e: React.TouchEvent) => {
     if (e.touches.length === 2) {
+      setIsTwoFingerTouch(true); // 2 fingers - enable drag
       const touchDistance = Math.hypot(
         e.touches[0].clientX - e.touches[1].clientX,
         e.touches[0].clientY - e.touches[1].clientY
       );
       setLastTouchDistance(touchDistance);
+    } else {
+      setIsTwoFingerTouch(false); // 1 finger - allow flip
     }
   };
 
@@ -125,7 +131,10 @@ const EAlbum: React.FC = () => {
     }
   };
 
-  const handleTouchEnd = () => setLastTouchDistance(null);
+  const handleTouchEnd = () => {
+    setLastTouchDistance(null);
+    if (isTwoFingerTouch) setIsTwoFingerTouch(false); // Reset on touch end
+  };
 
   return (
     <div className="album-wrapper">
@@ -168,19 +177,23 @@ const EAlbum: React.FC = () => {
             startPage={0}
             drawShadow={true}
             flippingTime={1000}
-            useMouseEvents={true}
-            clickEventForward={false}
+            useMouseEvents={!isTwoFingerTouch} // Disable mouse events when dragging
+            clickEventForward={!isTwoFingerTouch} // Allow page flip when not dragging
             usePortrait={true}
             startZIndex={0}
             autoSize={true}
             maxShadowOpacity={0.5}
             showPageCorners={true}
-            disableFlipByClick={false}
+            disableFlipByClick={isTwoFingerTouch}
             swipeDistance={30} // Add this line
           >
             {pages.map((page, index) => (
               <div key={index} className="album-page">
-                <img src={page} alt={`Page ${index + 1}`} className="album-image" />
+                <img
+                  src={page}
+                  alt={`Page ${index + 1}`}
+                  className="album-image"
+                />
               </div>
             ))}
           </HTMLFlipBook>
