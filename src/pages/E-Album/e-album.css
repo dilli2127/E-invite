@@ -1,0 +1,50 @@
+.album-wrapper {
+  width: 100%;
+  height: 100vh;
+  background: radial-gradient(circle, #fefefe, #e8e8e8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.album-header {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  z-index: 10;
+}
+
+.album-header button {
+  background: #4a90e2;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.flipbook-container {
+  width: 100%;
+  height: calc(100vh - 60px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.album-flipbook {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.album-page img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.loading {
+  font-size: 20px;
+}

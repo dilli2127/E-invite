@@ -171,6 +171,12 @@ code {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   overflow: hidden;
 }
+@media (max-width: 768px) {
+  .album-container {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
 
 .album-page {
   display: flex;
