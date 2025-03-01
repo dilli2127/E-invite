@@ -77,6 +77,11 @@ export const API_ROUTES = {
       method: API_METHODS.GET,
       endpoint: "/cms_image",
     },
+    GetAll: {
+      identifier: "GetCmsImage",
+      method: API_METHODS.POST,
+      endpoint: "/cms_image",
+    },
     Delete: {
       identifier: "DeleteCmsImage",
       method: API_METHODS.DELETE,

@@ -1,25 +1,30 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import "./WeddingBanner.css";
 import AboutUs from "./about";
 import TeamSection from "./team_section";
 import Footer from "./footer";
 import HomeGallery from "./home_gallery";
 import Testimonial from "./testimonial";
-
-const images = [
-  "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/062A6124.JPG",
-  "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/062A7195.jpg",
-  "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/062A9143.jpg",
-  "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/DSC_0319.jpg",
-  "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/post-1.jpg",
-];
+import { ApiRequest } from "../../services/api/apiService";
+import { dynamic_request, useDynamicSelector } from "../../services/redux";
+import { useDispatch } from "react-redux";
+import { Dispatch } from "redux";
+import { getApiRouteCmsImage } from "../../helpers/Common_functions";
 
 const WeddingBanner: React.FC = () => {
+  const getImageRoute = getApiRouteCmsImage("GetAll");
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [transition, setTransition] = useState("slide-in");
   const [isVisible, setIsVisible] = useState(true);
   const bannerRef = useRef<HTMLDivElement>(null);
-
+  const { loading, items } = useDynamicSelector(getImageRoute.identifier);
+  const dispatch: Dispatch<any> = useDispatch();
+  const callBackServer = useCallback(
+    (variables: ApiRequest, key: string) => {
+      dispatch(dynamic_request(variables, key));
+    },
+    [dispatch]
+  );
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -38,26 +43,46 @@ const WeddingBanner: React.FC = () => {
       }
     };
   }, []);
-
+  const homeImages = items?.result?.filter((item: { type: string }) => item.type === 'Home') ?? [];
+  const homeGalleryImages = items?.result?.filter((item: { type: string }) => item.type === 'HomeGallery') ?? [];
+  const getAllImages = () => {
+    callBackServer(
+      {
+        method: getImageRoute.method,
+        endpoint: getImageRoute.endpoint,
+        data: {},
+      },
+      getImageRoute.identifier
+    );
+  };
   useEffect(() => {
-    if (!isVisible) return; 
+    getAllImages();
+  }, []);
+  useEffect(() => {
+    if (!isVisible) return;
     const interval = setInterval(() => {
       setTransition("slide-out");
       setTimeout(() => {
-        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+        setCurrentImageIndex(
+          (prevIndex) => (prevIndex + 1) % homeImages?.length
+        );
         setTransition("slide-in");
-      }, 500);
+      }, 300);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [isVisible, currentImageIndex]); 
+  }, [isVisible, currentImageIndex]);
 
   return (
     <>
       <div ref={bannerRef} className="banner-container">
         <div
           className={`image-container ${transition}`}
-          style={{ backgroundImage: `url('${images[currentImageIndex]}')` }}
+          style={{
+            backgroundImage: items?.result?.length
+              ? `url('${homeImages?.[currentImageIndex]?.url}')`
+              : `url('${homeImages?.[currentImageIndex]?.url}')`,
+          }}
         ></div>
         <div className="content-container_landing">
           <span className="badge">WEDDING</span>
@@ -74,8 +99,8 @@ const WeddingBanner: React.FC = () => {
       </div>
       <div>
         <AboutUs />
-        <HomeGallery />
-        <Testimonial/>
+        <HomeGallery homeGalleryImages={homeGalleryImages} />
+        <Testimonial />
         <TeamSection />
         <Footer />
       </div>

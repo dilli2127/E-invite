@@ -51,7 +51,7 @@ const AntdForm = (props) => {
       <Form
         form={form}
         onFinish={onFinish}
-        initialValues={initialValues}
+        // initialValues={initialValues}
         layout="vertical"
       >
         <Row gutter={[16, 16]}>

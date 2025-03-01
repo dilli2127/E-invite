@@ -27,7 +27,7 @@ import { useDispatch } from "react-redux";
 import { Dispatch } from "redux";
 import { API_ROUTES } from "../../services/api/utils";
 import { useFileUpload } from "../../helpers/useFileUpload";
-import { getApiRoute, showToast } from "../../helpers/message";
+import { getApiRouteCmsImage, showToast } from "../../helpers/Common_functions";
 
 const { Option } = Select;
 const formColumns = 2;
@@ -43,10 +43,10 @@ const CmsImageCrud: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
   const { url, handleFileUpload } = useFileUpload();
 
-  const getRoute = getApiRoute("Get");
-  const addRoute = getApiRoute("Create");
-  const updateRoute = getApiRoute("Update");
-  const deleteRoute = getApiRoute("Delete");
+  const getRoute = getApiRouteCmsImage("Get");
+  const addRoute = getApiRouteCmsImage("Create");
+  const updateRoute = getApiRouteCmsImage("Update");
+  const deleteRoute = getApiRouteCmsImage("Delete");
 
   const { loading, items } = useDynamicSelector(getRoute.identifier);
   const { items: updateItems, error: updateError } = useDynamicSelector(
@@ -91,7 +91,7 @@ const CmsImageCrud: React.FC = () => {
       showToast("success", `Image ${action}d successfully`);
       getAllImages();
       resetForm();
-      const actionRoute = getApiRoute(
+      const actionRoute = getApiRouteCmsImage(
         (action.charAt(0).toUpperCase() +
           action.slice(1)) as keyof typeof API_ROUTES.CmsImage
       );

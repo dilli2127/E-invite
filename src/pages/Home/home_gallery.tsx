@@ -14,12 +14,17 @@ const images = [
   "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/062A6124.JPG",
 ];
 
-const HomeGallery: React.FC = () => {
+interface HomeGalleryProps {
+  homeGalleryImages: any[];
+}
+
+const HomeGallery: React.FC<HomeGalleryProps> = ({ homeGalleryImages }) => {
+  console.log("homeGalleryImages",homeGalleryImages)
   return (
     <div className="gallery-container">
       <h2 className="gallery-title">Gallery</h2>
       <Row gutter={[16, 16]} justify="center">
-        {images.map((img, index) => (
+        {homeGalleryImages.map((img, index) => (
           <Col key={index} xs={24} sm={24} md={8} lg={6}>
             <motion.div
               whileHover={{ scale: 1.05, boxShadow: "0px 10px 20px rgba(0,0,0,0.3)" }}
@@ -27,7 +32,7 @@ const HomeGallery: React.FC = () => {
             <Card hoverable>
               <div style={{ cursor: "pointer", textAlign: "center" }}>
                 <Image
-                  src={img}
+                  src={img?.url}
                   alt={`Gallery Image ${index + 1}`}
                   width="100%"
                   style={{
