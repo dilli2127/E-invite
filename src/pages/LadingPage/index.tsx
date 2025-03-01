@@ -12,9 +12,15 @@ const LandingPage: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (brideName && groomName) {
-      if (pageName === "ealbum")
-        navigate(`/ealbum/${groomName}weds${brideName}`);
-      else navigate(`/einvite/${groomName}weds${brideName}`);
+      // Convert to lowercase
+      const brideNameLower = brideName.toLowerCase();
+      const groomNameLower = groomName.toLowerCase();
+
+      if (pageName === "ealbum") {
+        navigate(`/ealbum/${groomNameLower}weds${brideNameLower}`);
+      } else {
+        navigate(`/einvite/${groomNameLower}weds${brideNameLower}`);
+      }
     }
   };
   const pageTitle =

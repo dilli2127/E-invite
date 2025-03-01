@@ -7,7 +7,7 @@ interface LandscapeImageProps {
 
 const LandscapeImage: React.FC<LandscapeImageProps> = ({ imageUrl }) => {
   return (
-    <Col className="image-container">
+    <Col className="image-container-e-invite">
       <img alt="Landscape" src={imageUrl} className="image-full-width" />
     </Col>
   );
