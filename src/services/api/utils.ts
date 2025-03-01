@@ -3,6 +3,7 @@ export const API_METHODS = {
   POST: "POST",
   PUT: "PUT",
   DELETE: "DELETE",
+  PATCH: "PATCH",
 };
 
 export const API_ROUTES = {
@@ -68,7 +69,7 @@ export const API_ROUTES = {
     },
     Update: {
       identifier: "UpdateCmsImage",
-      method: API_METHODS.POST,
+      method: API_METHODS.PATCH,
       endpoint: "/cms_image",
     },
     Get: {
@@ -78,7 +79,7 @@ export const API_ROUTES = {
     },
     Delete: {
       identifier: "DeleteCmsImage",
-      method: API_METHODS.POST,
+      method: API_METHODS.DELETE,
       endpoint: "/cms_image",
     },
   },

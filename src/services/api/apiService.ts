@@ -2,7 +2,8 @@ import axios from 'axios';
 import { API_ERROR_CODES } from '../../helpers/constants';
 
 export interface ApiResponse<T> {
-    status: string;
+    statusCode: string;
+    result:any
     message: string;
     data?: T; // Optional, only present on success
 }
@@ -42,13 +43,14 @@ class APIService {
 
     // Handle successful responses
     private handleResponse<T>(response: ApiResponse<T>): ApiResponse<T> {
-        if (response.status === API_ERROR_CODES.OK) {
+        if (response?.statusCode === API_ERROR_CODES.OK) {
             return response; // Return the successful response
         } else {
             // Handle other statuses appropriately
             return {
-                status: response.status,
+                statusCode: response.statusCode,
                 message: response.message,
+                result: response.result,
             };
         }
     }
@@ -56,20 +58,20 @@ class APIService {
     // Handle errors from Axios
     private handleError<T>(error: unknown): ApiResponse<T | null> {
         let errorMessage = 'API call failed';
-        let status: string = 'FAILED';
+        let statusCode: string = 'FAILED';
 
         if (axios.isAxiosError(error)) {
             if (error.response) {
-                // The request was made and the server responded with a status code
+                // The request was made and the server responded with a statusCode code
                 const responseStatus = error.response.status;
                 errorMessage = error.response.data?.message || 'An error occurred';
 
                 if (responseStatus === 404) {
-                    status = 'NOT FOUND';
+                    statusCode = 'NOT FOUND';
                 } else if (responseStatus === 400) {
-                    status = 'BAD REQUEST';
+                    statusCode = 'BAD REQUEST';
                 } else if (responseStatus >= 500) {
-                    status = 'SERVER ERROR';
+                    statusCode = 'SERVER ERROR';
                 }
             } else if (error.request) {
                 // The request was made but no response was received
@@ -80,7 +82,7 @@ class APIService {
             }
         }
 
-        return { status, message: errorMessage, data: null }; // Maintain type consistency
+        return { statusCode, message: errorMessage, result: null, data: null }; // Maintain type consistency
     }
 
 }
