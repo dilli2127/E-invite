@@ -21,15 +21,15 @@ const AntdForm = (props) => {
   const columns = formColumns || 1;
   const handleCancel = () => {
     onChildCancel(false);
-    form.resetFields();
+    form?.resetFields();
   };
   const onFinish = (values) => {
     FormValue(values);
-    form.resetFields();
+    form?.resetFields();
   };
   useEffect(() => {
     if (initialValues) {
-      form.setFieldsValue(initialValues);
+      form?.setFieldsValue(initialValues);
     }
   }, [initialValues, form]);
   return (
