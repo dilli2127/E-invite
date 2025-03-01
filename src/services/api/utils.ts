@@ -62,7 +62,7 @@ export const API_ROUTES = {
     },
   },
   CmsImage: {
-    Add: {
+    Create: {
       identifier: "AddCmsImage",
       method: API_METHODS.PUT,
       endpoint: "/cms_image",

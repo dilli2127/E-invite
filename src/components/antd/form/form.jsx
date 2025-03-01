@@ -1,5 +1,6 @@
 import { Form, Button, Typography, Row, Col } from "antd";
 import { PlusOutlined, MinusCircleOutlined } from "@ant-design/icons";
+import { useEffect } from "react";
 
 const AntdForm = (props) => {
   const {
@@ -14,19 +15,27 @@ const AntdForm = (props) => {
     labelCol,
     initialValues,
     loading,
+    form,
   } = props;
 
-  const [form] = Form.useForm();
   const columns = formColumns || 1;
-
   const handleCancel = () => {
     onChildCancel(false);
+    form.resetFields();
   };
-
+  const type = Form.useWatch("type", form);
+  const url = Form.useWatch("url", form);
+  console.log("type", type, url);
+  console.log("url", url);
   const onFinish = (values) => {
     FormValue(values);
+    form.resetFields();
   };
-
+  useEffect(() => {
+    if (initialValues) {
+      form.setFieldsValue(initialValues);
+    }
+  }, [initialValues, form]);
   return (
     <div style={{ position: "relative", height: "100%" }}>
       <div
@@ -87,7 +96,7 @@ const AntdForm = (props) => {
               {(fields, { add, remove }) => (
                 <>
                   {fields.map(({ key, name, fieldKey, ...restField }) => (
-                    <Row gutter={[16,16]} align="middle" key={key}>
+                    <Row gutter={[16, 16]} align="middle" key={key}>
                       {nestedInputs.map((input, idx) => (
                         <Col key={idx}>
                           <Form.Item
@@ -102,7 +111,7 @@ const AntdForm = (props) => {
                             ]}
                             label={input.label}
                           >
-                             {input.component}
+                            {input.component}
                           </Form.Item>
                         </Col>
                       ))}
@@ -112,7 +121,7 @@ const AntdForm = (props) => {
                     </Row>
                   ))}
                   <Row justify="center">
-                    <Col >
+                    <Col>
                       <Button
                         type="primary"
                         onClick={() => add()}
