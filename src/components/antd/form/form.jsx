@@ -23,10 +23,6 @@ const AntdForm = (props) => {
     onChildCancel(false);
     form.resetFields();
   };
-  const type = Form.useWatch("type", form);
-  const url = Form.useWatch("url", form);
-  console.log("type", type, url);
-  console.log("url", url);
   const onFinish = (values) => {
     FormValue(values);
     form.resetFields();
