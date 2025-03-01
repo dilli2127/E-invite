@@ -23,6 +23,7 @@ const PhotoGallery = lazy(() => import("../pages/Gallery/photoGallery"));
 const EInviteCrud = lazy(() => import("../pages/E-InviteCrud/crud"));
 const EGalleryCrud = lazy(() => import("../pages/E-GalleryCrud/crud"));
 const EAlbumCrud = lazy(() => import("../pages/E-AlbumCrud/crud"));
+const CmsImageCrud = lazy(() => import("../pages/CMS-Image-Crud/crud"));
 
 const Loader = () => <div>Loading...</div>;
 
@@ -208,6 +209,16 @@ const routerData: RouteConfig[] = [
         element: (
           <Suspense fallback={<Loader />}>
             <EAlbumCrud />
+          </Suspense>
+        ),
+        children: [],
+      },
+      {
+        key: "imageCrud",
+        path: "image_crud",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <CmsImageCrud />
           </Suspense>
         ),
         children: [],

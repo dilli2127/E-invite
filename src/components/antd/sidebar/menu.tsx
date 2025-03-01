@@ -25,4 +25,10 @@ export  const menuItems = [
     label: "E-Gallery",
     path: "egallery_crud",
   },
+  {
+    key: "CMS Images Crud",
+    icon: <UserOutlined />,
+    label: "CMS Images",
+    path: "image_crud",
+  },
 ];

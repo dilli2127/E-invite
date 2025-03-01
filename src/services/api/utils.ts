@@ -1,6 +1,8 @@
 export const API_METHODS = {
   GET: "GET",
   POST: "POST",
+  PUT: "PUT",
+  DELETE: "DELETE",
 };
 
 export const API_ROUTES = {
@@ -31,11 +33,11 @@ export const API_ROUTES = {
       endpoint: "ledger-definition/delete",
     },
   },
-  PdfUploder: {
+  FileUploder: {
     Add: {
-      identifier: "/upload-album",
+      identifier: "file-upload",
       method: API_METHODS.POST,
-      endpoint: "/upload-album",
+      endpoint: "/file-upload",
     },
     Update: {
       identifier: "UpdateLedgerDefinition",
@@ -56,6 +58,28 @@ export const API_ROUTES = {
       identifier: "DeleteLedgerDefinition",
       method: API_METHODS.POST,
       endpoint: "ledger-definition/delete",
+    },
+  },
+  CmsImage: {
+    Add: {
+      identifier: "AddCmsImage",
+      method: API_METHODS.PUT,
+      endpoint: "/cms_image",
+    },
+    Update: {
+      identifier: "UpdateCmsImage",
+      method: API_METHODS.POST,
+      endpoint: "/cms_image",
+    },
+    Get: {
+      identifier: "GetCmsImage",
+      method: API_METHODS.GET,
+      endpoint: "/cms_image",
+    },
+    Delete: {
+      identifier: "DeleteCmsImage",
+      method: API_METHODS.POST,
+      endpoint: "/cms_image",
     },
   },
  
