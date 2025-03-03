@@ -17,3 +17,12 @@ export const getApiRouteCmsImage = (action: keyof typeof API_ROUTES.CmsImage) =>
   }
   return route;
 };
+
+export const getApiRouteGetEivite = (action: keyof typeof API_ROUTES.GetEivite) => {
+  const route = API_ROUTES?.GetEivite?.[action];
+  if (!route) {
+    console.error(`API_ROUTES.CmsImage.${action} is undefined.`);
+    throw new Error(`API route for CmsImage.${action} is not defined.`);
+  }
+  return route;
+};

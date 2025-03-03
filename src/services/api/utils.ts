@@ -8,10 +8,10 @@ export const API_METHODS = {
 
 export const API_ROUTES = {
   GetEivite: {
-    Add: {
-      identifier: "AddLedgerDefinition",
-      method: API_METHODS.POST,
-      endpoint: "ledger-definition/add",
+    Create: {
+      identifier: "CreateEinvite",
+      method: API_METHODS.PUT,
+      endpoint: "e_invite",
     },
     Update: {
       identifier: "UpdateLedgerDefinition",
@@ -26,7 +26,7 @@ export const API_ROUTES = {
     Get: {
       identifier: "GetEinvite",
       method: API_METHODS.GET,
-      endpoint: "e_invite/",
+      endpoint: "e_invite",
     },
     Delete: {
       identifier: "DeleteLedgerDefinition",
