@@ -91,16 +91,6 @@ const EInviteCrud: React.FC = ({}) => {
   const handleDrawerClose = () => {
     setDrawerVisible(false);
   };
-  // const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const text = e.target.value.toLowerCase();
-  //   setSearchText(text);
-  //   const filtered = items.filter(
-  //     (item) =>
-  //       item.name.toLowerCase().includes(text) ||
-  //       item.description.toLowerCase().includes(text)
-  //   );
-  //   setFilteredItems(filtered);
-  // };
 
   const FormValue = (values: any) => {
     console.log("Form Values:", values);
