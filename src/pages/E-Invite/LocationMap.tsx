@@ -10,33 +10,17 @@ import {
 interface LocationMapProps {
   latitude: number;
   longitude: number;
+  placeName?: string; // Optional, if you want to pass "SVK PALACE"
 }
 
-const LocationMap: React.FC<LocationMapProps> = ({ latitude, longitude }) => {
-  const [address, setAddress] = useState<string>("");
+const LocationMap: React.FC<LocationMapProps> = ({
+  latitude,
+  longitude,
+  placeName
+}) => {
   const [showInfoWindow, setShowInfoWindow] = useState<boolean>(false);
-  const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY || "";
 
-  const fetchCoordinates = async (longitude: number,latitude: number) => {
-    console.log("latitude", latitude, "longitude", longitude);
-    try {
-      const response = await fetch(
-        `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`
-      );
-      const data = await response.json();
-      setAddress(data?.display_name || "Address not found");
-    } catch (err) {
-      console.error("Error fetching coordinates:", err);
-      setAddress("Error fetching address");
-    }
-  };
-
-  // Run the effect when latitude or longitude changes
-  useEffect(() => {
-    if (latitude && longitude) {
-      fetchCoordinates(latitude, longitude);
-    }
-  }, [latitude, longitude]);
+  const apiKey = "AIzaSyAKpQZVawfF5Mq6zhr-S-PMgrf_Mlpy-zg";
 
   const handleMarkerClick = () => {
     setShowInfoWindow(true);
@@ -54,7 +38,7 @@ const LocationMap: React.FC<LocationMapProps> = ({ latitude, longitude }) => {
         <GoogleMap
           mapContainerStyle={{ height: "400px", width: "100%" }}
           center={{ lat: latitude, lng: longitude }}
-          zoom={13}
+          zoom={15}
         >
           <Marker
             position={{ lat: latitude, lng: longitude }}
@@ -65,33 +49,36 @@ const LocationMap: React.FC<LocationMapProps> = ({ latitude, longitude }) => {
               position={{ lat: latitude, lng: longitude }}
               onCloseClick={handleInfoWindowClose}
             >
-              <div>
+              <div style={{ maxWidth: "250px", textAlign: "center" }}>
+                <h3 style={{ margin: "5px 0" }}>{placeName}</h3>
                 <a
                   href={googleMapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
+                  style={{ textDecoration: "none", color: "#1a73e8" }}
                 >
-                  {address}
-                  <Button
-                    type="primary"
-                    onClick={() => {
-                      navigator.clipboard.writeText(address);
-                    }}
-                  >
-                    Directions
-                  </Button>
+                  Open in Google Maps
                 </a>
+                <br />
+                <Button
+                  type="primary"
+                  style={{ marginTop: "8px" }}
+                  onClick={() => placeName && navigator.clipboard.writeText(placeName)}
+                >
+                  Copy Location Name
+                </Button>
               </div>
             </InfoWindow>
           )}
         </GoogleMap>
       </LoadScript>
-      {address && (
+    {/* Address Block Below Map */}
+    {googleMapsUrl && (
         <div
           style={{
-            marginTop: "10px",
-            backgroundColor: "#f0f8ff",
+            marginTop: "15px",
             padding: "15px",
+            backgroundColor: "#f0f8ff",
             borderRadius: "10px",
             boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
             textAlign: "center",
@@ -100,19 +87,24 @@ const LocationMap: React.FC<LocationMapProps> = ({ latitude, longitude }) => {
           <h3 style={{ color: "#1d3557", fontFamily: "Arial, sans-serif" }}>
             Event Address
           </h3>
-          <a
-            href={googleMapsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+          <p
             style={{
-              textDecoration: "none",
+              whiteSpace: "pre-line", // Ensures multiline address
               color: "#0b1687",
               fontWeight: "bold",
-              fontSize: "18px",
+              fontSize: "16px",
             }}
           >
-            {address}
-          </a>
+            {placeName}
+          </p>
+          <Button
+            type="primary"
+            href={googleMapsUrl}
+            target="_blank"
+            style={{ marginTop: "10px" }}
+          >
+            Get Directions
+          </Button>
         </div>
       )}
     </Card>

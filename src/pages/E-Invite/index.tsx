@@ -13,8 +13,6 @@ import { API_ROUTES } from "../../services/api/utils";
 
 const EInvitePage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [imageUrl, setImageUrl] = useState<string>("");
-  const [photos, setPhotos] = useState<string[]>([]);
   const { loading, items } = useDynamicSelector(
     API_ROUTES.GetEivite.Get.identifier
   );
@@ -26,28 +24,7 @@ const EInvitePage: React.FC = () => {
     },
     [dispatch]
   );
-  const [location, setLatitude] = useState<{
-    latitude: number;
-    longitude: number;
-  }>({ latitude: 0.0, longitude: 0.0 });
-  // useEffect(() => {
-  //   if (id) {
-  //     fetch(`https://einviteapi.freshfocuz.tech/e_invite/${id}`)
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         const result = data.result;
-  //         setImageUrl(result?.invite_url || "");
-  //         setPhotos(result?.images || []);
-  //         setLatitude({
-  //           latitude: result?.latitude || 0.0,
-  //           longitude: result?.longitude || 0.0,
-  //         });
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error fetching invite details:", error);
-  //       });
-  //   }
-  // }, [id]);
+
   useEffect(() => {
     callBackServer(
       {
@@ -58,6 +35,7 @@ const EInvitePage: React.FC = () => {
       API_ROUTES.GetEivite.Get.identifier
     );
   }, [id]);
+  console.log(items);
   return (
     <>
       <Col className="einvite-page">
@@ -69,8 +47,11 @@ const EInvitePage: React.FC = () => {
         </Col>
         <Col>
           <LocationMap
-            latitude={location.latitude}
-            longitude={location.longitude}
+            latitude={items?.result?.latitude}
+            longitude={items?.result?.longitude}
+            placeName={`${items?.result?.event_address1},
+                ${items?.result?.event_address2}
+            `}
           />
         </Col>
       </Col>
