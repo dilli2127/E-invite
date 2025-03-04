@@ -14,14 +14,9 @@ export const API_ROUTES = {
       endpoint: "e_invite",
     },
     Update: {
-      identifier: "UpdateLedgerDefinition",
-      method: API_METHODS.POST,
-      endpoint: "ledger-definition/update",
-    },
-    UpdateTemplate: {
-      identifier: "UpdateTemplateLedgerDefinition",
-      method: API_METHODS.POST,
-      endpoint: "ledger-definition/mark-as-default",
+      identifier: "UpdateEinvite",
+      method: API_METHODS.PATCH,
+      endpoint: "e_invite",
     },
     Get: {
       identifier: "GetEinvite",
@@ -29,9 +24,9 @@ export const API_ROUTES = {
       endpoint: "e_invite",
     },
     Delete: {
-      identifier: "DeleteLedgerDefinition",
-      method: API_METHODS.POST,
-      endpoint: "ledger-definition/delete",
+      identifier: "DeleteEinvite",
+      method: API_METHODS.DELETE,
+      endpoint: "e_invite",
     },
   },
   FileUploder: {

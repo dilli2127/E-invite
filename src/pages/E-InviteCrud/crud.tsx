@@ -11,21 +11,29 @@ import {
   Tooltip,
   Image,
 } from "antd";
-import { DeleteOutlined, EditOutlined, UploadOutlined } from "@ant-design/icons";
+import {
+  DeleteOutlined,
+  EditOutlined,
+  UploadOutlined,
+} from "@ant-design/icons";
 import { useFileUpload } from "../../helpers/useFileUpload";
 import AntdForm from "../../components/antd/form/form";
 import { useDispatch } from "react-redux";
 import { Dispatch } from "redux";
 import { ApiRequest } from "../../services/api/apiService";
-import { dynamic_request, useDynamicSelector } from "../../services/redux";
+import {
+  dynamic_clear,
+  dynamic_request,
+  useDynamicSelector,
+} from "../../services/redux";
 import {
   getApiRouteCmsImage,
   getApiRouteGetEivite,
+  showToast,
 } from "../../helpers/Common_functions";
+import { API_ROUTES } from "../../services/api/utils";
 
 const formColumns = 2;
-
-
 
 const EInviteCrud: React.FC = () => {
   const getRoute = getApiRouteGetEivite("Get");
@@ -37,7 +45,20 @@ const EInviteCrud: React.FC = () => {
   const { handleFileUpload } = useFileUpload();
   const [drawerVisible, setDrawerVisible] = useState(false);
   const [searchText, setSearchText] = useState("");
+  const [initialValues, setInitialValues] = useState<{
+    _id?: string;
+    url?: string;
+  } | null>({});
   const [uploadedImageUrls, setUploadedImageUrls] = useState<string[]>([]);
+  const { items: updateItems, error: updateError } = useDynamicSelector(
+    updateRoute.identifier
+  );
+  const { items: deleteItems, error: deleteError } = useDynamicSelector(
+    deleteRoute.identifier
+  );
+  const { items: createItems, error: createError } = useDynamicSelector(
+    addRoute.identifier
+  );
   const [InviteUrl, setInviteUrl] = useState<string[]>([]);
   const callBackServer = useCallback(
     (variables: ApiRequest, key: string) => {
@@ -45,7 +66,7 @@ const EInviteCrud: React.FC = () => {
     },
     [dispatch]
   );
-   const { loading, items } = useDynamicSelector(getRoute.identifier);
+  const { loading, items } = useDynamicSelector(getRoute.identifier);
   const columns = [
     { title: "Invite Name", dataIndex: "invite_name", key: "invite_name" },
     {
@@ -71,13 +92,13 @@ const EInviteCrud: React.FC = () => {
           <Tooltip title="Edit">
             <EditOutlined
               style={{ cursor: "pointer", color: "#1890ff" }}
-              // onClick={() => handleEdit(record)}
+              onClick={() => handleEdit(record)}
             />
           </Tooltip>
           <Tooltip title="Delete">
             <DeleteOutlined
               style={{ cursor: "pointer", color: "red" }}
-              // onClick={() => handleDelete(record)}
+              onClick={() => handleDelete(record)}
             />
           </Tooltip>
         </div>
@@ -127,29 +148,29 @@ const EInviteCrud: React.FC = () => {
       rules: [{ required: true, message: "Please Enter Longitude!" }],
       component: <InputNumber style={{ width: "100%" }} />,
     },
-      {
-          label: "Image",
-          name: "image",
-          rules: [{ required: false }],
-          component: (
-            <Upload
-              customRequest={async ({ file, onSuccess, onError }) => {
-                if (file) {
-                  const uploadedInviteUrl = await handleFileUpload(file);
-                  if (uploadedInviteUrl) {
-                    form.setFieldsValue({ invite_url: uploadedInviteUrl });
-                    setInviteUrl(uploadedInviteUrl);
-                    onSuccess?.(uploadedInviteUrl);
-                  } else {
-                    onError?.(new Error("File upload failed"));
-                  }
-                }
-              }}
-            >
-              <Button icon={<UploadOutlined />}>Click to Upload</Button>
-            </Upload>
-          ),
-        },
+    {
+      label: "Image",
+      name: "image",
+      rules: [{ required: false }],
+      component: (
+        <Upload
+          customRequest={async ({ file, onSuccess, onError }) => {
+            if (file) {
+              const uploadedInviteUrl = await handleFileUpload(file);
+              if (uploadedInviteUrl) {
+                form.setFieldsValue({ invite_url: uploadedInviteUrl });
+                setInviteUrl(uploadedInviteUrl);
+                onSuccess?.(uploadedInviteUrl);
+              } else {
+                onError?.(new Error("File upload failed"));
+              }
+            }
+          }}
+        >
+          <Button icon={<UploadOutlined />}>Click to Upload</Button>
+        </Upload>
+      ),
+    },
   ];
   const getAllInvites = () => {
     callBackServer(
@@ -157,9 +178,60 @@ const EInviteCrud: React.FC = () => {
       getRoute.identifier
     );
   };
-   useEffect(() => {
+  const handleEdit = (record: any) => {
+    setInitialValues(record);
+    setDrawerVisible(true);
+  };
+  const handleDelete = (record: any) => {
+    callBackServer(
+      {
+        method: deleteRoute.method,
+        endpoint: `${deleteRoute.endpoint}/${record._id}`,
+        data: { _id: record._id },
+      },
+      deleteRoute.identifier
+    );
+  };
+  const resetForm = () => {
+    setDrawerVisible(false);
+    setInitialValues({});
+    form.resetFields();
+  };
+  useEffect(() => {
     getAllInvites();
-    }, []);
+  }, []);
+  const handleApiResponse = (
+    action: "create" | "update" | "delete",
+    success: boolean
+  ) => {
+    if (success) {
+      showToast("success", `Image ${action}d successfully`);
+      getAllInvites();
+      resetForm();
+      const actionRoute = getApiRouteGetEivite(
+        (action.charAt(0).toUpperCase() +
+          action.slice(1)) as keyof typeof API_ROUTES.GetEivite
+      );
+      dispatch(dynamic_clear(actionRoute.identifier));
+    } else {
+      showToast("error", `Failed to ${action} image`);
+    }
+  };
+
+  useEffect(() => {
+    if (createItems?.statusCode === "200") handleApiResponse("create", true);
+    if (createError) handleApiResponse("create", false);
+  }, [createItems, createError]);
+
+  useEffect(() => {
+    if (updateItems?.statusCode === "200") handleApiResponse("update", true);
+    if (updateError) handleApiResponse("update", false);
+  }, [updateItems, updateError]);
+
+  useEffect(() => {
+    if (deleteItems?.statusCode === "200") handleApiResponse("delete", true);
+    if (deleteError) handleApiResponse("delete", false);
+  }, [deleteItems, deleteError]);
   const handleCustomUpload = async ({ file, onSuccess, onError }: any) => {
     try {
       const uploadedImageUrl = await handleFileUpload(file);
@@ -226,7 +298,7 @@ const EInviteCrud: React.FC = () => {
     const finalData = {
       ...values,
       images: uploadedImageUrls,
-      invite_url:InviteUrl
+      invite_url: InviteUrl,
     };
 
     callBackServer(
@@ -276,6 +348,7 @@ const EInviteCrud: React.FC = () => {
       >
         <AntdForm
           form={form}
+          initialValues={initialValues}
           formItems={formItems}
           nestedInputs={nestedInputs}
           nested={true}
