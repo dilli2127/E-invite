@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./LandingPage.css"; // For custom styling
-import AppHeader from "../../components/Header/Header";
 
 const LandingPage: React.FC = () => {
   const location = useLocation();
@@ -9,25 +8,34 @@ const LandingPage: React.FC = () => {
   const [brideName, setBrideName] = useState("");
   const [groomName, setGroomName] = useState("");
   const navigate = useNavigate();
+  const pageTitleMap: Record<string, string> = {
+    ealbum: "Welcome to the E-Album",
+    einvite: "Welcome to the E-Invite",
+    egallery: "Welcome to the E-Gallery",
+  };
+
+  const buttonTextMap: Record<string, string> = {
+    ealbum: "Get E-Album",
+    einvite: "Get E-Invite",
+    egallery: "Get E-Gallery",
+  };
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (brideName && groomName) {
-      // Convert to lowercase
       const brideNameLower = brideName.toLowerCase();
       const groomNameLower = groomName.toLowerCase();
 
       if (pageName === "ealbum") {
         navigate(`/ealbum/${groomNameLower}weds${brideNameLower}`);
-      } else {
+      } else if (pageName === "einvite") {
         navigate(`/einvite/${groomNameLower}weds${brideNameLower}`);
+      } else if (pageName === "egallery") {
+        navigate(`/egallery/${groomNameLower}weds${brideNameLower}`);
       }
     }
   };
-  const pageTitle =
-    pageName === "ealbum"
-      ? "Welcome to the E-Album"
-      : "Welcome to the E-Invite";
-  const Button = pageName === "ealbum" ? "Get E-Album" : "Get E-Invite";
+  const pageTitle = pageName ? pageTitleMap[pageName] : "Welcome";
+  const buttonText = pageName ? buttonTextMap[pageName] : "Get Started";
   return (
     <>
       <div className="landing-page">
@@ -51,7 +59,7 @@ const LandingPage: React.FC = () => {
               />
             </div>
             <button type="submit" className="submit-btn">
-              {Button}
+              {buttonText}
             </button>
           </form>
           <br />

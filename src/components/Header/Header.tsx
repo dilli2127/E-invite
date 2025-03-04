@@ -49,6 +49,9 @@ const AppHeader: React.FC = () => {
             <Menu.Item key="e-album">
               <Link to="/ealbum">E-album</Link>
             </Menu.Item>
+            <Menu.Item key="e-gallery">
+              <Link to="/egallery">E-gallery</Link>
+            </Menu.Item>
           <Menu.Item key="services">
             <Link to="/services">Services</Link>
           </Menu.Item>
@@ -82,24 +85,27 @@ const AppHeader: React.FC = () => {
             className="mobile-nav-links"
             onClick={onClose}
           >
-            <Menu.Item key="home">
-              <Link to="/">Home</Link>
+           <Menu.Item key="home">
+            <Link to="/">Home</Link>
+          </Menu.Item>
+          <Menu.Item key="gallery">
+            <Link to="/gallery">Gallery</Link>
+          </Menu.Item>
+          <Menu.Item key="e-invite">
+              <Link to="/einvite">E-invite</Link>
             </Menu.Item>
-            <Menu.Item key="gallery">
-              <Link to="/gallery">Gallery</Link>
+            <Menu.Item key="e-album">
+              <Link to="/ealbum">E-album</Link>
             </Menu.Item>
-            <Menu.Item key="gallery">
-              <Link to="/gallery">E-invite</Link>
-            </Menu.Item>
-            <Menu.Item key="gallery">
-              <Link to="/gallery">E-album</Link>
-            </Menu.Item>
-            <Menu.Item key="services">
-              <Link to="/services">Services</Link>
-            </Menu.Item>
-            <Menu.Item key="contact">
-              <Link to="/contact">Contact</Link>
-            </Menu.Item>
+          <Menu.Item key="services">
+            <Link to="/services">Services</Link>
+          </Menu.Item>
+          <Menu.Item key="contact">
+            <Link to="/contact">Contact</Link>
+          </Menu.Item>
+          <Menu.Item key="login">
+            <Link to="/login">Login</Link>
+          </Menu.Item>
           </Menu>
         </Drawer>
       </div>
