@@ -50,7 +50,7 @@ const Footer: React.FC = () => {
                   freshfocuzstudio@gmail.com
                 </a>
               </li>
-              <li>Kg Knadigai</li>
+              <li>Kg Kandigai</li>
               <li>Thiruvallur</li>
             </ul>
           </div>
