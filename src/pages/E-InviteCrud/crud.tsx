@@ -300,15 +300,25 @@ const EInviteCrud: React.FC = () => {
       images: uploadedImageUrls,
       invite_url: InviteUrl,
     };
-
-    callBackServer(
-      {
-        method: addRoute.method,
-        endpoint: addRoute.endpoint,
-        data: finalData,
-      },
-      addRoute.identifier
-    );
+    if (initialValues?._id) {
+      callBackServer(
+        {
+          method: updateRoute.method,
+          endpoint: `${updateRoute.endpoint}/${initialValues._id}`,
+          data: finalData,
+        },
+        updateRoute.identifier
+      );
+    } else {
+      callBackServer(
+        {
+          method: addRoute.method,
+          endpoint: addRoute.endpoint,
+          data: finalData,
+        },
+        addRoute.identifier
+      );
+    }
     setDrawerVisible(false);
     form.resetFields();
     setUploadedImageUrls([]);
