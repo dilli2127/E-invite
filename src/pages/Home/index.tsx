@@ -45,12 +45,13 @@ const WeddingBanner: React.FC = () => {
   }, []);
   const homeImages = items?.result?.filter((item: { type: string }) => item.type === 'Home') ?? [];
   const homeGalleryImages = items?.result?.filter((item: { type: string }) => item.type === 'HomeGallery') ?? [];
+  console.log("homeImages",homeImages)
   const getAllImages = () => {
     callBackServer(
       {
         method: getImageRoute.method,
         endpoint: getImageRoute.endpoint,
-        data: {},
+        data: {pageLimit:100},
       },
       getImageRoute.identifier
     );
@@ -68,7 +69,7 @@ const WeddingBanner: React.FC = () => {
         );
         setTransition("slide-in");
       }, 300);
-    }, 5000);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [isVisible, currentImageIndex]);

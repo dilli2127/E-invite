@@ -16,17 +16,17 @@ export const API_ROUTES = {
     Update: {
       identifier: "UpdateEinvite",
       method: API_METHODS.PATCH,
-      endpoint: "e_invite",
+      endpoint: "e_invite/",
     },
     Get: {
       identifier: "GetEinvite",
       method: API_METHODS.GET,
-      endpoint: "e_invite",
+      endpoint: "e_invite/",
     },
     Delete: {
       identifier: "DeleteEinvite",
       method: API_METHODS.DELETE,
-      endpoint: "e_invite",
+      endpoint: "e_invite/",
     },
   },
   FileUploder: {
