@@ -16,42 +16,69 @@ interface Package {
 const packages: Package[] = [
   {
     name: "Basic Package",
-    price: 40000,
+    price: 44999,
     description: [
       "Perfect for small events.",
       "Great for individual portraits.",
     ],
-    features: ["Up to 5 hours.", "2 Photographer.", "50 Edited Photos.", "1 Video.", "1 Album."],
+    features: [
+      "2 Photographer.",
+      "1 Video With Pendrive.",
+      "2 Albums.",
+      "E-Invite",
+      "E-Gallery",
+      "E-Album",
+    ],
     primaryColor: "#64B5F6", // Blue
     secondaryColor: "#BBDEFB",
     textColor: "#212121",
   },
   {
     name: "Standard Package",
-    price: 55000,
+    price: 69999,
     description: ["Ideal for family photoshoots.", "Enhanced coverage."],
-    features: ["Up to 4 hours.", "1 Photographer.", "100 Edited Photos.","1 Video.", "2 Album."],
+    features: [
+      "3 Photographer.",
+      "1 Video.",
+      "3 Albums.",
+      "E-Invite",
+      "E-Gallery",
+      "E-Album",
+    ],
     primaryColor: "#FFB74D", // Orange
     secondaryColor: "#FFE0B2",
     textColor: "#212121",
   },
   {
     name: "Premium Package",
-    price: 75000,
+    price: 89999,
     description: ["Large events & special occasions.", "Second photographer."],
-    features: ["Up to 6 hours.", "2 Photographers.", "150 Edited Photos.","1 Video.", "3 Album."],
+    features: [
+      "4 Photographers.",
+      "2 Video.",
+      "3 Album.",
+      "E-Invite",
+      "E-Gallery",
+      "E-Album",
+    ],
     primaryColor: "#81C784", // Green
     secondaryColor: "#C8E6C9",
     textColor: "#212121",
   },
   {
     name: "Luxury Package",
-    price: 120000,
-    description: ["Top-tier package.", "Full-day coverage.","1 Video.", "4 Album."],
+    price: 119999,
+    description: ["Top-tier package.", "Full-day coverage."],
     features: [
       "Full-day coverage.",
       "Photographers & Videographer.",
       "Unlimited Photos.",
+      "Pre Wedding Or Post Wedding",
+      "3 Video.",
+      "4 Album.",
+      "E-Invite",
+      "E-Gallery",
+      "E-Album",
     ],
     primaryColor: "#E57373", // Red
     secondaryColor: "#FFCDD2",
