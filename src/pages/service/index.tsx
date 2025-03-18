@@ -52,7 +52,7 @@ const packages: Package[] = [
   {
     name: "Premium Package",
     price: 89999,
-    description: ["Large events & special occasions.", "Second photographer."],
+    description: ["Large events & special occasions.", "Wedding Budget Coverage."],
     features: [
       "4 Photographers.",
       "2 Video.",
@@ -71,14 +71,11 @@ const packages: Package[] = [
     description: ["Top-tier package.", "Full-day coverage."],
     features: [
       "Full-day coverage.",
-      "Photographers & Videographer.",
       "Unlimited Photos.",
       "Pre Wedding Or Post Wedding",
       "3 Video.",
       "4 Album.",
-      "E-Invite",
-      "E-Gallery",
-      "E-Album",
+      "E-Invite, E-Gallery, E-Album",
     ],
     primaryColor: "#E57373", // Red
     secondaryColor: "#FFCDD2",

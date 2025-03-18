@@ -1,5 +1,14 @@
 import React, { memo, useState } from "react";
-import { Table, Button, Row, Drawer, Input, InputNumber, Upload } from "antd";
+import {
+  Table,
+  Button,
+  Row,
+  Drawer,
+  Input,
+  InputNumber,
+  Upload,
+  Select,
+} from "antd";
 import AntdForm from "../../components/antd/form/form";
 import { UploadOutlined } from "@ant-design/icons";
 import { ApiRequest } from "../../services/api/apiService";
@@ -9,32 +18,9 @@ import { Dispatch } from "redux";
 import { API_ROUTES } from "../../services/api/utils";
 
 const formColumns = 2;
-const formItems = [
-  {
-    label: "Tittle",
-    name: "tittle",
-    rules: [{ required: true, message: "Please Enter Name!" }],
-    component: <Input />,
-  },
-  {
-    label: "Drive Folder Id",
-    name: "drivefolderid",
-    rules: [{ required: true, message: "Please Enter Mobile Number!" }],
-    component: <InputNumber style={{ width: "100%" }} />,
-  },
 
-  {
-    label: "Image",
-    name: "Image",
-    rules: [{ required: true, message: "Please Upload Image!" }],
-    component: (
-      <Upload>
-        <Button icon={<UploadOutlined />}>Click to Upload</Button>
-      </Upload>
-    ),
-  },
-];
-const EGalleryCrud: React.FC = ({}) => {
+const EGalleryCrud: React.FC = () => {
+  const { Option } = Select;
   const [drawerVisible, setDrawerVisible] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [filteredItems, setFilteredItems] = useState();
@@ -45,6 +31,43 @@ const EGalleryCrud: React.FC = ({}) => {
     },
     [dispatch]
   );
+  const formItems = [
+    {
+      label: "Tittle",
+      name: "tittle",
+      rules: [{ required: true, message: "Please Enter Name!" }],
+      component: <Input />,
+    },
+    {
+      label: "Drive Folder Id",
+      name: "drivefolderid",
+      rules: [{ required: true, message: "Please Enter Mobile Number!" }],
+      component: <InputNumber style={{ width: "100%" }} />,
+    },
+    {
+      label: "User",
+      name: "User",
+      rules: [{ required: true, message: "Please input!" }],
+      component: (
+        <Select allowClear>
+          <Option value="Home">Home</Option>
+          <Option value="Gallery">Gallery</Option>
+          <Option value="HomeGallery">HomeGallery</Option>
+        </Select>
+      ),
+    },
+
+    {
+      label: "Image",
+      name: "Image",
+      rules: [{ required: true, message: "Please Upload Image!" }],
+      component: (
+        <Upload>
+          <Button icon={<UploadOutlined />}>Click to Upload</Button>
+        </Upload>
+      ),
+    },
+  ];
   const columns = [
     {
       title: "ID",

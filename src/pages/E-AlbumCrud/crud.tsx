@@ -1,33 +1,55 @@
 import React, { memo, useState } from "react";
-import { Table, Button, Row, Drawer, Input, InputNumber, Upload } from "antd";
+import {
+  Table,
+  Button,
+  Row,
+  Drawer,
+  Input,
+  InputNumber,
+  Upload,
+  Select,
+} from "antd";
 import AntdForm from "../../components/antd/form/form";
 import { UploadOutlined } from "@ant-design/icons";
 
 const formColumns = 2;
-const formItems = [
-  {
-    label: "Tittle",
-    name: "tittle",
-    rules: [{ required: true, message: "Please Enter Name!" }],
-    component: <Input />,
-  },
-  {
-    label: "Upload Pdf",
-    name: "pdfurl",
-    rules: [{ required: true, message: "Please Upload Pdf!" }],
-    component: (
-      <Upload>
-        <Button icon={<UploadOutlined />}>Click to Upload</Button>
-      </Upload>
-    ),
-  },
-];
 
-const EAlbumCrud: React.FC = ({}) => {
+const EAlbumCrud: React.FC = () => {
+  const { Option } = Select;
   const [drawerVisible, setDrawerVisible] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [filteredItems, setFilteredItems] = useState();
+  const formItems = [
+    {
+      label: "Tittle",
+      name: "tittle",
+      rules: [{ required: true, message: "Please Enter Name!" }],
+      component: <Input />,
+    },
+    {
+      label: "User",
+      name: "User",
+      rules: [{ required: true, message: "Please input!" }],
+      component: (
+        <Select allowClear>
+          <Option value="Home">Home</Option>
+          <Option value="Gallery">Gallery</Option>
+          <Option value="HomeGallery">HomeGallery</Option>
+        </Select>
+      ),
+    },
 
+    {
+      label: "Upload Pdf",
+      name: "pdfurl",
+      rules: [{ required: true, message: "Please Upload Pdf!" }],
+      component: (
+        <Upload>
+          <Button icon={<UploadOutlined />}>Click to Upload</Button>
+        </Upload>
+      ),
+    },
+  ];
   const columns = [
     {
       title: "ID",
