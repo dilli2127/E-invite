@@ -1,19 +1,34 @@
 import React, { useState } from "react";
-import { Form, Input, Button, Checkbox, message, Row, Col, Card } from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  Checkbox,
+  message,
+  Row,
+  Col,
+  Card,
+  Typography,
+} from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import "./Login.css"; // Optional: for custom styling
+import "./Login.css";
 import LogoBackground from "../../assets/img/ffslogo.png";
+
+const { Title, Text } = Typography;
 
 const Login: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const onFinish = (values: { username: string; password: string; remember: boolean }) => {
+  const onFinish = (values: {
+    username: string;
+    password: string;
+    remember: boolean;
+  }) => {
     console.log("Received values:", values);
     setLoading(true);
 
-    // Mock login request (replace with your API call)
     setTimeout(() => {
       if (values.username === "admin" && values.password === "admin") {
         message.success("Login successful!");
@@ -26,30 +41,14 @@ const Login: React.FC = () => {
   };
 
   return (
-    <Row style={{ height: "100vh" }}>
-      <Col
-        span={12}
-        style={{
-          background: `url(${LogoBackground}) no-repeat center center`,
-          backgroundSize: "cover",
-          filter: "brightness(0.8)", // Darken background for contrast
-        }}
-      />
-      <Col
-        span={12}
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          background: "linear-gradient(to right, #ff4e50, #fc913a)",
-        }}
-      >
-        <Card
-          className="login-card"
-          style={{ width: 400 ,}}
-          bodyStyle={{ padding: "30px",}} // Padding for card content
-        >
-          <h1 style={{ textAlign: "center" }}>Login</h1>
+    <Row className="login-container">
+      <Col span={12} className="login-background" />
+      <Col span={12} className="login-content">
+        <Card className="login-card">
+          <Title level={2} className="login-title">
+            Welcome Back
+          </Title>
+          <Text className="login-subtitle">Sign in to continue</Text>
           <Form
             name="login_form"
             className="login-form"
@@ -58,31 +57,29 @@ const Login: React.FC = () => {
           >
             <Form.Item
               name="username"
-              rules={[{ required: true, message: "Please input your Username!" }]}
+              rules={[
+                { required: true, message: "Please input your Username!" },
+              ]}
             >
-              <Input
-                prefix={<UserOutlined className="site-form-item-icon" />}
-                placeholder="Username"
-              />
+              <Input prefix={<UserOutlined />} placeholder="Username" />
             </Form.Item>
 
             <Form.Item
               name="password"
-              rules={[{ required: true, message: "Please input your Password!" }]}
+              rules={[
+                { required: true, message: "Please input your Password!" },
+              ]}
             >
               <Input.Password
-                prefix={<LockOutlined className="site-form-item-icon" />}
+                prefix={<LockOutlined />}
                 placeholder="Password"
               />
             </Form.Item>
 
-            <Form.Item>
-              <Form.Item name="remember" valuePropName="checked" noStyle>
-                <Checkbox>Remember me</Checkbox>
-              </Form.Item>
-
-              <a className="login-form-forgot" href="#">
-                Forgot password
+            <Form.Item className="login-options">
+              <Checkbox>Remember me</Checkbox>
+              <a href="#" className="forgot-password">
+                Forgot password?
               </a>
             </Form.Item>
 
@@ -90,12 +87,18 @@ const Login: React.FC = () => {
               <Button
                 type="primary"
                 htmlType="submit"
-                className="login-form-button"
+                className="login-button"
                 loading={loading}
-                style={{ width: "100%" }} // Full width button
               >
                 Log in
               </Button>
+            </Form.Item>
+
+            <Form.Item className="signup-link">
+              <Text className="auth-switch">
+                Don't have an account?{" "}
+                <a onClick={() => navigate("/signup")}>Sign up</a>
+              </Text>
             </Form.Item>
           </Form>
         </Card>
