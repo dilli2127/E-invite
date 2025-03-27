@@ -24,7 +24,6 @@ import {
 } from "../../services/redux";
 import {
   getApiRouteGallareyCategory,
-  getApiRouteGetEivite,
   showToast,
 } from "../../helpers/Common_functions";
 import { API_ROUTES } from "../../services/api/utils";
@@ -139,7 +138,7 @@ const GalaryCategory: React.FC = () => {
       showToast("success", `Gallery Category ${action}d successfully`);
       getAllGalleryCategory();
       resetForm();
-      const actionRoute = getApiRouteGetEivite(
+      const actionRoute = getApiRouteGallareyCategory(
         (action.charAt(0).toUpperCase() +
           action.slice(1)) as keyof typeof API_ROUTES.GetEivite
       );
