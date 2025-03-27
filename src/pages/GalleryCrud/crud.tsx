@@ -212,9 +212,9 @@ const Galary: React.FC = () => {
       showToast("success", `Gallery ${action}d successfully`);
       getAllGallery();
       resetForm();
-      const actionRoute = getApiRouteGetEivite(
+      const actionRoute = getApiRouteGallarey(
         (action.charAt(0).toUpperCase() +
-          action.slice(1)) as keyof typeof API_ROUTES.GetEivite
+          action.slice(1)) as keyof typeof API_ROUTES.Gallery
       );
       dispatch(dynamic_clear(actionRoute.identifier));
     } else {
@@ -275,7 +275,7 @@ const Galary: React.FC = () => {
           alignItems: "flex-start",
         }}
       >
-        <h1>Gallery Category List</h1>
+        <h1>Gallery List</h1>
         <div style={{ display: "flex", gap: "16px" }}>
           <Input
             placeholder="Search Patients"

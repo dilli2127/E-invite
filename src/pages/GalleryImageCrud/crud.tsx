@@ -207,8 +207,9 @@ const GalaryImage: React.FC = () => {
       getAllGallery();
       resetForm();
       const actionRoute = getApiRouteGetEivite(
-        (action.charAt(0).toUpperCase() +
-          action.slice(1)) as keyof typeof API_ROUTES.GetEivite
+        (["Create", "Update", "Get", "Delete"].includes(action)
+          ? (action.charAt(0).toUpperCase() + action.slice(1) as "Create" | "Update" | "Get" | "Delete")
+          : "Get")
       );
       dispatch(dynamic_clear(actionRoute.identifier));
     } else {
