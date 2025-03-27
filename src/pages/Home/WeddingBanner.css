@@ -107,10 +107,10 @@
     }
   
     .title {
-      font-size: 1.8rem; /* Further reduce font size */
+      font-size: 1.0rem; /* Further reduce font size */
     }
   
     .description {
-      font-size: 0.8rem; /* Further reduce font size */
+      font-size: 0.7rem; /* Further reduce font size */
     }
   }

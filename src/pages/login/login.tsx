@@ -38,6 +38,7 @@ const Login: React.FC = () => {
   const { loading, items } = useDynamicSelector(
     API_ROUTES.Login.Create.identifier
   );
+  console.log(items);
   const onFinish = (values: {
     username: string;
     password: string;
@@ -55,6 +56,8 @@ const Login: React.FC = () => {
   useEffect(() => {
     if (items?.statusCode === "200") {
       message.success("Login successful! Welcome back.");
+      sessionStorage.setItem("token", items?.result?.token);
+      sessionStorage.setItem("user", JSON.stringify(items?.result?.UserItem));
       dispatch(dynamic_clear(API_ROUTES.Login.Create.identifier));
       navigate("/");
     }
