@@ -23,8 +23,11 @@ const PhotoGallery = lazy(() => import("../pages/Gallery/photoGallery"));
 // Admin imports
 const EInviteCrud = lazy(() => import("../pages/E-InviteCrud/crud"));
 const EGalleryCrud = lazy(() => import("../pages/E-GalleryCrud/crud"));
+const GalleryCrud = lazy(() => import("../pages/GalleryCrud/crud"));
 const EAlbumCrud = lazy(() => import("../pages/E-AlbumCrud/crud"));
+const GalleryCategory = lazy(() => import("../pages/GalleryCategory/crud"));
 const CmsImageCrud = lazy(() => import("../pages/CMS-Image-Crud/crud"));
+const GalaryImage = lazy(() => import("../pages/GalleryImageCrud/crud"));
 
 const Loader = () => <div>Loading...</div>;
 
@@ -235,6 +238,16 @@ const routerData: RouteConfig[] = [
         children: [],
       },
       {
+        key: "galleryCrud",
+        path: "gallery_crud",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <GalleryCrud />
+          </Suspense>
+        ),
+        children: [],
+      },
+      {
         key: "ealbumCrud",
         path: "ealbum_crud",
         element: (
@@ -245,11 +258,31 @@ const routerData: RouteConfig[] = [
         children: [],
       },
       {
+        key: "gallaryCategoryCrud",
+        path: "gallary_category_Crud",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <GalleryCategory />
+          </Suspense>
+        ),
+        children: [],
+      },
+      {
         key: "imageCrud",
         path: "image_crud",
         element: (
           <Suspense fallback={<Loader />}>
             <CmsImageCrud />
+          </Suspense>
+        ),
+        children: [],
+      },
+      {
+        key: "galleryimageCrud",
+        path: "gallery_image_crud",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <GalaryImage />
           </Suspense>
         ),
         children: [],

@@ -165,7 +165,11 @@ code {
 :where(.css-dev-only-do-not-override-vryruh).ant-modal .ant-modal-content {
   padding: 5px !important;
 }
-
+/* Override Ant Design Submenu Background Color (Dark Theme, Inline) */
+:where(.css-dev-only-do-not-override-vryruh).ant-menu-dark.ant-menu-inline .ant-menu-sub.ant-menu-inline,
+:where(.css-dev-only-do-not-override-vryruh).ant-menu-dark > .ant-menu.ant-menu-inline .ant-menu-sub.ant-menu-inline {
+  background: transparent; /* Set background to transparent */
+}
 .album-container {
   border: 1px solid #ccc;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);

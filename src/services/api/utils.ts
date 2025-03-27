@@ -94,10 +94,69 @@ Login: {
       method: API_METHODS.POST,
       endpoint: "/cms_image",
     },
+    GetAllGalleryImages: {
+      identifier: "GetAllGalleryImages",
+      method: API_METHODS.POST,
+      endpoint: "/get_all_gallery_images",
+    },
     Delete: {
       identifier: "DeleteCmsImage",
       method: API_METHODS.DELETE,
       endpoint: "/cms_image",
+    },
+  },
+  GalleryCategory: {
+    Create: {
+      identifier: "AddGalleryCategory",
+      method: API_METHODS.PUT,
+      endpoint: "/gallery_category",
+    },
+    Update: {
+      identifier: "UpdatGalleryCategory",
+      method: API_METHODS.PATCH,
+      endpoint: "/gallery_category",
+    },
+    Get: {
+      identifier: "GetGalleryCategory",
+      method: API_METHODS.GET,
+      endpoint: "/gallery_category",
+    },
+    GetAll: {
+      identifier: "GetGalleryCategory",
+      method: API_METHODS.POST,
+      endpoint: "/gallery_category",
+    },
+    Delete: {
+      identifier: "DeleteGalleryCategory",
+      method: API_METHODS.DELETE,
+      endpoint: "/gallery_category",
+    },
+  },
+  Gallery: {
+    Create: {
+      identifier: "AddGallery",
+      method: API_METHODS.PUT,
+      endpoint: "/gallery",
+    },
+    Update: {
+      identifier: "UpdatGallery",
+      method: API_METHODS.PATCH,
+      endpoint: "/gallery",
+    },
+    Get: {
+      identifier: "GetGallery",
+      method: API_METHODS.GET,
+      endpoint: "/gallery",
+    },
+    GetAll: {
+      identifier: "GetGallery",
+      method: API_METHODS.POST,
+      endpoint: "/gallery",
+    },
+    Delete: {
+      identifier: "DeleteGallery",
+      method: API_METHODS.DELETE,
+      endpoint: "/gallery",
     },
   },
 };

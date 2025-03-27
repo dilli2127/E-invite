@@ -26,3 +26,19 @@ export const getApiRouteGetEivite = (action: keyof typeof API_ROUTES.GetEivite) 
   }
   return route;
 };
+export const getApiRouteGallareyCategory = (action: keyof typeof API_ROUTES.GalleryCategory) => {
+  const route = API_ROUTES?.GalleryCategory?.[action];
+  if (!route) {
+    console.error(`API_ROUTES.CmsImage.${action} is undefined.`);
+    throw new Error(`API route for CmsImage.${action} is not defined.`);
+  }
+  return route;
+};
+export const getApiRouteGallarey = (action: keyof typeof API_ROUTES.Gallery) => {
+  const route = API_ROUTES?.Gallery?.[action];
+  if (!route) {
+    console.error(`API_ROUTES.CmsImage.${action} is undefined.`);
+    throw new Error(`API route for CmsImage.${action} is not defined.`);
+  }
+  return route;
+};

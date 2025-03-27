@@ -100,7 +100,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
             height: "100vh",
             background: "linear-gradient(180deg, #2C3E50, #4CA1AF)",
             boxShadow: "2px 0 10px rgba(0, 0, 0, 0.2)",
-            overflow: "hidden", 
+            overflow: "hidden",
           }}
         >
           <div
@@ -119,31 +119,60 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
 
           <Menu
             mode="inline"
-            selectedKeys={[selectedKey]} // Highlight selected menu item
+            selectedKeys={[selectedKey]}
             style={{
               borderRight: 0,
               background: "transparent",
               color: "white",
               height: "100%",
-              position: "relative", // Ensure menu items are above the background
-              zIndex: 1, // Ensure menu items are above the overlay
+              position: "relative",
+              zIndex: 1,
             }}
             theme="dark"
           >
-            {menuItems.map((item) => (
-              <Menu.Item
-                key={item.key}
-                icon={item.icon}
-                onClick={() => handleMenuClick(item.key, item.path)}
-                style={{
-                  backgroundColor:
-                    selectedKey === item.key ? "#16A085" : "transparent", // Highlight active item
-                  color: selectedKey === item.key ? "#ffffff" : "#ffffff",
-                }}
-              >
-                {item.label}
-              </Menu.Item>
-            ))}
+            {menuItems.map((item) => {
+              if (item.children) {
+                return (
+                  <Menu.SubMenu
+                    key={item.key}
+                    icon={item.icon}
+                    title={item.label}
+                  >
+                    {item.children.map((child) => (
+                      <Menu.Item
+                        key={child.key}
+                        onClick={() => handleMenuClick(child.key, child.path)}
+                        style={{
+                          backgroundColor:
+                            selectedKey === child.key
+                              ? "#16A085"
+                              : "transparent",
+                          color:
+                            selectedKey === child.key ? "#ffffff" : "#ffffff",
+                        }}
+                      >
+                        {child.label}
+                      </Menu.Item>
+                    ))}
+                  </Menu.SubMenu>
+                );
+              } else {
+                return (
+                  <Menu.Item
+                    key={item.key}
+                    icon={item.icon}
+                    onClick={() => handleMenuClick(item.key, item.path)}
+                    style={{
+                      backgroundColor:
+                        selectedKey === item.key ? "#16A085" : "transparent",
+                      color: selectedKey === item.key ? "#ffffff" : "#ffffff",
+                    }}
+                  >
+                    {item.label}
+                  </Menu.Item>
+                );
+              }
+            })}
           </Menu>
         </Sider>
 
