@@ -16,7 +16,6 @@ const EInvitePage: React.FC = () => {
   const { loading, items } = useDynamicSelector(
     API_ROUTES.GetEivite.Get.identifier
   );
-  console.log(items);
   const dispatch: Dispatch<any> = useDispatch();
   const callBackServer = React.useCallback(
     (variables: ApiRequest, key: string) => {

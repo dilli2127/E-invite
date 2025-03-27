@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   Form,
   Input,
@@ -14,32 +14,51 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import LogoBackground from "../../assets/img/ffslogo.png";
+import { ApiRequest } from "../../services/api/apiService";
+import {
+  dynamic_clear,
+  dynamic_request,
+  useDynamicSelector,
+} from "../../services/redux";
+import { useDispatch } from "react-redux";
+import { Dispatch } from "redux";
+import { API_ROUTES } from "../../services/api/utils";
 
 const { Title, Text } = Typography;
 
 const Login: React.FC = () => {
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
+  const dispatch: Dispatch<any> = useDispatch();
+  const callBackServer = useCallback(
+    (variables: ApiRequest, key: string) => {
+      dispatch(dynamic_request(variables, key));
+    },
+    [dispatch]
+  );
+  const { loading, items } = useDynamicSelector(
+    API_ROUTES.Login.Create.identifier
+  );
   const onFinish = (values: {
     username: string;
     password: string;
     remember: boolean;
   }) => {
-    console.log("Received values:", values);
-    setLoading(true);
-
-    setTimeout(() => {
-      if (values.username === "admin" && values.password === "admin") {
-        message.success("Login successful!");
-        navigate("/home");
-      } else {
-        message.error("Invalid username or password");
-      }
-      setLoading(false);
-    }, 1000);
+    callBackServer(
+      {
+        method: API_ROUTES.Login.Create.method,
+        endpoint: API_ROUTES.Login.Create.endpoint,
+        data: values,
+      },
+      API_ROUTES.Login.Create.identifier
+    );
   };
-
+  useEffect(() => {
+    if (items?.statusCode === "200") {
+      message.success("Login successful! Welcome back.");
+      dispatch(dynamic_clear(API_ROUTES.Login.Create.identifier));
+      navigate("/");
+    }
+  }, [items]);
   return (
     <Row className="login-container">
       <Col span={12} className="login-background" />

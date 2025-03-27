@@ -1,3 +1,6 @@
+import Login from "../../pages/login/login";
+import Signup from "../../pages/login/Signup";
+
 export const API_METHODS = {
   GET: "GET",
   POST: "POST",
@@ -7,6 +10,20 @@ export const API_METHODS = {
 };
 
 export const API_ROUTES = {
+  Signup: {
+    Create: {
+      identifier: "CreateSignup",
+      method: API_METHODS.POST,
+      endpoint: "signup",
+    },
+  },
+Login: {
+    Create: {
+      identifier: "CreateLogin",
+      method: API_METHODS.POST,
+      endpoint: "login",
+    },
+  },
   GetEivite: {
     Create: {
       identifier: "CreateEinvite",
@@ -83,5 +100,4 @@ export const API_ROUTES = {
       endpoint: "/cms_image",
     },
   },
- 
 };
