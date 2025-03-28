@@ -11,6 +11,8 @@ import TermsAndConditions from "../pages/policy/terms_and_onditions";
 import ReturnAndRefundPolicy from "../pages/policy/return_and_refund_policy";
 import EInvitePage from "../pages/E-Invite";
 import Signup from "../pages/login/Signup";
+import EGallery from "../pages/E-Gallery";
+import EAlbumLading from "../pages/E-Album/landing";
 
 // User web imports
 const Login = lazy(() => import("../pages/login/login"));
@@ -97,7 +99,7 @@ const routerData: RouteConfig[] = [
         path: "/ealbum",
         element: (
           <Suspense fallback={<Loader />}>
-            <LandingPage />
+            <EAlbumLading />
           </Suspense>
         ),
         children: [],
@@ -117,7 +119,7 @@ const routerData: RouteConfig[] = [
         path: "/egallery/:id",
         element: (
           <Suspense fallback={<Loader />}>
-            <PhotoGallery />
+            <EGallery />
           </Suspense>
         ),
         children: [],

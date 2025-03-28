@@ -14,4 +14,13 @@ export interface Album {
   galleryname: string;
   gallerycover: string;
 }
+export interface EAlbum {
+  _id: number;
+  albumname: string;
+  albumcover: string;
+  name: string;
+  galleryname: string;
+  album_cover: string;
+}
+
 
