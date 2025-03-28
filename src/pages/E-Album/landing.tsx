@@ -28,7 +28,8 @@ const EAlbumLading: React.FC = () => {
     );
   };
   const openGallery = (albumId: number) => {
-    navigate(`/ealbum/${albumId}`);
+    const selectedAlbum = galleryItems.find((album) => album._id === albumId);
+    navigate(`/ealbum/${albumId}`, { state: { pdfUrl: selectedAlbum?.albumurl } });
   };
   useEffect(() => {
     getAllEAlbum();

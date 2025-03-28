@@ -16,6 +16,7 @@ export interface Album {
 }
 export interface EAlbum {
   _id: number;
+  albumurl: string;
   albumname: string;
   albumcover: string;
   name: string;

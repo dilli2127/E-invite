@@ -2,13 +2,14 @@ import React, { useEffect, useState, useRef } from "react";
 import HTMLFlipBook from "react-pageflip";
 import { getDocument, GlobalWorkerOptions } from "pdfjs-dist";
 import "./e-album.css";
-
-GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js";
-
-const pdfUrl = "https://freshfocuzstudio.s3.ap-south-1.amazonaws.com/dhinraj-pdf_compressed.pdf";
+import { useLocation } from "react-router-dom";
+GlobalWorkerOptions.workerSrc =
+  "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js";
 
 const EAlbum: React.FC = () => {
   const [pages, setPages] = useState<string[]>([]);
+  const location = useLocation();
+  const pdfUrl = location.state?.pdfUrl;
   const [loading, setLoading] = useState(true);
   const [zoom, setZoom] = useState(1);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
@@ -38,7 +39,9 @@ const EAlbum: React.FC = () => {
       };
 
       // Load all pages in parallel
-      const pagesPromises = Array.from({ length: pdf.numPages }, (_, i) => loadPage(i + 1));
+      const pagesPromises = Array.from({ length: pdf.numPages }, (_, i) =>
+        loadPage(i + 1)
+      );
       const images = await Promise.all(pagesPromises);
       setPages(images.filter((img): img is string => img !== null)); // Filter out any null pages
     } catch (error) {
@@ -86,7 +89,10 @@ const EAlbum: React.FC = () => {
   const handleMouseDown = (e: React.MouseEvent) => {
     if (zoom > 1 && isSpacePressed) {
       setIsDragging(true);
-      setDragStart({ x: e.clientX - dragOffset.x, y: e.clientY - dragOffset.y });
+      setDragStart({
+        x: e.clientX - dragOffset.x,
+        y: e.clientY - dragOffset.y,
+      });
     }
   };
 
@@ -101,14 +107,20 @@ const EAlbum: React.FC = () => {
     if (zoom > 1 && e.touches.length === 1) {
       setIsDragging(true);
       const touch = e.touches[0];
-      setDragStart({ x: touch.clientX - dragOffset.x, y: touch.clientY - dragOffset.y });
+      setDragStart({
+        x: touch.clientX - dragOffset.x,
+        y: touch.clientY - dragOffset.y,
+      });
     }
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
     if (!isDragging || e.touches.length !== 1) return;
     const touch = e.touches[0];
-    setDragOffset({ x: touch.clientX - dragStart.x, y: touch.clientY - dragStart.y });
+    setDragOffset({
+      x: touch.clientX - dragStart.x,
+      y: touch.clientY - dragStart.y,
+    });
   };
 
   const handleTouchEnd = () => setIsDragging(false);
@@ -167,7 +179,11 @@ const EAlbum: React.FC = () => {
           >
             {pages.map((page, index) => (
               <div key={index} className="album-page">
-                <img src={page} alt={`Page ${index + 1}`} className="album-image" />
+                <img
+                  src={page}
+                  alt={`Page ${index + 1}`}
+                  className="album-image"
+                />
               </div>
             ))}
           </HTMLFlipBook>
