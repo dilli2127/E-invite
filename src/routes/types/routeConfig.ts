@@ -19,6 +19,7 @@ export interface EAlbum {
   albumname: string;
   albumcover: string;
   name: string;
+  drive_folder_id: string;
   galleryname: string;
   album_cover: string;
 }

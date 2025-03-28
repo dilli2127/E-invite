@@ -5,10 +5,7 @@ import {
   LeftOutlined,
   RightOutlined,
 } from "@ant-design/icons";
-import AppHeader from "../../components/Header/Header";
-
-const GOOGLE_API_KEY = "AIzaSyAKpQZVawfF5Mq6zhr-S-PMgrf_Mlpy-zg";
-const FOLDER_ID = "1BRFdSl05T4ZxVCSfTTBDDzCqqQUSmytf";
+import { useLocation } from "react-router-dom";
 
 type FileType = {
   id: string;
@@ -17,13 +14,15 @@ type FileType = {
   thumbnailLink?: string;
 };
 
-const GoogleDriveGallery: React.FC = () => {
+const EGallery: React.FC = () => {
   const [files, setFiles] = useState<FileType[]>([]);
+  const location = useLocation();
+  const FOLDER_ID = location.state?.FOLDER_ID;
   const [loading, setLoading] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-
+  const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
   const fetchFiles = async (pageToken: string | null = null) => {
-    let url = `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents&key=${GOOGLE_API_KEY}&fields=nextPageToken,files(id,name,mimeType,thumbnailLink)&pageSize=100`;
+    let url = `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents&key=${API_KEY}&fields=nextPageToken,files(id,name,mimeType,thumbnailLink)&pageSize=100`;
     if (pageToken) {
       url += `&pageToken=${pageToken}`;
     }
@@ -67,7 +66,7 @@ const GoogleDriveGallery: React.FC = () => {
     <>
       <div style={{ padding: "20px", margin: "0 auto" }}>
         <Typography.Title level={2} style={{ textAlign: "center" }}>
-         Gallery
+          Gallery
         </Typography.Title>
 
         {loading ? (
@@ -196,4 +195,4 @@ const GoogleDriveGallery: React.FC = () => {
   );
 };
 
-export default GoogleDriveGallery;
+export default EGallery;

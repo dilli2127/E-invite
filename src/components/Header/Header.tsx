@@ -137,7 +137,7 @@ const AppHeader = () => {
                 </Link>
               </Menu.Item>
               <Menu.Item key="e-gallery">
-              <Link to="/egallery/:id" className="menu-link">
+              <Link to="/egallery" className="menu-link">
                   E-gallery
                 </Link>
               </Menu.Item>
@@ -220,7 +220,7 @@ const AppHeader = () => {
                 </Link>
               </Menu.Item>
               <Menu.Item key="e-gallery">
-                <Link to="/egallery/:id" className="menu-link">
+                <Link to="/egallery" className="menu-link">
                   E-gallery
                 </Link>
               </Menu.Item>

@@ -6,7 +6,8 @@ import { ApiRequest } from "../../services/api/apiService";
 import { dynamic_request, useDynamicSelector } from "../../services/redux";
 import { useDispatch } from "react-redux";
 import { Dispatch } from "redux";
-import { Album, EAlbum } from "../../routes/types/routeConfig";
+import { EAlbum } from "../../routes/types/routeConfig";
+
 
 const AlbumPage: React.FC = () => {
   const navigate = useNavigate();
@@ -28,7 +29,10 @@ const AlbumPage: React.FC = () => {
     );
   };
   const openGallery = (albumId: number) => {
-    navigate(`/gallery/${albumId}`);
+    const album = galleryItems.find((item) => item._id === albumId);
+    if (album) {
+      navigate(`/egallery/${albumId}`, { state: { FOLDER_ID: album?.drive_folder_id } });
+    }
   };
   useEffect(() => {
     getAllGallery();
