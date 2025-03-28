@@ -40,7 +40,7 @@ interface GalleryCategoryItem {
 const formColumns = 2;
 const { Option } = Select;
 const Galary: React.FC = () => {
-  const getRoute = getApiRouteGallarey("Get");
+  const getRoute = getApiRouteGallarey("GetAll");
   const addRoute = getApiRouteGallarey("Create");
   const updateRoute = getApiRouteGallarey("Update");
   const deleteRoute = getApiRouteGallarey("Delete");

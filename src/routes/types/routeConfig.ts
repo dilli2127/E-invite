@@ -8,5 +8,10 @@ export interface RouteConfig {
   element?: ReactNode;
   children?: RouteConfig[];
 }
-
+export interface Album {
+  _id: number;
+  title: string;
+  galleryname: string;
+  gallerycover: string;
+}
 

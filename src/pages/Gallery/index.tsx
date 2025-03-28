@@ -1,52 +1,51 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import { Card, Row, Col } from "antd";
 import { useNavigate } from "react-router-dom";
-import AppHeader from "../../components/Header/Header";
-
-const albums = [
-  {
-    id: 1,
-    title: "Wedding Album",
-    cover: "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/062A6124.JPG",
-  },
-  {
-    id: 2,
-    title: "Engagement Shoots",
-    cover: "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/005A6658.jpg",
-  },
-  {
-    id: 3,
-    title: "Birthday Celebrations",
-    cover:
-      "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/20240630_101612.jpg",
-  },
-  {
-    id: 4,
-    title: "Corporate Events",
-    cover: "https://pub-c9841409a5664691accafda9ed7f1b86.r2.dev/0E9A1768.jpg",
-  },
-];
+import { getApiRouteGallarey } from "../../helpers/Common_functions";
+import { ApiRequest } from "../../services/api/apiService";
+import { dynamic_request, useDynamicSelector } from "../../services/redux";
+import { useDispatch } from "react-redux";
+import { Dispatch } from "redux";
+import { Album } from "../../routes/types/routeConfig";
 
 const AlbumPage: React.FC = () => {
   const navigate = useNavigate();
+  const dispatch: Dispatch<any> = useDispatch();
+  const callBackServer = useCallback(
+    (variables: ApiRequest, key: string) => {
+      dispatch(dynamic_request(variables, key));
+    },
+    [dispatch]
+  );
+  const getRoute = getApiRouteGallarey("GetAll");
+  const { loading, items } = useDynamicSelector(getRoute.identifier);
 
+  const galleryItems: Album[] = items?.result || [];
+  const getAllGallery = () => {
+    callBackServer(
+      { method: getRoute.method, endpoint: getRoute.endpoint, data: {} },
+      getRoute.identifier
+    );
+  };
   const openGallery = (albumId: number) => {
     navigate(`/gallery/${albumId}`);
   };
-
+  useEffect(() => {
+    getAllGallery();
+  }, []);
   return (
     <>
       <div style={{ padding: 20 }}>
-        <h1 style={{ textAlign: "center", marginBottom: 20 }}>Photo Albums</h1>
+        <h1 style={{ textAlign: "center", marginBottom: 20 }}>Photo Gallery</h1>
         <Row gutter={[16, 16]}>
-          {albums.map((album) => (
-            <Col xs={24} sm={12} md={8} lg={6} key={album.id}>
+          {galleryItems.map((album) => (
+            <Col xs={24} sm={12} md={8} lg={6} key={album._id}>
               <Card
                 hoverable
                 cover={
                   <img
-                    alt={album.title}
-                    src={album.cover}
+                    alt={album.galleryname}
+                    src={album.gallerycover}
                     style={{
                       height: "200px",
                       objectFit: "cover",
@@ -55,9 +54,9 @@ const AlbumPage: React.FC = () => {
                     }}
                   />
                 }
-                onClick={() => openGallery(album.id)}
+                onClick={() => openGallery(album._id)}
               >
-                <Card.Meta title={album.title} />
+                <Card.Meta title={album.galleryname} />
               </Card>
             </Col>
           ))}
