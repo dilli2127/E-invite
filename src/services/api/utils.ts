@@ -159,4 +159,85 @@ Login: {
       endpoint: "/gallery",
     },
   },
+  EGallery: {
+    Create: {
+      identifier: "AddEGallery",
+      method: API_METHODS.PUT,
+      endpoint: "/e_gallery",
+    },
+    Update: {
+      identifier: "UpdatEGallery",
+      method: API_METHODS.PATCH,
+      endpoint: "/e_gallery",
+    },
+    Get: {
+      identifier: "GetEGallery",
+      method: API_METHODS.GET,
+      endpoint: "/e_gallery",
+    },
+    GetAll: {
+      identifier: "GetEGallery",
+      method: API_METHODS.POST,
+      endpoint: "/e_gallery",
+    },
+    Delete: {
+      identifier: "DeleteEGallery",
+      method: API_METHODS.DELETE,
+      endpoint: "/e_gallery",
+    },
+  },
+  User: {
+    Create: {
+      identifier: "AddUser",
+      method: API_METHODS.PUT,
+      endpoint: "/user",
+    },
+    Update: {
+      identifier: "UpdatUser",
+      method: API_METHODS.PATCH,
+      endpoint: "/user",
+    },
+    Get: {
+      identifier: "GetEUser",
+      method: API_METHODS.GET,
+      endpoint: "/user",
+    },
+    GetAll: {
+      identifier: "GetAllUser",
+      method: API_METHODS.POST,
+      endpoint: "/user",
+    },
+    Delete: {
+      identifier: "DeleteUser",
+      method: API_METHODS.DELETE,
+      endpoint: "/user",
+    },
+  },
+  EAlbum: {
+    Create: {
+      identifier: "AddEAlbum",
+      method: API_METHODS.PUT,
+      endpoint: "/e_album",
+    },
+    Update: {
+      identifier: "UpdatEAlbum",
+      method: API_METHODS.PATCH,
+      endpoint: "/e_album",
+    },
+    Get: {
+      identifier: "GetEAlbum",
+      method: API_METHODS.GET,
+      endpoint: "/e_album",
+    },
+    GetAll: {
+      identifier: "GetEAlbum",
+      method: API_METHODS.POST,
+      endpoint: "/e_album",
+    },
+    Delete: {
+      identifier: "DeleteEAlbum",
+      method: API_METHODS.DELETE,
+      endpoint: "/e_album",
+    },
+  },
 };

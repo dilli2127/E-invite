@@ -42,3 +42,27 @@ export const getApiRouteGallarey = (action: keyof typeof API_ROUTES.Gallery) => 
   }
   return route;
 };
+export const getApiRouteEGallery = (action: keyof typeof API_ROUTES.EGallery) => {
+  const route = API_ROUTES?.EGallery?.[action];
+  if (!route) {
+    console.error(`API_ROUTES.CmsImage.${action} is undefined.`);
+    throw new Error(`API route for CmsImage.${action} is not defined.`);
+  }
+  return route;
+};
+export const getApiRouteUser = (action: keyof typeof API_ROUTES.User) => {
+  const route = API_ROUTES?.User?.[action];
+  if (!route) {
+    console.error(`API_ROUTES.CmsImage.${action} is undefined.`);
+    throw new Error(`API route for CmsImage.${action} is not defined.`);
+  }
+  return route;
+};
+export const getApiRouteEAlbum = (action: keyof typeof API_ROUTES.EAlbum) => {
+  const route = API_ROUTES?.EAlbum?.[action];
+  if (!route) {
+    console.error(`API_ROUTES.CmsImage.${action} is undefined.`);
+    throw new Error(`API route for CmsImage.${action} is not defined.`);
+  }
+  return route;
+};

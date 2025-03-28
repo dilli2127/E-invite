@@ -80,7 +80,13 @@ const GalaryImage: React.FC = () => {
   );
   const { loading, items } = useDynamicSelector(getRoute.identifier);
   const columns = [
-    { title: "Gallery Category", dataIndex: "galleryname", key: "name" },
+    {
+      title: "Category",
+      dataIndex: "GalleryCategoryItem",
+      key: "galleryCategory",
+      render: (GalleryCategoryItem: GalleryCategoryItem) =>
+        GalleryCategoryItem?.name || "No Category",
+    },
     {
       title: "Image",
       dataIndex: "url",
@@ -118,7 +124,6 @@ const GalaryImage: React.FC = () => {
     },
   ];
   const formItems = [
-    
     {
       label: "Image",
       name: "url",
@@ -207,9 +212,13 @@ const GalaryImage: React.FC = () => {
       getAllGallery();
       resetForm();
       const actionRoute = getApiRouteGetEivite(
-        (["Create", "Update", "Get", "Delete"].includes(action)
-          ? (action.charAt(0).toUpperCase() + action.slice(1) as "Create" | "Update" | "Get" | "Delete")
-          : "Get")
+        ["Create", "Update", "Get", "Delete"].includes(action)
+          ? ((action.charAt(0).toUpperCase() + action.slice(1)) as
+              | "Create"
+              | "Update"
+              | "Get"
+              | "Delete")
+          : "Get"
       );
       dispatch(dynamic_clear(actionRoute.identifier));
     } else {
@@ -234,11 +243,9 @@ const GalaryImage: React.FC = () => {
 
   const handleDrawerOpen = () => setDrawerVisible(true);
 
-  const handleDrawerClose = () => setDrawerVisible(false);
-
   const FormValue = (values: any) => {
     values.url = imageurl;
-    values.type= "galleryimage";
+    values.type = "galleryimage";
     if (initialValues?._id) {
       callBackServer(
         {
@@ -290,7 +297,7 @@ const GalaryImage: React.FC = () => {
       <Drawer
         title="Add Gallery Image"
         placement="right"
-        onClose={handleDrawerClose}
+        onClose={resetForm}
         open={drawerVisible}
         width={600}
       >
@@ -300,7 +307,7 @@ const GalaryImage: React.FC = () => {
           formItems={formItems}
           FormValue={FormValue}
           formColumns={formColumns}
-          onChildCancel={handleDrawerClose}
+          onChildCancel={resetForm}
         />
       </Drawer>
     </div>

@@ -165,7 +165,6 @@ const GalaryCategory: React.FC = () => {
 
   const handleDrawerOpen = () => setDrawerVisible(true);
 
-  const handleDrawerClose = () => setDrawerVisible(false);
 
   const FormValue = (values: any) => {
     if (initialValues?._id) {
@@ -219,7 +218,7 @@ const GalaryCategory: React.FC = () => {
       <Drawer
         title="Add Gallery Category"
         placement="right"
-        onClose={handleDrawerClose}
+        onClose={resetForm}
         open={drawerVisible}
         width={600}
       >
@@ -229,7 +228,7 @@ const GalaryCategory: React.FC = () => {
           formItems={formItems}
           FormValue={FormValue}
           formColumns={formColumns}
-          onChildCancel={handleDrawerClose}
+          onChildCancel={resetForm}
         />
       </Drawer>
     </div>

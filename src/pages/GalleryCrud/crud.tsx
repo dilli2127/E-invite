@@ -239,7 +239,6 @@ const Galary: React.FC = () => {
 
   const handleDrawerOpen = () => setDrawerVisible(true);
 
-  const handleDrawerClose = () => setDrawerVisible(false);
 
   const FormValue = (values: any) => {
     values.gallerycover = imageurl;
@@ -294,7 +293,7 @@ const Galary: React.FC = () => {
       <Drawer
         title="Add Gallery Category"
         placement="right"
-        onClose={handleDrawerClose}
+        onClose={resetForm}
         open={drawerVisible}
         width={600}
       >
@@ -304,7 +303,7 @@ const Galary: React.FC = () => {
           formItems={formItems}
           FormValue={FormValue}
           formColumns={formColumns}
-          onChildCancel={handleDrawerClose}
+          onChildCancel={resetForm}
         />
       </Drawer>
     </div>

@@ -290,7 +290,6 @@ const EInviteCrud: React.FC = () => {
 
   const handleDrawerOpen = () => setDrawerVisible(true);
 
-  const handleDrawerClose = () => setDrawerVisible(false);
 
   const FormValue = (values: any) => {
     delete values.nestedItems;
@@ -352,7 +351,7 @@ const EInviteCrud: React.FC = () => {
       <Drawer
         title="Add New Invite"
         placement="right"
-        onClose={handleDrawerClose}
+        onClose={resetForm}
         open={drawerVisible}
         width={600}
       >
@@ -364,7 +363,7 @@ const EInviteCrud: React.FC = () => {
           nested={true}
           FormValue={FormValue}
           formColumns={formColumns}
-          onChildCancel={handleDrawerClose}
+          onChildCancel={resetForm}
         />
       </Drawer>
     </div>
