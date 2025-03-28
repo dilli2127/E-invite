@@ -16,13 +16,14 @@ export interface ApiRequest {
 
 class APIService {
     private api;
-
+    private token = sessionStorage.getItem("token");
     constructor(baseURL: string) {
         this.api = axios.create({
             baseURL: baseURL,
             timeout: 10000,
             headers: {
                 'Content-Type': 'application/json',
+                Token: this.token,
             },
         });
     }
