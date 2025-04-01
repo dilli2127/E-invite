@@ -1,12 +1,14 @@
 .login-container {
   height: 100vh;
   display: flex;
+  flex-direction: row; /* Default to row for larger screens */
 }
 
 .login-background {
   background: url("../../assets/img/ffslogo.png") no-repeat center center;
   background-size: cover;
   filter: brightness(0.8);
+  flex: 1; /* Take up 50% of the container */
 }
 
 .login-content {
@@ -14,10 +16,12 @@
   justify-content: center;
   align-items: center;
   background: linear-gradient(to right, #ff4e50, #fc913a);
+  flex: 1; /* Take up 50% of the container */
 }
 
 .login-card {
-  width: 400px;
+  width: 90%; /* Adjust card width for smaller screens */
+  max-width: 400px; /* Limit card width on larger screens */
   padding: 30px;
   text-align: center;
   border-radius: 15px;
@@ -63,4 +67,27 @@
 .signup-link a {
   color: #fff;
   font-weight: bold;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column; 
+  }
+
+  .login-background,
+  .login-content {
+    flex: none; /* Don't use flex, let content take its natural height */
+    height: 50vh; /* Make each section take 50% of the viewport height */
+  }
+  :where(.css-dev-only-do-not-override-vryruh).ant-col-12 {
+    max-width: 100%;
+  }
+}
+
+
+@media (max-width: 480px) {
+    .login-card {
+        /* padding: 20px; */
+    }
 }

@@ -3,7 +3,6 @@ import {
   Form,
   Input,
   Button,
-  Checkbox,
   message,
   Row,
   Col,
@@ -13,7 +12,6 @@ import {
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import LogoBackground from "../../assets/img/ffslogo.png";
 import { ApiRequest } from "../../services/api/apiService";
 import {
   dynamic_clear,
@@ -38,11 +36,9 @@ const Login: React.FC = () => {
   const { loading, items } = useDynamicSelector(
     API_ROUTES.Login.Create.identifier
   );
-  console.log(items);
   const onFinish = (values: {
     username: string;
     password: string;
-    remember: boolean;
   }) => {
     callBackServer(
       {
@@ -55,17 +51,17 @@ const Login: React.FC = () => {
   };
   useEffect(() => {
     if (items?.statusCode === "200") {
-      console.log(items?.result?.UserItem);
       message.success("Login successful! Welcome back.");
       sessionStorage.setItem("token", items?.result?.token);
       sessionStorage.setItem("user", JSON.stringify(items?.result?.UserItem));
       dispatch(dynamic_clear(API_ROUTES.Login.Create.identifier));
-      debugger;
       if (items?.result?.UserItem?.usertype === "admin") {
         navigate("/admin/einvite_crud");
       } else {
         navigate("/");
       }
+    } else if (items?.statusCode && items.statusCode !== "200") {
+        message.error(items?.message || "Login failed, please try again");
     }
   }, [items]);
   return (
@@ -80,23 +76,18 @@ const Login: React.FC = () => {
           <Form
             name="login_form"
             className="login-form"
-            initialValues={{ remember: true }}
             onFinish={onFinish}
           >
             <Form.Item
               name="username"
-              rules={[
-                { required: true, message: "Please input your Username!" },
-              ]}
+              rules={[{ required: true, message: "Please input your Username!" }]}
             >
               <Input prefix={<UserOutlined />} placeholder="Username" />
             </Form.Item>
 
             <Form.Item
               name="password"
-              rules={[
-                { required: true, message: "Please input your Password!" },
-              ]}
+              rules={[{ required: true, message: "Please input your Password!" }]}
             >
               <Input.Password
                 prefix={<LockOutlined />}
@@ -105,7 +96,6 @@ const Login: React.FC = () => {
             </Form.Item>
 
             <Form.Item className="login-options">
-              {/* <Checkbox>Remember me</Checkbox> */}
               <a href="#" className="forgot-password">
                 Forgot password?
               </a>
