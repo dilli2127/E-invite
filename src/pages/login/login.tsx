@@ -55,11 +55,17 @@ const Login: React.FC = () => {
   };
   useEffect(() => {
     if (items?.statusCode === "200") {
+      console.log(items?.result?.UserItem);
       message.success("Login successful! Welcome back.");
       sessionStorage.setItem("token", items?.result?.token);
       sessionStorage.setItem("user", JSON.stringify(items?.result?.UserItem));
       dispatch(dynamic_clear(API_ROUTES.Login.Create.identifier));
-      navigate("/");
+      debugger;
+      if (items?.result?.UserItem?.usertype === "admin") {
+        navigate("/admin/einvite_crud");
+      } else {
+        navigate("/");
+      }
     }
   }, [items]);
   return (

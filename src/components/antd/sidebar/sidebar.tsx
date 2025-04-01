@@ -28,6 +28,8 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
   };
 
   const handleOk = () => {
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("user");
     setIsModalVisible(false);
     navigate("/login");
   };

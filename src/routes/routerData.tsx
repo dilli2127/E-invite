@@ -46,6 +46,16 @@ const routerData: RouteConfig[] = [
     children: [],
   },
   {
+    key: "admin",
+    path: "/admin",
+    element: (
+      <Suspense fallback={<Loader />}>
+        <Login />
+      </Suspense>
+    ),
+    children: [],
+  },
+  {
     key: "signup",
     path: "/signup",
     element: (
@@ -220,6 +230,7 @@ const routerData: RouteConfig[] = [
       </Suspense>
     ),
     children: [
+     
       {
         key: "einviteCrud",
         path: "einvite_crud",
