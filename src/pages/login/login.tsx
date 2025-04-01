@@ -105,7 +105,7 @@ const Login: React.FC = () => {
             </Form.Item>
 
             <Form.Item className="login-options">
-              <Checkbox>Remember me</Checkbox>
+              {/* <Checkbox>Remember me</Checkbox> */}
               <a href="#" className="forgot-password">
                 Forgot password?
               </a>

@@ -40,7 +40,7 @@
 
 .login-options {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .forgot-password {
