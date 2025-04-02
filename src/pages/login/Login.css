@@ -80,9 +80,9 @@
     flex: none; /* Don't use flex, let content take its natural height */
     height: 50vh; /* Make each section take 50% of the viewport height */
   }
-  :where(.css-dev-only-do-not-override-vryruh).ant-col-12 {
-    max-width: 100%;
-  }
+  .ant-col-12 {
+    max-width: 100% !important;
+}
 }
 
 
