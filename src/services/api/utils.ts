@@ -33,12 +33,12 @@ Login: {
     Update: {
       identifier: "UpdateEinvite",
       method: API_METHODS.PATCH,
-      endpoint: "e_invite/",
+      endpoint: "e_invite",
     },
     Get: {
       identifier: "GetEinvite",
       method: API_METHODS.GET,
-      endpoint: "e_invite/",
+      endpoint: "e_invite",
     },
     Delete: {
       identifier: "DeleteEinvite",
@@ -51,26 +51,6 @@ Login: {
       identifier: "file-upload",
       method: API_METHODS.POST,
       endpoint: "/file-upload",
-    },
-    Update: {
-      identifier: "UpdateLedgerDefinition",
-      method: API_METHODS.POST,
-      endpoint: "ledger-definition/update",
-    },
-    UpdateTemplate: {
-      identifier: "UpdateTemplateLedgerDefinition",
-      method: API_METHODS.POST,
-      endpoint: "ledger-definition/mark-as-default",
-    },
-    Get: {
-      identifier: "GetEinvite",
-      method: API_METHODS.GET,
-      endpoint: "e_invite/",
-    },
-    Delete: {
-      identifier: "DeleteLedgerDefinition",
-      method: API_METHODS.POST,
-      endpoint: "ledger-definition/delete",
     },
   },
   CmsImage: {
