@@ -82,7 +82,7 @@ Login: {
     Delete: {
       identifier: "DeleteCmsImage",
       method: API_METHODS.DELETE,
-      endpoint: "/cms_image/",
+      endpoint: "/cms_image",
     },
   },
   GalleryCategory: {

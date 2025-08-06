@@ -70,7 +70,7 @@ const WeddingBanner: React.FC = () => {
   useEffect(() => {
     getAllImages();
   }, [getAllImages]);
-  // Improved slider with better controls
+  // Optimized slider with better performance
   useEffect(() => {
     if (!isVisible || !isPlaying || homeImages.length === 0) {
       if (intervalRef.current) {
@@ -82,11 +82,14 @@ const WeddingBanner: React.FC = () => {
 
     intervalRef.current = setInterval(() => {
       setTransition("slide-out");
-      setTimeout(() => {
-        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % homeImages.length);
-        setTransition("slide-in");
-      }, 600);
-    }, 5000); // Increased interval for better UX
+      // Use requestAnimationFrame for better performance
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          setCurrentImageIndex((prevIndex) => (prevIndex + 1) % homeImages.length);
+          setTransition("slide-in");
+        }, 300); // Reduced timeout for faster transition
+      });
+    }, 5000);
 
     return () => {
       if (intervalRef.current) {
@@ -100,10 +103,12 @@ const WeddingBanner: React.FC = () => {
   const goToSlide = useCallback((index: number) => {
     if (index === currentImageIndex) return;
     setTransition("slide-out");
-    setTimeout(() => {
-      setCurrentImageIndex(index);
-      setTransition("slide-in");
-    }, 600);
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        setCurrentImageIndex(index);
+        setTransition("slide-in");
+      }, 300);
+    });
   }, [currentImageIndex]);
 
   const togglePlayPause = useCallback(() => {

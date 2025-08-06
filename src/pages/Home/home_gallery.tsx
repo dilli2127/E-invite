@@ -30,7 +30,7 @@ const HomeGallery: React.FC<HomeGalleryProps> = ({ homeGalleryImages }) => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
+        staggerChildren: 0.05
       }
     }
   };
@@ -38,15 +38,13 @@ const HomeGallery: React.FC<HomeGalleryProps> = ({ homeGalleryImages }) => {
   const itemVariants = {
     hidden: { 
       opacity: 0, 
-      y: 20,
-      scale: 0.9
+      y: 10
     },
     visible: { 
       opacity: 1, 
       y: 0,
-      scale: 1,
       transition: {
-        duration: 0.5,
+        duration: 0.3,
         ease: "easeOut"
       }
     }
@@ -124,8 +122,8 @@ const HomeGallery: React.FC<HomeGalleryProps> = ({ homeGalleryImages }) => {
                   variants={itemVariants}
                   className="gallery-item-wrapper"
                   whileHover={{ 
-                    y: -8,
-                    transition: { duration: 0.3 }
+                    y: -4,
+                    transition: { duration: 0.2 }
                   }}
                 >
                   <div className="gallery-item">
@@ -134,6 +132,20 @@ const HomeGallery: React.FC<HomeGalleryProps> = ({ homeGalleryImages }) => {
                         src={img.url}
                         alt={img.title || `Gallery Image ${index + 1}`}
                         className="gallery-image"
+                        loading="lazy"
+                        placeholder={
+                          <div style={{
+                            width: '100%',
+                            height: '100%',
+                            background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            borderRadius: '20px 20px 0 0'
+                          }}>
+                            Loading...
+                          </div>
+                        }
                         style={{
                           width: '100%',
                           height: '100%',
