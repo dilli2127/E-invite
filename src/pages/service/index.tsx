@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, Typography, Button, List, Col, Row, Space, Badge, Divider } from "antd";
 import { 
   CameraOutlined, 
@@ -8,7 +8,9 @@ import {
   CheckCircleOutlined,
   CrownOutlined,
   FireOutlined,
-  ThunderboltOutlined
+  ThunderboltOutlined,
+  DownOutlined,
+  UpOutlined
 } from "@ant-design/icons";
 import styles from "./service.module.css";
 
@@ -20,6 +22,10 @@ interface Package {
   originalPrice?: number;
   description: string[];
   features: string[];
+  additionalFeatures?: string[];
+  deliverables?: string[];
+  timeline?: string;
+  support?: string;
   gradient: string;
   accentColor: string;
   icon: React.ReactNode;
@@ -46,6 +52,20 @@ const packages: Package[] = [
       "Digital E-Album",
       "Basic Photo Editing",
     ],
+    additionalFeatures: [
+      "Online Photo Selection Portal",
+      "Basic Color Correction",
+      "Standard Print Quality",
+      "Email Support",
+    ],
+    deliverables: [
+      "High-resolution digital photos",
+      "Edited video highlights",
+      "Custom e-invite templates",
+      "Photo gallery access for 1 year",
+    ],
+    timeline: "7-10 business days",
+    support: "Email support during business hours",
     gradient: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%)",
     accentColor: "#6366f1",
     icon: <CameraOutlined />,
@@ -71,6 +91,22 @@ const packages: Package[] = [
       "Professional Photo Editing",
       "Drone Photography (if permitted)",
     ],
+    additionalFeatures: [
+      "Advanced Photo Retouching",
+      "Multiple E-invite Design Options",
+      "Social Media Ready Photos",
+      "Priority Customer Support",
+      "Photo Backup Service",
+    ],
+    deliverables: [
+      "4K quality digital photos",
+      "Cinematic video highlights",
+      "Multiple e-invite designs",
+      "Unlimited downloads",
+      "Social media package",
+    ],
+    timeline: "5-7 business days",
+    support: "Priority phone and email support",
     gradient: "linear-gradient(135deg, #ec4899 0%, #f43f5e 50%, #ef4444 100%)",
     accentColor: "#ec4899",
     icon: <StarOutlined />,
@@ -96,6 +132,23 @@ const packages: Package[] = [
       "Drone Photography & Videography",
       "Same-day Preview (50 photos)",
     ],
+    additionalFeatures: [
+      "Professional Retouching Team",
+      "Custom Animation Effects",
+      "Multi-language E-invites",
+      "Guest RSVP Management",
+      "Live Streaming Setup",
+      "Photo Booth Integration",
+    ],
+    deliverables: [
+      "Ultra HD 4K photos and videos",
+      "Documentary-style film",
+      "Interactive e-invite suite",
+      "Cloud storage for 2 years",
+      "Physical USB with all content",
+    ],
+    timeline: "3-5 business days",
+    support: "Dedicated account manager",
     gradient: "linear-gradient(135deg, #06b6d4 0%, #0ea5e9 50%, #3b82f6 100%)",
     accentColor: "#06b6d4",
     icon: <CrownOutlined />,
@@ -125,6 +178,25 @@ const packages: Package[] = [
       "Dedicated Project Manager",
       "24/7 Customer Support",
     ],
+    additionalFeatures: [
+      "AI-powered photo selection",
+      "Virtual Reality Experience",
+      "Live Social Media Management",
+      "Guest Photo Collection App",
+      "Professional Makeup Artist",
+      "Red Carpet Setup",
+      "Celebrity Photographer Available",
+    ],
+    deliverables: [
+      "Master-quality 8K photos",
+      "Feature-length documentary",
+      "Interactive multimedia experience",
+      "Lifetime cloud storage",
+      "Premium physical delivery package",
+      "Personalized photo book collection",
+    ],
+    timeline: "1-3 business days (express)",
+    support: "White-glove concierge service",
     gradient: "linear-gradient(135deg, #f59e0b 0%, #f97316 50%, #ea580c 100%)",
     accentColor: "#f59e0b",
     icon: <FireOutlined />,
@@ -133,6 +205,15 @@ const packages: Package[] = [
 ];
 
 const PackageDetails: React.FC = () => {
+  const [expandedCards, setExpandedCards] = useState<{[key: string]: boolean}>({});
+
+  const toggleExpand = (packageName: string) => {
+    setExpandedCards(prev => ({
+      ...prev,
+      [packageName]: !prev[packageName]
+    }));
+  };
+
   return (
     <div className={styles.luxuryServicesContainer}>
       {/* Hero Section */}
@@ -153,9 +234,9 @@ const PackageDetails: React.FC = () => {
 
       {/* Packages Grid */}
       <div className={styles.packagesSection}>
-        <Row gutter={[32, 32]} justify="center">
+        <div className={styles.packagesGrid}>
           {packages.map((pkg, index) => (
-            <Col xs={24} sm={12} lg={6} key={pkg.name}>
+            <div className={styles.packageColumn} key={pkg.name}>
               <div className={`${styles.luxuryPackageCard} ${pkg.popular ? styles.popular : ''}`}>
                 {pkg.popular && (
                   <div className={styles.popularBadge}>
@@ -214,16 +295,66 @@ const PackageDetails: React.FC = () => {
                         <Title level={5} className={styles.featuresTitle}>
                           What's Included:
                         </Title>
-                        <List
-                          className={styles.featuresList}
-                          dataSource={pkg.features}
-                          renderItem={(item) => (
-                            <List.Item className={styles.featureItem}>
-                              <CheckCircleOutlined className={styles.featureIcon} />
-                              <span>{item}</span>
-                            </List.Item>
+                        <div className={`${styles.expandableContent} ${expandedCards[pkg.name] ? styles.expanded : ''}`}>
+                          <List
+                            className={styles.featuresList}
+                            dataSource={pkg.features}
+                            renderItem={(item) => (
+                              <List.Item className={styles.featureItem}>
+                                <CheckCircleOutlined className={styles.featureIcon} />
+                                <span>{item}</span>
+                              </List.Item>
+                            )}
+                          />
+                          
+                          {expandedCards[pkg.name] && (
+                            <div className={styles.additionalDetails}>
+                              {pkg.additionalFeatures && (
+                                <>
+                                  <h6>Additional Features:</h6>
+                                  {pkg.additionalFeatures.map((feature, idx) => (
+                                    <p key={idx}>• {feature}</p>
+                                  ))}
+                                </>
+                              )}
+                              
+                              {pkg.deliverables && (
+                                <>
+                                  <h6>Deliverables:</h6>
+                                  {pkg.deliverables.map((item, idx) => (
+                                    <p key={idx}>• {item}</p>
+                                  ))}
+                                </>
+                              )}
+                              
+                              {pkg.timeline && (
+                                <>
+                                  <h6>Delivery Timeline:</h6>
+                                  <p>{pkg.timeline}</p>
+                                </>
+                              )}
+                              
+                              {pkg.support && (
+                                <>
+                                  <h6>Support:</h6>
+                                  <p>{pkg.support}</p>
+                                </>
+                              )}
+                            </div>
                           )}
-                        />
+                        </div>
+                        
+                        <Button 
+                          type="text" 
+                          className={styles.expandToggle}
+                          onClick={() => toggleExpand(pkg.name)}
+                        >
+                          {expandedCards[pkg.name] ? (
+                            <><UpOutlined /> Show Less</>
+                          ) : (
+                            <><DownOutlined /> Show More Details</>
+                          )}
+                        </Button>
                       </div>
 
                       <div className={styles.packageActions}>
@@ -249,9 +380,9 @@ const PackageDetails: React.FC = () => {
                   </Card>
                 </Badge.Ribbon>
               </div>
-            </Col>
+            </div>
           ))}
-        </Row>
+        </div>
       </div>
 
       {/* Call to Action */}
