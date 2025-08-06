@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback, useMemo } from "react";
+import { Spin } from "antd";
 import "./WeddingBanner.css";
 import AboutUs from "./about";
 import TeamSection from "./team_section";
@@ -16,9 +17,12 @@ const WeddingBanner: React.FC = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [transition, setTransition] = useState("slide-in");
   const [isVisible, setIsVisible] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(true);
   const bannerRef = useRef<HTMLDivElement>(null);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const { loading, items } = useDynamicSelector(getImageRoute.identifier);
   const dispatch: Dispatch<any> = useDispatch();
+  
   const callBackServer = useCallback(
     (variables: ApiRequest, key: string) => {
       dispatch(dynamic_request(variables, key));
@@ -43,67 +47,145 @@ const WeddingBanner: React.FC = () => {
       }
     };
   }, []);
-  const homeImages = items?.result?.filter((item: { type: string }) => item.type === 'Home') ?? [];
-  const homeGalleryImages = items?.result?.filter((item: { type: string }) => item.type === 'HomeGallery') ?? [];
-  const getAllImages = () => {
+  // Memoize filtered images to prevent unnecessary re-renders
+  const { homeImages, homeGalleryImages } = useMemo(() => {
+    const result = items?.result || [];
+    return {
+      homeImages: result.filter((item: { type: string }) => item.type === 'Home'),
+      homeGalleryImages: result.filter((item: { type: string }) => item.type === 'HomeGallery')
+    };
+  }, [items?.result]);
+
+  const getAllImages = useCallback(() => {
     callBackServer(
       {
         method: getImageRoute.method,
         endpoint: getImageRoute.endpoint,
-        data: {pageLimit:100},
+        data: { pageLimit: 100 },
       },
       getImageRoute.identifier
     );
-  };
+  }, [callBackServer, getImageRoute]);
+
   useEffect(() => {
     getAllImages();
-  }, []);
+  }, [getAllImages]);
+  // Improved slider with better controls
   useEffect(() => {
-    if (!isVisible) return;
-    const interval = setInterval(() => {
+    if (!isVisible || !isPlaying || homeImages.length === 0) {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+      return;
+    }
+
+    intervalRef.current = setInterval(() => {
       setTransition("slide-out");
       setTimeout(() => {
-        setCurrentImageIndex(
-          (prevIndex) => (prevIndex + 1) % homeImages?.length
-        );
+        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % homeImages.length);
         setTransition("slide-in");
       }, 300);
-    }, 4000);
+    }, 5000); // Increased interval for better UX
 
-    return () => clearInterval(interval);
-  }, [isVisible, currentImageIndex]);
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
+  }, [isVisible, isPlaying, homeImages.length]);
+
+  // Navigation functions
+  const goToSlide = useCallback((index: number) => {
+    if (index === currentImageIndex) return;
+    setTransition("slide-out");
+    setTimeout(() => {
+      setCurrentImageIndex(index);
+      setTransition("slide-in");
+    }, 300);
+  }, [currentImageIndex]);
+
+  const togglePlayPause = useCallback(() => {
+    setIsPlaying(prev => !prev);
+  }, []);
+
+  if (loading && !items?.result?.length) {
+    return (
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        minHeight: '100vh',
+        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+      }}>
+        <Spin size="large" />
+      </div>
+    );
+  }
 
   return (
     <>
       <div ref={bannerRef} className="banner-container">
-        <div
-          className={`image-container ${transition}`}
-          style={{
-            backgroundImage: items?.result?.length
-              ? `url('${homeImages?.[currentImageIndex]?.url}')`
-              : `url('${homeImages?.[currentImageIndex]?.url}')`,
-          }}
-        ></div>
+        {homeImages.length > 0 && (
+          <div
+            className={`image-container ${transition}`}
+            style={{
+              backgroundImage: `url('${homeImages[currentImageIndex]?.url}')`,
+            }}
+            role="img"
+            aria-label={`Wedding photo ${currentImageIndex + 1} of ${homeImages.length}`}
+          />
+        )}
+        
+        {/* Slider Controls */}
+        <div className="slider-controls">
+          <button 
+            className="play-pause-btn"
+            onClick={togglePlayPause}
+            aria-label={isPlaying ? "Pause slideshow" : "Play slideshow"}
+          >
+            {isPlaying ? "⏸️" : "▶️"}
+          </button>
+          
+          <div className="slider-dots">
+            {homeImages.map((_: any, index: number) => (
+              <button
+                key={index}
+                className={`dot ${index === currentImageIndex ? 'active' : ''}`}
+                onClick={() => goToSlide(index)}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+
         <div className="content-container_landing">
-          <span className="badge">WEDDING</span>
-          <h2 className="title">A picture is worth a thousand words!</h2>
+          <span className="badge">WEDDING PHOTOGRAPHY</span>
+          <h1 className="title">Capturing Your Perfect Moments</h1>
           <p className="description">
-            It clearly and beautifully captures your emotions - the joy, the
-            laughter, the tears, you name it. Our pride is in offering the best
-            shoots as we help you tell your story in photos.
+            Every picture tells a story of love, joy, and unforgettable memories. 
+            Let us help you preserve your most precious moments with our professional 
+            photography services that capture the essence of your special day.
           </p>
-          <a href="/gallery" className="view-gallery-button">
-            View Gallery &gt;
-          </a>
+          <div className="cta-buttons">
+            <a href="/gallery" className="view-gallery-button primary">
+              View Our Gallery
+            </a>
+            <a href="/contact" className="view-gallery-button secondary">
+              Book Now
+            </a>
+          </div>
         </div>
       </div>
-      <div>
+      
+      <main>
         <AboutUs />
         <HomeGallery homeGalleryImages={homeGalleryImages} />
         <Testimonial />
         <TeamSection />
         <Footer />
-      </div>
+      </main>
     </>
   );
 };
