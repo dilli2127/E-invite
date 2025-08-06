@@ -85,7 +85,7 @@ const WeddingBanner: React.FC = () => {
       setTimeout(() => {
         setCurrentImageIndex((prevIndex) => (prevIndex + 1) % homeImages.length);
         setTransition("slide-in");
-      }, 300);
+      }, 600);
     }, 5000); // Increased interval for better UX
 
     return () => {
@@ -103,7 +103,7 @@ const WeddingBanner: React.FC = () => {
     setTimeout(() => {
       setCurrentImageIndex(index);
       setTransition("slide-in");
-    }, 300);
+    }, 600);
   }, [currentImageIndex]);
 
   const togglePlayPause = useCallback(() => {

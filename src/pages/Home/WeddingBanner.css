@@ -15,7 +15,7 @@
     background-position: center;
     background-attachment: fixed;
     position: relative;
-    transition: all 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     transform-style: preserve-3d;
     filter: brightness(0.7);
   }
@@ -37,13 +37,13 @@
   }
   
   .image-container.slide-out {
-    transform: translateX(-50px) scale(0.95);
+    transform: scale(1.02);
     opacity: 0;
-    filter: brightness(0.5) blur(2px);
+    filter: brightness(0.4) blur(1px);
   }
   
   .image-container.slide-in {
-    transform: translateX(0) scale(1);
+    transform: scale(1);
     opacity: 1;
     filter: brightness(0.7);
   }
@@ -107,7 +107,7 @@
     text-decoration: none;
     font-weight: 600;
     font-size: 1rem;
-    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     position: relative;
     overflow: hidden;
     min-width: 160px;
@@ -161,7 +161,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     font-size: 18px;
   }
   
@@ -183,7 +183,7 @@
     border: 2px solid rgba(255, 255, 255, 0.5);
     background: transparent;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
   
   .dot.active {
