@@ -1,176 +1,278 @@
 import React from "react";
-import { Card, Typography, Button, List, Col, Row, Space } from "antd";
+import { Card, Typography, Button, List, Col, Row, Space, Badge, Divider } from "antd";
+import { 
+  CameraOutlined, 
+  VideoCameraOutlined, 
+  GiftOutlined, 
+  StarOutlined,
+  CheckCircleOutlined,
+  CrownOutlined,
+  FireOutlined,
+  ThunderboltOutlined
+} from "@ant-design/icons";
+import styles from "./service.module.css";
 
 const { Title, Text } = Typography;
 
 interface Package {
   name: string;
   price: number;
+  originalPrice?: number;
   description: string[];
   features: string[];
-  primaryColor: string;
-  secondaryColor: string;
-  textColor: string;
+  gradient: string;
+  accentColor: string;
+  icon: React.ReactNode;
+  badge?: string;
+  popular?: boolean;
 }
 
 const packages: Package[] = [
   {
-    name: "Basic Package",
+    name: "Starter",
     price: 44999,
+    originalPrice: 54999,
     description: [
-      "Perfect for small events.",
-      "Great for individual portraits.",
+      "Perfect for intimate gatherings and small celebrations",
+      "Ideal for engagement shoots and family portraits",
     ],
     features: [
-      "2 Photographer.",
-      "1 Video With Pendrive.",
-      "2 Albums.",
-      "E-Invite",
-      "E-Gallery",
-      "E-Album",
+      "2 Professional Photographers",
+      "4-6 Hours Coverage",
+      "HD Video with Pendrive",
+      "2 Premium Albums (50 photos each)",
+      "Digital E-Invite Design",
+      "Private E-Gallery Access",
+      "Digital E-Album",
+      "Basic Photo Editing",
     ],
-    primaryColor: "#64B5F6", // Blue
-    secondaryColor: "#BBDEFB",
-    textColor: "#212121",
+    gradient: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%)",
+    accentColor: "#6366f1",
+    icon: <CameraOutlined />,
+    badge: "BEST VALUE",
   },
   {
-    name: "Standard Package",
+    name: "Professional",
     price: 69999,
-    description: ["Ideal for family photoshoots.", "Enhanced coverage."],
-    features: [
-      "3 Photographer.",
-      "1 Video.",
-      "3 Albums.",
-      "E-Invite",
-      "E-Gallery",
-      "E-Album",
+    originalPrice: 84999,
+    popular: true,
+    description: [
+      "Enhanced coverage for medium-sized events",
+      "Perfect balance of quality and affordability",
     ],
-    primaryColor: "#FFB74D", // Orange
-    secondaryColor: "#FFE0B2",
-    textColor: "#212121",
+    features: [
+      "3 Expert Photographers",
+      "6-8 Hours Coverage",
+      "2 HD Videos with Editing",
+      "3 Luxury Albums (75 photos each)",
+      "Custom E-Invite Design",
+      "Premium E-Gallery with Download",
+      "Interactive E-Album",
+      "Professional Photo Editing",
+      "Drone Photography (if permitted)",
+    ],
+    gradient: "linear-gradient(135deg, #ec4899 0%, #f43f5e 50%, #ef4444 100%)",
+    accentColor: "#ec4899",
+    icon: <StarOutlined />,
+    badge: "MOST POPULAR",
   },
   {
-    name: "Premium Package",
+    name: "Premium",
     price: 89999,
-    description: ["Large events & special occasions.", "Wedding Budget Coverage."],
-    features: [
-      "4 Photographers.",
-      "2 Video.",
-      "3 Album.",
-      "E-Invite",
-      "E-Gallery",
-      "E-Album",
+    originalPrice: 109999,
+    description: [
+      "Comprehensive coverage for grand celebrations",
+      "Premium quality with extensive documentation",
     ],
-    primaryColor: "#81C784", // Green
-    secondaryColor: "#C8E6C9",
-    textColor: "#212121",
+    features: [
+      "4 Senior Photographers",
+      "8-10 Hours Coverage",
+      "3 Cinematic Videos with Story",
+      "4 Designer Albums (100 photos each)",
+      "Animated E-Invite with Music",
+      "Premium E-Gallery with Slideshow",
+      "Multimedia E-Album",
+      "Advanced Photo & Video Editing",
+      "Drone Photography & Videography",
+      "Same-day Preview (50 photos)",
+    ],
+    gradient: "linear-gradient(135deg, #06b6d4 0%, #0ea5e9 50%, #3b82f6 100%)",
+    accentColor: "#06b6d4",
+    icon: <CrownOutlined />,
+    badge: "PREMIUM",
   },
   {
-    name: "Luxury Package",
+    name: "Luxury Elite",
     price: 119999,
-    description: ["Top-tier package.", "Full-day coverage."],
-    features: [
-      "Full-day coverage.",
-      "Unlimited Photos.",
-      "Pre Wedding Or Post Wedding",
-      "3 Video.",
-      "4 Album.",
-      "E-Invite, E-Gallery, E-Album",
+    originalPrice: 149999,
+    description: [
+      "Ultimate luxury experience with no compromises",
+      "Complete documentation of your special day",
     ],
-    primaryColor: "#E57373", // Red
-    secondaryColor: "#FFCDD2",
-    textColor: "#212121",
+    features: [
+      "5+ Master Photographers",
+      "Full Day Coverage (12+ Hours)",
+      "Pre & Post Wedding Shoot",
+      "5 Cinematic Videos with Premium Edit",
+      "5 Luxury Albums (150+ photos each)",
+      "Unlimited Photos & Videos",
+      "Premium Animated E-Invites",
+      "Exclusive E-Gallery with AI Features",
+      "4K Ultra HD E-Album",
+      "Master-level Photo & Video Editing",
+      "Professional Drone Coverage",
+      "Same-day Highlights Reel",
+      "Dedicated Project Manager",
+      "24/7 Customer Support",
+    ],
+    gradient: "linear-gradient(135deg, #f59e0b 0%, #f97316 50%, #ea580c 100%)",
+    accentColor: "#f59e0b",
+    icon: <FireOutlined />,
+    badge: "LUXURY",
   },
 ];
 
 const PackageDetails: React.FC = () => {
   return (
-    <div style={{ padding: "40px", background: "#f8f8f8" }}>
-      <Title
-        level={2}
-        style={{ textAlign: "center", marginBottom: "40px", color: "#333" }}
-      >
-        Photography Packages
-      </Title>
-      <Row gutter={[24, 24]} justify="center">
-        {packages.map((pkg) => (
-          <Col xs={24} sm={12} md={8} lg={6} key={pkg.name}>
-            <Card
-              title={
-                <div style={{ color: pkg.textColor, fontWeight: "600" }}>
-                  {pkg.name}
-                </div>
-              }
-              style={{
-                backgroundColor: pkg.secondaryColor,
-                border: `2px solid ${pkg.primaryColor}`,
-                transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-              }}
-              headStyle={{
-                backgroundColor: pkg.primaryColor,
-                borderBottom: "none",
-              }}
-              bodyStyle={{ padding: "20px" }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.transform =
-                  "translateY(-5px)";
-                (e.currentTarget as HTMLElement).style.boxShadow =
-                  "0 8px 16px rgba(0, 0, 0, 0.2)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.transform =
-                  "translateY(0)";
-                (e.currentTarget as HTMLElement).style.boxShadow =
-                  "0 4px 8px rgba(0, 0, 0, 0.1)";
-              }}
-            >
-              <Text
-                strong
-                style={{
-                  fontSize: "1.4em",
-                  display: "block",
-                  marginBottom: "15px",
-                  color: pkg.textColor,
-                }}
-              >
-                ₹{pkg.price.toLocaleString()}
-              </Text>
-              <Title level={4} style={{ color: pkg.textColor }}>
-                Description:
-              </Title>
-              <List
-                dataSource={pkg.description}
-                renderItem={(item) => (
-                  <List.Item style={{ color: pkg.textColor }}>{item}</List.Item>
+    <div className={styles.luxuryServicesContainer}>
+      {/* Hero Section */}
+      <div className={styles.servicesHero}>
+        <div className={styles.heroContent}>
+          {/* <Badge.Ribbon text="PREMIUM PHOTOGRAPHY" color="#667eea" className={styles.heroBadge}>
+            <div></div>
+          </Badge.Ribbon> */}
+          <Title level={1} className={styles.heroTitle}>
+            Luxury Photography Packages
+          </Title>
+          <Text className={styles.heroSubtitle}>
+            Capture your most precious moments with our premium photography services. 
+            Each package is crafted to deliver exceptional quality and unforgettable memories.
+          </Text>
+        </div>
+      </div>
+
+      {/* Packages Grid */}
+      <div className={styles.packagesSection}>
+        <Row gutter={[32, 32]} justify="center">
+          {packages.map((pkg, index) => (
+            <Col xs={24} sm={12} lg={6} key={pkg.name}>
+              <div className={`${styles.luxuryPackageCard} ${pkg.popular ? styles.popular : ''}`}>
+                {pkg.popular && (
+                  <div className={styles.popularBadge}>
+                    <ThunderboltOutlined /> MOST POPULAR
+                  </div>
                 )}
-              />
-              <Title level={4} style={{ color: pkg.textColor }}>
-                Features:
-              </Title>
-              <List
-                dataSource={pkg.features}
-                renderItem={(item) => (
-                  <List.Item style={{ color: pkg.textColor }}>{item}</List.Item>
-                )}
-              />
-              <Space style={{ width: "100%", justifyContent: "center" }}>
-                <Button
-                  type="primary"
-                  style={{
-                    backgroundColor: pkg.primaryColor,
-                    borderColor: pkg.primaryColor,
-                    color: "white",
-                    marginTop: "20px",
-                  }}
+                
+                <Badge.Ribbon 
+                  text={pkg.badge} 
+                  color={pkg.accentColor}
+                  className={styles.packageBadge}
                 >
-                  Book Now
-                </Button>
-              </Space>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+                  <Card
+                    className={styles.packageCard}
+                    style={{
+                      background: pkg.gradient,
+                      border: 'none',
+                      borderRadius: '20px',
+                      overflow: 'hidden',
+                    }}
+                    bodyStyle={{ padding: 0 }}
+                  >
+                    {/* Card Header */}
+                    <div className={styles.packageHeader}>
+                      <div className={styles.packageIcon}>
+                        {pkg.icon}
+                      </div>
+                      <Title level={3} className={styles.packageName}>
+                        {pkg.name}
+                      </Title>
+                      <div className={styles.packagePricing}>
+                        <Text className={styles.currentPrice}>
+                          ₹{pkg.price.toLocaleString()}
+                        </Text>
+                        {pkg.originalPrice && (
+                          <Text className={styles.originalPrice}>
+                            ₹{pkg.originalPrice.toLocaleString()}
+                          </Text>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Card Body */}
+                    <div className={styles.packageBody}>
+                      <div className={styles.packageDescription}>
+                        {pkg.description.map((desc, idx) => (
+                          <Text key={idx} className={styles.descriptionText}>
+                            {desc}
+                          </Text>
+                        ))}
+                      </div>
+
+                      <Divider className={styles.featuresDivider} />
+
+                      <div className={styles.packageFeatures}>
+                        <Title level={5} className={styles.featuresTitle}>
+                          What's Included:
+                        </Title>
+                        <List
+                          className={styles.featuresList}
+                          dataSource={pkg.features}
+                          renderItem={(item) => (
+                            <List.Item className={styles.featureItem}>
+                              <CheckCircleOutlined className={styles.featureIcon} />
+                              <span>{item}</span>
+                            </List.Item>
+                          )}
+                        />
+                      </div>
+
+                      <div className={styles.packageActions}>
+                        <Button
+                          type="primary"
+                          size="large"
+                          className={styles.bookButton}
+                          style={{
+                            borderColor: 'rgba(255, 255, 255, 0.3)',
+                            backdropFilter: 'blur(10px)',
+                          }}
+                        >
+                          <GiftOutlined /> Book Now
+                        </Button>
+                        <Button
+                          type="text"
+                          className={styles.detailsButton}
+                        >
+                          View Details
+                        </Button>
+                      </div>
+                    </div>
+                  </Card>
+                </Badge.Ribbon>
+              </div>
+            </Col>
+          ))}
+        </Row>
+      </div>
+
+      {/* Call to Action */}
+      <div className={styles.ctaSection}>
+        <div className={styles.ctaContent}>
+          <Title level={2} className={styles.ctaTitle}>
+            Ready to Capture Your Special Moments?
+          </Title>
+          <Text className={styles.ctaText}>
+            Contact us today for a personalized consultation and let us create magical memories for you.
+          </Text>
+          <Space size="large" className={styles.ctaButtons}>
+            <Button type="primary" size="large" className={styles.ctaPrimary}>
+              Get Free Consultation
+            </Button>
+            <Button size="large" className={styles.ctaSecondary}>
+              View Portfolio
+            </Button>
+          </Space>
+        </div>
+      </div>
     </div>
   );
 };

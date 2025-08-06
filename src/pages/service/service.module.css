@@ -1,0 +1,414 @@
+/* Luxury Services Container */
+.luxuryServicesContainer {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 30%, #334155 70%, #475569 100%);
+  position: relative;
+  overflow-x: hidden;
+}
+
+.luxuryServicesContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Hero Section */
+.servicesHero {
+  padding: 100px 50px 80px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.heroContent {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.heroBadge {
+  margin-bottom: 30px;
+}
+
+.heroTitle {
+  color: white !important;
+  font-size: 3.5rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 24px !important;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.heroSubtitle {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-size: 1.3rem !important;
+  line-height: 1.8 !important;
+  margin-bottom: 40px !important;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Packages Section */
+.packagesSection {
+  padding: 0 50px 100px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Luxury Package Cards */
+.luxuryPackageCard {
+  position: relative;
+  height: 100%;
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.luxuryPackageCard.popular {
+  transform: scale(1.05);
+  z-index: 3;
+}
+
+.luxuryPackageCard:nth-child(1) { animation-delay: 0.1s; }
+.luxuryPackageCard:nth-child(2) { animation-delay: 0.2s; }
+.luxuryPackageCard:nth-child(3) { animation-delay: 0.3s; }
+.luxuryPackageCard:nth-child(4) { animation-delay: 0.4s; }
+
+.popularBadge {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  z-index: 10;
+  box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(1.05); }
+  100% { transform: translateX(-50%) scale(1); }
+}
+
+.packageCard {
+  height: 100%;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+.packageCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 
+    0 30px 60px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Package Header */
+.packageHeader {
+  padding: 40px 30px 30px;
+  text-align: center;
+  color: white;
+}
+
+.packageIcon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+.packageName {
+  color: white !important;
+  font-size: 1.8rem !important;
+  font-weight: 600 !important;
+  margin-bottom: 20px !important;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.packagePricing {
+  margin-bottom: 10px;
+}
+
+.currentPrice {
+  color: white !important;
+  font-size: 2.2rem !important;
+  font-weight: 700 !important;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.originalPrice {
+  color: rgba(255, 255, 255, 0.7) !important;
+  font-size: 1.2rem !important;
+  text-decoration: line-through !important;
+  margin-left: 10px !important;
+}
+
+/* Package Body */
+.packageBody {
+  background: linear-gradient(135deg, 
+    rgba(248, 250, 252, 46%) 0%, 
+    rgba(241, 245, 249, 80%) 50%, 
+    rgba(226, 232, 240, 56%) 100%);
+  backdrop-filter: blur(20px);
+  padding: 30px;
+  border-radius: 0 0 20px 20px;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.packageDescription {
+  margin-bottom: 20px;
+}
+
+.descriptionText {
+  display: block !important;
+  color: #334155 !important;
+  font-size: 0.95rem !important;
+  line-height: 1.6 !important;
+  margin-bottom: 8px !important;
+  font-weight: 500 !important;
+}
+
+.featuresDivider {
+  margin: 20px 0 !important;
+  border-color: rgba(148, 163, 184, 0.3) !important;
+}
+
+.featuresTitle {
+  color: #1e293b !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  margin-bottom: 15px !important;
+}
+
+.featuresList {
+  flex-grow: 1;
+}
+
+.featuresList :global(.ant-list-item) {
+  padding: 8px 0 !important;
+  border: none !important;
+}
+
+.featureItem {
+  display: flex !important;
+  align-items: center !important;
+  color: #031e45 !important;
+  font-size: 0.9rem !important;
+  font-weight: 500 !important;
+}
+
+.featureIcon {
+  color: #10b981 !important;
+  margin-right: 10px !important;
+  font-size: 1rem !important;
+}
+
+/* Package Actions */
+.packageActions {
+  margin-top: auto;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bookButton {
+  width: 100% !important;
+  height: 50px !important;
+  border-radius: 25px !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  color: white !important;
+  transition: all 0.3s ease !important;
+}
+
+.bookButton:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2) !important;
+}
+
+.detailsButton {
+  color: #64748b !important;
+  font-weight: 500 !important;
+}
+
+.detailsButton:hover {
+  color: #334155 !important;
+}
+
+/* Call to Action Section */
+.ctaSection {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  backdrop-filter: blur(20px);
+  padding: 80px 50px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.ctaContent {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.ctaTitle {
+  color: white !important;
+  font-size: 2.5rem !important;
+  font-weight: 600 !important;
+  margin-bottom: 20px !important;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.ctaText {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-size: 1.2rem !important;
+  line-height: 1.6 !important;
+  margin-bottom: 40px !important;
+}
+
+.ctaButtons {
+  justify-content: center !important;
+}
+
+.ctaPrimary {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+  border: none !important;
+  height: 55px !important;
+  padding: 0 40px !important;
+  border-radius: 28px !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4) !important;
+  transition: all 0.3s ease !important;
+}
+
+.ctaPrimary:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 12px 35px rgba(99, 102, 241, 0.6) !important;
+}
+
+.ctaSecondary {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  color: white !important;
+  height: 55px !important;
+  padding: 0 40px !important;
+  border-radius: 28px !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  backdrop-filter: blur(10px) !important;
+  transition: all 0.3s ease !important;
+}
+
+.ctaSecondary:hover {
+  background: rgba(255, 255, 255, 0.3) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  color: white !important;
+  transform: translateY(-3px) !important;
+}
+
+/* Badge Ribbon Customization */
+.packageBadge :global(.ant-ribbon) {
+  font-size: 0.8rem !important;
+  font-weight: bold !important;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .luxuryPackageCard.popular {
+    transform: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .servicesHero {
+    padding: 60px 20px 40px;
+  }
+
+  .heroTitle {
+    font-size: 2.5rem !important;
+  }
+
+  .heroSubtitle {
+    font-size: 1.1rem !important;
+  }
+
+  .packagesSection {
+    padding: 0 20px 60px;
+  }
+
+  .packageBody {
+    min-height: auto;
+  }
+
+  .ctaSection {
+    padding: 60px 20px;
+  }
+
+  .ctaTitle {
+    font-size: 2rem !important;
+  }
+
+  .ctaButtons {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .ctaPrimary,
+  .ctaSecondary {
+    width: 100% !important;
+    max-width: 280px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroTitle {
+    font-size: 2rem !important;
+  }
+
+  .packageHeader {
+    padding: 30px 20px 20px;
+  }
+
+  .packageBody {
+    padding: 20px;
+  }
+
+  .currentPrice {
+    font-size: 1.8rem !important;
+  }
+}
+
+/* Animation for package cards */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
