@@ -43,7 +43,7 @@ Login: {
     Delete: {
       identifier: "DeleteEinvite",
       method: API_METHODS.DELETE,
-      endpoint: "e_invite/",
+      endpoint: "e_invite",
     },
   },
   FileUploder: {

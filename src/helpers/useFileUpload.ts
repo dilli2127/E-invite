@@ -10,7 +10,7 @@ export const useFileUpload = () => {
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const response = await fetch("http://localhost:8247/file-upload", {
+      const response = await fetch("http://localhost:8247/upload-photo", {
         method: "POST",
         body: formData,
       });

@@ -45,7 +45,6 @@ const WeddingBanner: React.FC = () => {
   }, []);
   const homeImages = items?.result?.filter((item: { type: string }) => item.type === 'Home') ?? [];
   const homeGalleryImages = items?.result?.filter((item: { type: string }) => item.type === 'HomeGallery') ?? [];
-  console.log("homeImages",homeImages)
   const getAllImages = () => {
     callBackServer(
       {

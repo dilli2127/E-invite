@@ -125,7 +125,7 @@ const CmsImageCrud: React.FC = () => {
     callBackServer(
       {
         method: deleteRoute.method,
-        endpoint: `${deleteRoute.endpoint}/${record._id}`,
+        endpoint: `${deleteRoute.endpoint}${record._id}`,
         data: { _id: record._id },
       },
       deleteRoute.identifier
