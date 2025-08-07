@@ -28,13 +28,14 @@ import {
 } from "../../services/redux";
 import {
   getApiRouteCmsImage,
+  getApiRouteGallarey,
   getApiRouteGallareyCategory,
   getApiRouteGetEivite,
   showToast,
 } from "../../helpers/Common_functions";
 import { API_ROUTES } from "../../services/api/utils";
 interface GalleryCategoryItem {
-  name: string;
+  galleryname: string;
   _id: string;
 }
 const formColumns = 2;
@@ -45,6 +46,7 @@ const GalaryImage: React.FC = () => {
   const updateRoute = getApiRouteCmsImage("Update");
   const deleteRoute = getApiRouteCmsImage("Delete");
   const getGallareyCategory = getApiRouteGallareyCategory("Get");
+  const getRouteGallry = getApiRouteGallarey("GetAll");
   const [form] = Form.useForm();
   const dispatch: Dispatch<any> = useDispatch();
   const { handleFileUpload } = useFileUpload();
@@ -65,10 +67,10 @@ const GalaryImage: React.FC = () => {
     addRoute.identifier
   );
   const { items: GalleryCategoryItems, error: GalleryCategoryError } =
-    useDynamicSelector(getGallareyCategory.identifier);
+    useDynamicSelector(getRouteGallry.identifier);
   const galleryCategoryOptions = GalleryCategoryItems?.result?.map(
     (item: GalleryCategoryItem) => ({
-      label: item.name,
+      label: item.galleryname,
       value: item._id,
     })
   );
@@ -81,11 +83,11 @@ const GalaryImage: React.FC = () => {
   const { loading, items } = useDynamicSelector(getRoute.identifier);
   const columns = [
     {
-      title: "Category",
-      dataIndex: "GalleryCategoryItem",
-      key: "galleryCategory",
-      render: (GalleryCategoryItem: GalleryCategoryItem) =>
-        GalleryCategoryItem?.name || "No Category",
+      title: "Gallery Name",
+      dataIndex: "GallerItem",
+      key: "GallerItem",
+      render: (GallerItem: GalleryCategoryItem) =>
+        GallerItem?.galleryname || "No Category",
     },
     {
       title: "Image",
@@ -148,9 +150,9 @@ const GalaryImage: React.FC = () => {
       ),
     },
     {
-      label: "Galary Category",
-      name: "gallery_category",
-      rules: [{ required: true, message: "Please input GalaryCategory!" }],
+      label: "Galary List",
+      name: "gallery_id",
+      rules: [{ required: true, message: "Please input Galary!" }],
       component: (
         <Select allowClear placeholder="Select Category">
           {galleryCategoryOptions?.map(
@@ -173,11 +175,11 @@ const GalaryImage: React.FC = () => {
   const getAllGalleryCategory = () => {
     callBackServer(
       {
-        method: getGallareyCategory.method,
-        endpoint: getGallareyCategory.endpoint,
+        method: getRouteGallry.method,
+        endpoint: getRouteGallry.endpoint,
         data: {},
       },
-      getGallareyCategory.identifier
+      getRouteGallry.identifier
     );
   };
   const handleEdit = (record: any) => {
