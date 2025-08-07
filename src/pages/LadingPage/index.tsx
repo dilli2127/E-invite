@@ -8,34 +8,49 @@ const LandingPage: React.FC = () => {
   const [brideName, setBrideName] = useState("");
   const [groomName, setGroomName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isChecking, setIsChecking] = useState(false);
   const navigate = useNavigate();
 
   const pageTitleMap: Record<string, string> = {
     ealbum: "Create Your Digital Wedding Album",
-    einvite: "Design Your Perfect Wedding Invitation",
+    einvite: "Get Your Wedding Invitation",
     egallery: "Showcase Your Wedding Gallery",
     createeinvite: "CREATE E-INVITE",
   };
 
   const pageSubtitleMap: Record<string, string> = {
     ealbum: "Transform your precious moments into a beautiful digital album",
-    einvite: "Create stunning digital invitations that your guests will love",
+    einvite: "Enter your names to view your existing wedding invitation",
     egallery: "Share your wedding memories with friends and family",
-    createeinvite: "Create beautiful digital wedding invitations with our easy-to-use platform",
+    createeinvite: "Enter couple names to find or create your E-invite",
   };
 
   const buttonTextMap: Record<string, string> = {
     ealbum: "GET E-Album",
-    einvite: "GET E-Invite",
+    einvite: "VIEW E-INVITE",
     egallery: "GET E-Gallery",
-    createeinvite: "CREATE E-INVITE",
+    createeinvite: "FIND / CREATE E-INVITE",
   };
 
   const iconMap: Record<string, string> = {
     ealbum: "📸",
-    einvite: "💌",
+    einvite: "📋",
     egallery: "🖼️",
-    createeinvite: "🎨",
+    createeinvite: "🔍",
+  };
+
+  // Function to check if E-invite exists in database
+  const checkEInviteExists = async (groomName: string, brideName: string) => {
+    try {
+      // This would be your actual API call to check database
+      // For now, simulating the check
+      const response = await fetch(`/api/check-einvite?groom=${groomName}&bride=${brideName}`);
+      const data = await response.json();
+      return data.exists;
+    } catch (error) {
+      console.error("Error checking E-invite:", error);
+      return false;
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -45,19 +60,42 @@ const LandingPage: React.FC = () => {
       const brideNameLower = brideName.toLowerCase();
       const groomNameLower = groomName.toLowerCase();
 
-      // Simulate loading for better UX
-      setTimeout(() => {
-        if (pageName === "ealbum") {
-          navigate(`/ealbum/${groomNameLower}weds${brideNameLower}`);
-        } else if (pageName === "einvite") {
-          navigate(`/einvite/${groomNameLower}weds${brideNameLower}`);
-        } else if (pageName === "egallery") {
-          navigate(`/egallery/${groomNameLower}weds${brideNameLower}`);
-        } else if (pageName === "createeinvite") {
+      if (pageName === "createeinvite") {
+        setIsChecking(true);
+        try {
+          // Check if E-invite already exists
+          const inviteExists = await checkEInviteExists(groomNameLower, brideNameLower);
+          
+          if (inviteExists) {
+            // If exists, navigate to existing E-invite
+            navigate(`/einvite/${groomNameLower}weds${brideNameLower}`);
+          } else {
+            // If doesn't exist, navigate to create new E-invite
+            navigate(`/createeinvite/${groomNameLower}weds${brideNameLower}`);
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          // Fallback to create new E-invite
           navigate(`/createeinvite/${groomNameLower}weds${brideNameLower}`);
+        } finally {
+          setIsChecking(false);
+          setIsLoading(false);
         }
+      } else if (pageName === "einvite") {
+        // For GET E-Invite page, directly navigate to view existing invite
+        navigate(`/einvite/${groomNameLower}weds${brideNameLower}`);
         setIsLoading(false);
-      }, 1000);
+      } else {
+        // For other services, use existing logic
+        setTimeout(() => {
+          if (pageName === "ealbum") {
+            navigate(`/ealbum/${groomNameLower}weds${brideNameLower}`);
+          } else if (pageName === "egallery") {
+            navigate(`/egallery/${groomNameLower}weds${brideNameLower}`);
+          }
+          setIsLoading(false);
+        }, 1000);
+      }
     }
   };
 
@@ -127,7 +165,7 @@ const LandingPage: React.FC = () => {
             {isLoading ? (
               <>
                 <span className="loading-spinner"></span>
-                Creating...
+                {isChecking ? "Checking Database..." : "Loading..."}
               </>
             ) : (
               <>
