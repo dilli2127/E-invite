@@ -124,6 +124,22 @@ const LandingPage: React.FC = () => {
           <p className="subtitle">{pageSubtitle}</p>
         </div>
 
+        {pageName === "einvite" && (
+          <div className="action-buttons">
+            <button 
+              onClick={() => navigate('/createeinvite/new')}
+              className="create-new-btn"
+            >
+              <span className="btn-icon">✨</span>
+              Create New Invite
+            </button>
+            
+            <div className="divider">
+              <span>or</span>
+            </div>
+          </div>
+        )}
+
         <form onSubmit={handleSubmit} className="form-container">
           <div className="input-group">
             <label htmlFor="groom-name" className="input-label">
@@ -169,8 +185,8 @@ const LandingPage: React.FC = () => {
               </>
             ) : (
               <>
-                <span className="btn-icon">🚀</span>
-                {buttonText}
+                <span className="btn-icon">🔍</span>
+                Find Existing Invite
               </>
             )}
           </button>

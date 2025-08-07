@@ -19,6 +19,9 @@ import EAlbumLading from "../pages/E-Album/landing";
 const Login = lazy(() => import("../pages/login/login"));
 const Einvite = lazy(() => import("../pages/E-Invite"));
 const LandingPage = lazy(() => import("../pages/LadingPage"));
+const CreateEInvite = lazy(() => import("../pages/CreateEInvite"));
+const CustomizeInvite = lazy(() => import("../pages/CreateEInvite/CustomizeInvite"));
+const PreviewInvite = lazy(() => import("../pages/CreateEInvite/PreviewInvite"));
 const ContactPage = lazy(() => import("../pages/Contact"));
 const AlbumPage = lazy(() => import("../pages/Gallery"));
 const PhotoGallery = lazy(() => import("../pages/Gallery/photoGallery"));
@@ -101,6 +104,57 @@ const routerData: RouteConfig[] = [
         element: (
           <Suspense fallback={<Loader />}>
             <EInvitePage />
+          </Suspense>
+        ),
+        children: [],
+      },
+
+      {
+        key: "createeinvite",
+        path: "/createeinvite/:id",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <CreateEInvite />
+          </Suspense>
+        ),
+        children: [],
+      },
+            {
+              key: "createeinvite-new",
+              path: "/createeinvite/new",
+              element: (
+                <Suspense fallback={<Loader />}>
+                  <CreateEInvite />
+                </Suspense>
+              ),
+              children: [],
+            },
+      {
+        key: "customize",
+        path: "/customize/:templateId/:coupleId",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <CustomizeInvite />
+          </Suspense>
+        ),
+        children: [],
+      },
+      {
+        key: "preview",
+        path: "/preview/:templateId/:coupleId",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <PreviewInvite />
+          </Suspense>
+        ),
+        children: [],
+      },
+      {
+        key: "preview-template",
+        path: "/preview/:templateId",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <PreviewInvite />
           </Suspense>
         ),
         children: [],
