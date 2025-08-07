@@ -14,24 +14,28 @@ const LandingPage: React.FC = () => {
     ealbum: "Create Your Digital Wedding Album",
     einvite: "Design Your Perfect Wedding Invitation",
     egallery: "Showcase Your Wedding Gallery",
+    createeinvite: "CREATE E-INVITE",
   };
 
   const pageSubtitleMap: Record<string, string> = {
     ealbum: "Transform your precious moments into a beautiful digital album",
     einvite: "Create stunning digital invitations that your guests will love",
     egallery: "Share your wedding memories with friends and family",
+    createeinvite: "Create beautiful digital wedding invitations with our easy-to-use platform",
   };
 
   const buttonTextMap: Record<string, string> = {
     ealbum: "GET E-Album",
     einvite: "GET E-Invite",
     egallery: "GET E-Gallery",
+    createeinvite: "CREATE E-INVITE",
   };
 
   const iconMap: Record<string, string> = {
     ealbum: "📸",
     einvite: "💌",
     egallery: "🖼️",
+    createeinvite: "🎨",
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -49,6 +53,8 @@ const LandingPage: React.FC = () => {
           navigate(`/einvite/${groomNameLower}weds${brideNameLower}`);
         } else if (pageName === "egallery") {
           navigate(`/egallery/${groomNameLower}weds${brideNameLower}`);
+        } else if (pageName === "createeinvite") {
+          navigate(`/createeinvite/${groomNameLower}weds${brideNameLower}`);
         }
         setIsLoading(false);
       }, 1000);
