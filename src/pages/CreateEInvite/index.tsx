@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import './CreateEInvite.css';
+import styles from './CreateEInvite.module.css';
 import { templates, categories, TemplateData } from './templates';
 
 const CreateEInvite: React.FC = () => {
@@ -69,20 +69,20 @@ const CreateEInvite: React.FC = () => {
   };
 
   return (
-    <div className="create-einvite-page">
+    <div className={styles.createEinvitePage}>
       {/* Header Section */}
-      <div className="header-section">
-        <div className="header-content">
-          <h1 className="main-title">
-            <span className="title-icon">💍</span>
+      <div className={styles.headerSection}>
+        <div className={styles.headerContent}>
+          <h1 className={styles.mainTitle}>
+            <span className={styles.titleIcon}>💍</span>
             Create Your E-Invite
           </h1>
-          <p className="subtitle">
+          <p className={styles.subtitle}>
             Choose from our beautiful templates to create your perfect wedding invitation
           </p>
           {coupleNames && coupleNames !== 'new' && (
-            <div className="couple-info">
-              <span className="couple-names">
+            <div className={styles.coupleInfo}>
+              <span className={styles.coupleNames}>
                 {groomName} & {brideName}
               </span>
             </div>
@@ -92,20 +92,20 @@ const CreateEInvite: React.FC = () => {
 
       {/* Name Form for New Invite */}
       {showNameForm && (
-        <div className="name-form-section">
-          <div className="name-form-container">
-            <h2 className="name-form-title">
-              <span className="form-icon">👰🤵</span>
+        <div className={styles.nameFormSection}>
+          <div className={styles.nameFormContainer}>
+            <h2 className={styles.nameFormTitle}>
+              <span className={styles.formIcon}>👰🤵</span>
               Enter Couple Names
             </h2>
-            <p className="name-form-subtitle">
+            <p className={styles.nameFormSubtitle}>
               Please provide the names to personalize your invitation
             </p>
             
-            <form onSubmit={handleNameSubmit} className="name-form">
-              <div className="name-input-group">
-                <label htmlFor="temp-groom-name" className="name-input-label">
-                  <span className="label-icon">👨</span>
+            <form onSubmit={handleNameSubmit} className={styles.nameForm}>
+              <div className={styles.nameInputGroup}>
+                <label htmlFor="temp-groom-name" className={styles.nameInputLabel}>
+                  <span className={styles.labelIcon}>👨</span>
                   Groom's Name
                 </label>
                 <input
@@ -114,14 +114,14 @@ const CreateEInvite: React.FC = () => {
                   placeholder="Enter groom's name"
                   value={tempGroomName}
                   onChange={(e) => setTempGroomName(e.target.value)}
-                  className="name-input"
+                  className={styles.nameInput}
                   required
                 />
               </div>
 
-              <div className="name-input-group">
-                <label htmlFor="temp-bride-name" className="name-input-label">
-                  <span className="label-icon">👰</span>
+              <div className={styles.nameInputGroup}>
+                <label htmlFor="temp-bride-name" className={styles.nameInputLabel}>
+                  <span className={styles.labelIcon}>👰</span>
                   Bride's Name
                 </label>
                 <input
@@ -130,12 +130,12 @@ const CreateEInvite: React.FC = () => {
                   placeholder="Enter bride's name"
                   value={tempBrideName}
                   onChange={(e) => setTempBrideName(e.target.value)}
-                  className="name-input"
+                  className={styles.nameInput}
                   required
                 />
               </div>
 
-              <button type="submit" className="name-submit-btn">
+              <button type="submit" className={styles.nameSubmitBtn}>
                 <span className="btn-icon">✨</span>
                 Continue to Templates
               </button>
@@ -145,26 +145,26 @@ const CreateEInvite: React.FC = () => {
       )}
 
       {/* Search and Filter Section */}
-      <div className="filter-section">
-        <div className="search-container">
+      <div className={styles.filterSection}>
+        <div className={styles.searchContainer}>
           <input
             type="text"
             placeholder="Search templates..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="search-input"
+            className={styles.searchInput}
           />
-          <span className="search-icon">🔍</span>
+          <span className={styles.searchIcon}>🔍</span>
         </div>
 
-        <div className="category-filters">
+        <div className={styles.categoryFilters}>
           {categories.map(category => (
             <button
               key={category.id}
-              className={`category-btn ${selectedCategory === category.id ? 'active' : ''}`}
+              className={`${styles.categoryBtn} ${selectedCategory === category.id ? styles.active : ''}`}
               onClick={() => setSelectedCategory(category.id)}
             >
-              <span className="category-icon">{category.icon}</span>
+              <span className={styles.categoryIcon}>{category.icon}</span>
               {category.name}
             </button>
           ))}
@@ -172,24 +172,24 @@ const CreateEInvite: React.FC = () => {
       </div>
 
       {/* Templates Grid */}
-      <div className="templates-container">
-        <div className="templates-grid">
+      <div className={styles.templatesContainer}>
+        <div className={styles.templatesGrid}>
           {filteredTemplates.map(template => (
-            <div key={template.id} className="template-card">
-              <div className="template-preview">
-                <div className="preview-placeholder">
-                  <span className="preview-icon">📱</span>
-                  <span className="preview-text">{template.name}</span>
+            <div key={template.id} className={styles.templateCard}>
+              <div className={styles.templatePreview}>
+                <div className={styles.previewPlaceholder}>
+                  <span className={styles.previewIcon}>📱</span>
+                  <span className={styles.previewText}>{template.name}</span>
                 </div>
-                <div className="template-overlay">
+                <div className={styles.templateOverlay}>
                   <button
-                    className="preview-btn"
+                    className={styles.previewBtn}
                     onClick={() => handlePreviewTemplate(template)}
                   >
                     👁️ Preview
                   </button>
                   <button
-                    className="select-btn"
+                    className={styles.selectBtn}
                     onClick={() => handleTemplateSelect(template)}
                   >
                     ✨ Select Template
@@ -197,29 +197,29 @@ const CreateEInvite: React.FC = () => {
                 </div>
               </div>
               
-              <div className="template-info">
-                <h3 className="template-name">{template.name}</h3>
-                <p className="template-description">{template.description}</p>
+              <div className={styles.templateInfo}>
+                <h3 className={styles.templateName}>{template.name}</h3>
+                <p className={styles.templateDescription}>{template.description}</p>
                 
-                <div className="template-colors">
+                <div className={styles.templateColors}>
                   {template.colors.map((color, index) => (
                     <div
                       key={index}
-                      className="color-swatch"
+                      className={styles.colorSwatch}
                       style={{ backgroundColor: color }}
                       title={color}
                     />
                   ))}
                 </div>
                 
-                <div className="template-features">
+                <div className={styles.templateFeatures}>
                   {template.features.slice(0, 3).map((feature, index) => (
-                    <span key={index} className="feature-tag">
+                    <span key={index} className={styles.featureTag}>
                       {feature}
                     </span>
                   ))}
                   {template.features.length > 3 && (
-                    <span className="feature-tag more">
+                    <span className={`${styles.featureTag} ${styles.more}`}>
                       +{template.features.length - 3} more
                     </span>
                   )}
@@ -230,8 +230,8 @@ const CreateEInvite: React.FC = () => {
         </div>
 
         {filteredTemplates.length === 0 && (
-          <div className="no-templates">
-            <span className="no-templates-icon">🔍</span>
+          <div className={styles.noTemplates}>
+            <span className={styles.noTemplatesIcon}>🔍</span>
             <h3>No templates found</h3>
             <p>Try adjusting your search or filter criteria</p>
           </div>
@@ -240,47 +240,47 @@ const CreateEInvite: React.FC = () => {
 
       {/* Template Selection Modal */}
       {showTemplateModal && selectedTemplate && (
-        <div className="modal-overlay" onClick={() => setShowTemplateModal(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
+        <div className={styles.modalOverlay} onClick={() => setShowTemplateModal(false)}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.modalHeader}>
               <h2>Selected Template: {selectedTemplate.name}</h2>
               <button
-                className="close-btn"
+                className={styles.closeBtn}
                 onClick={() => setShowTemplateModal(false)}
               >
                 ✕
               </button>
             </div>
             
-            <div className="modal-body">
-              <div className="template-details">
-                <div className="template-preview-large">
-                  <div className="preview-placeholder-large">
-                    <span className="preview-icon-large">📱</span>
-                    <span className="preview-text-large">{selectedTemplate.name}</span>
+            <div className={styles.modalBody}>
+              <div className={styles.templateDetails}>
+                <div className={styles.templatePreviewLarge}>
+                  <div className={styles.previewPlaceholderLarge}>
+                    <span className={styles.previewIconLarge}>📱</span>
+                    <span className={styles.previewTextLarge}>{selectedTemplate.name}</span>
                   </div>
                 </div>
                 
-                <div className="template-specs">
+                <div className={styles.templateSpecs}>
                   <h3>Template Features</h3>
-                  <ul className="features-list">
+                  <ul className={styles.featuresList}>
                     {selectedTemplate.features.map((feature, index) => (
-                      <li key={index} className="feature-item">
-                        <span className="feature-icon">✓</span>
+                      <li key={index} className={styles.featureItem}>
+                        <span className={styles.featureIcon}>✓</span>
                         {feature}
                       </li>
                     ))}
                   </ul>
                   
                   <h3>Color Palette</h3>
-                  <div className="color-palette">
+                  <div className={styles.colorPalette}>
                     {selectedTemplate.colors.map((color, index) => (
-                      <div key={index} className="color-item">
+                      <div key={index} className={styles.colorItem}>
                         <div
-                          className="color-swatch-large"
+                          className={styles.colorSwatchLarge}
                           style={{ backgroundColor: color }}
                         />
-                        <span className="color-code">{color}</span>
+                        <span className={styles.colorCode}>{color}</span>
                       </div>
                     ))}
                   </div>
@@ -288,15 +288,15 @@ const CreateEInvite: React.FC = () => {
               </div>
             </div>
             
-            <div className="modal-footer">
+            <div className={styles.modalFooter}>
               <button
-                className="cancel-btn"
+                className={styles.cancelBtn}
                 onClick={() => setShowTemplateModal(false)}
               >
                 Cancel
               </button>
               <button
-                className="create-btn"
+                className={styles.createBtn}
                 onClick={handleCreateInvite}
               >
                 Create Invite with This Template

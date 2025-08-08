@@ -1,0 +1,97 @@
+.previewPage {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.previewHeader {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.previewControls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.closeBtn, .printBtn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.closeBtn {
+  background: #f0f0f0;
+  color: #666;
+}
+
+.closeBtn:hover {
+  background: #e0e0e0;
+  color: #333;
+}
+
+.printBtn {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white;
+}
+
+.printBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.previewContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.errorContainer {
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+}
+
+.errorContainer h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.errorContainer p {
+  font-size: 1.1rem;
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .previewPage {
+    padding: 15px;
+  }
+
+  .previewControls {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .closeBtn, .printBtn {
+    width: 100%;
+    justify-content: center;
+  }
+} 

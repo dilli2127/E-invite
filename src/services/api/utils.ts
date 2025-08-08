@@ -38,7 +38,7 @@ Login: {
     Get: {
       identifier: "GetEinvite",
       method: API_METHODS.GET,
-      endpoint: "e_invite",
+      endpoint: "e_invite/",
     },
     Delete: {
       identifier: "DeleteEinvite",

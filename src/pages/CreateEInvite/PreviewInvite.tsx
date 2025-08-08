@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import TemplateRegistry from './templates/TemplateRegistry';
-import './PreviewInvite.css';
+import styles from './PreviewInvite.module.css';
 
 const PreviewInvite: React.FC = () => {
   const { templateId, coupleId } = useParams<{ templateId: string; coupleId?: string }>();
@@ -58,8 +58,8 @@ const PreviewInvite: React.FC = () => {
 
   if (!templateId) {
     return (
-      <div className="preview-page">
-        <div className="error-container">
+      <div className={styles.previewPage}>
+        <div className={styles.errorContainer}>
           <h2>Template not found</h2>
           <p>Please select a valid template.</p>
         </div>
@@ -68,19 +68,19 @@ const PreviewInvite: React.FC = () => {
   }
 
   return (
-    <div className="preview-page">
-      <div className="preview-header">
-        <div className="preview-controls">
-          <button className="close-btn" onClick={() => window.close()}>
+    <div className={styles.previewPage}>
+      <div className={styles.previewHeader}>
+        <div className={styles.previewControls}>
+          <button className={styles.closeBtn} onClick={() => window.close()}>
             ✕ Close Preview
           </button>
-          <button className="print-btn" onClick={() => window.print()}>
+          <button className={styles.printBtn} onClick={() => window.print()}>
             🖨️ Print Invite
           </button>
         </div>
       </div>
       
-      <div className="preview-content">
+      <div className={styles.previewContent}>
         <TemplateRegistry
           templateId={templateId}
           {...inviteData}

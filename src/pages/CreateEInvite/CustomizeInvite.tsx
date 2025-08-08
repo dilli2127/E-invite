@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import './CustomizeInvite.css';
+import styles from './CustomizeInvite.module.css';
 import { templates, TemplateData } from './templates';
 
 const CustomizeInvite: React.FC = () => {

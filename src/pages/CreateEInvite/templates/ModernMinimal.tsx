@@ -1,5 +1,5 @@
 import React from 'react';
-import './TemplateStyles.css';
+import styles from './TemplateStyles.module.css';
 
 interface ModernMinimalProps {
   groomName: string;
@@ -40,39 +40,39 @@ const ModernMinimal: React.FC<ModernMinimalProps> = ({
   };
 
   return (
-    <div className="template-modern-minimal" style={{ '--primary-color': primaryColor, '--secondary-color': secondaryColor } as React.CSSProperties}>
+    <div className={styles.modernMinimal} style={{ '--primary-color': primaryColor, '--secondary-color': secondaryColor } as React.CSSProperties}>
       {/* Hero Section */}
-      <section className="hero-section">
-        <div className="hero-content">
-          <div className="couple-names">
-            <h1 className="groom-name">{groomName || 'Groom'}</h1>
-            <div className="and-symbol">&</div>
-            <h1 className="bride-name">{brideName || 'Bride'}</h1>
+      <section className={styles.heroSection}>
+        <div className={styles.heroContent}>
+          <div className={styles.coupleNames}>
+            <h1 className={styles.groomName}>{groomName || 'Groom'}</h1>
+            <div className={styles.andSymbol}>&</div>
+            <h1 className={styles.brideName}>{brideName || 'Bride'}</h1>
           </div>
-          <div className="wedding-date">
+          <div className={styles.weddingDate}>
             {formatDate(weddingDate) || 'Wedding Date'}
           </div>
         </div>
       </section>
 
       {/* Details Section */}
-      <section className="details-section">
-        <div className="container">
-          <div className="details-grid">
-            <div className="detail-card">
-              <div className="detail-icon">🕐</div>
+      <section className={styles.detailsSection}>
+        <div className={styles.container}>
+          <div className={styles.detailsGrid}>
+            <div className={styles.detailCard}>
+              <div className={styles.detailIcon}>🕐</div>
               <h3>Time</h3>
               <p>{weddingTime || '6:00 PM'}</p>
             </div>
             
-            <div className="detail-card">
-              <div className="detail-icon">📍</div>
+            <div className={styles.detailCard}>
+              <div className={styles.detailIcon}>📍</div>
               <h3>Venue</h3>
               <p>{venue || 'Wedding Venue'}</p>
             </div>
             
-            <div className="detail-card">
-              <div className="detail-icon">🗺️</div>
+            <div className={styles.detailCard}>
+              <div className={styles.detailIcon}>🗺️</div>
               <h3>Address</h3>
               <p>{address || 'Venue Address'}</p>
             </div>
@@ -82,37 +82,37 @@ const ModernMinimal: React.FC<ModernMinimalProps> = ({
 
       {/* Description Section */}
       {description && (
-        <section className="description-section">
-          <div className="container">
-            <div className="description-content">
-              <p className="description-text">{description}</p>
+        <section className={styles.descriptionSection}>
+          <div className={styles.container}>
+            <div className={styles.descriptionContent}>
+              <p className={styles.descriptionText}>{description}</p>
             </div>
           </div>
         </section>
       )}
 
       {/* RSVP Section */}
-      <section className="rsvp-section">
-        <div className="container">
-          <h2 className="rsvp-title">RSVP</h2>
-          <div className="rsvp-content">
-            <div className="rsvp-methods">
+      <section className={styles.rsvpSection}>
+        <div className={styles.container}>
+          <h2 className={styles.rsvpTitle}>RSVP</h2>
+          <div className={styles.rsvpContent}>
+            <div className={styles.rsvpMethods}>
               {rsvpEmail && (
-                <div className="rsvp-method">
-                  <div className="rsvp-icon">📧</div>
-                  <div className="rsvp-details">
+                <div className={styles.rsvpMethod}>
+                  <div className={styles.rsvpIcon}>📧</div>
+                  <div className={styles.rsvpDetails}>
                     <h4>Email</h4>
-                    <a href={`mailto:${rsvpEmail}`} className="rsvp-link">{rsvpEmail}</a>
+                    <a href={`mailto:${rsvpEmail}`} className={styles.rsvpLink}>{rsvpEmail}</a>
                   </div>
                 </div>
               )}
               
               {rsvpPhone && (
-                <div className="rsvp-method">
-                  <div className="rsvp-icon">📱</div>
-                  <div className="rsvp-details">
+                <div className={styles.rsvpMethod}>
+                  <div className={styles.rsvpIcon}>📱</div>
+                  <div className={styles.rsvpDetails}>
                     <h4>Phone</h4>
-                    <a href={`tel:${rsvpPhone}`} className="rsvp-link">{rsvpPhone}</a>
+                    <a href={`tel:${rsvpPhone}`} className={styles.rsvpLink}>{rsvpPhone}</a>
                   </div>
                 </div>
               )}
@@ -122,9 +122,9 @@ const ModernMinimal: React.FC<ModernMinimalProps> = ({
       </section>
 
       {/* Footer */}
-      <footer className="template-footer">
-        <div className="container">
-          <p className="footer-text">
+      <footer className={styles.templateFooter}>
+        <div className={styles.container}>
+          <p className={styles.footerText}>
             We can't wait to celebrate with you! 💕
           </p>
         </div>
