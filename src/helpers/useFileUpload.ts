@@ -10,7 +10,7 @@ export const useFileUpload = () => {
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const response = await fetch("http://localhost:8247/upload-photo", {
+      const response = await fetch("https://www.freshfocuzstudio.com/api/", {
         method: "POST",
         body: formData,
       });
