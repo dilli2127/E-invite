@@ -36,25 +36,35 @@ const EInvitePage: React.FC = () => {
   }, [id]);
   console.log(items);
   return (
-    <>
+    <div className="einvite-main-container">
+      <div className="einvite-background-pattern"></div>
+      <div className="floating-elements">
+        <div className="floating-circle circle-1"></div>
+        <div className="floating-circle circle-2"></div>
+        <div className="floating-circle circle-3"></div>
+        <div className="floating-circle circle-4"></div>
+        <div className="floating-circle circle-5"></div>
+      </div>
       <Col className="einvite-page">
-        <Col>
+        <Col className="invitation-section">
           <LandscapeImage imageUrl={items?.result?.invite_url || ""} />
         </Col>
-        <Col style={{ marginTop: "-3px" }}>
-          <PhotoSlider photos={items?.result?.images || []} />
-        </Col>
-        <Col>
+        
+        {items?.result?.images && items.result.images.length > 0 && (
+          <Col className="gallery-section">
+            <PhotoSlider photos={items?.result?.images || []} />
+          </Col>
+        )}
+        
+        <Col className="location-section">
           <LocationMap
             latitude={items?.result?.latitude}
             longitude={items?.result?.longitude}
-            placeName={`${items?.result?.event_address1},
-                ${items?.result?.event_address2}
-            `}
+            placeName={`${items?.result?.event_address1}, ${items?.result?.event_address2}`}
           />
         </Col>
       </Col>
-    </>
+    </div>
   );
 };
 

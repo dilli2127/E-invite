@@ -33,81 +33,93 @@ const LocationMap: React.FC<LocationMapProps> = ({
   const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
 
   return (
-    <Card title="Event Location">
-      <LoadScript googleMapsApiKey={apiKey}>
-        <GoogleMap
-          mapContainerStyle={{ height: "400px", width: "100%" }}
-          center={{ lat: latitude, lng: longitude }}
-          zoom={15}
-        >
-          <Marker
-            position={{ lat: latitude, lng: longitude }}
-            onClick={handleMarkerClick}
-          />
-          {showInfoWindow && (
-            <InfoWindow
-              position={{ lat: latitude, lng: longitude }}
-              onCloseClick={handleInfoWindowClose}
+    <div className="location-map-container">
+      <Card 
+        className="location-card"
+        title={
+          <div className="location-card-header">
+            <div className="location-icon">📍</div>
+            <span className="location-title">Event Location</span>
+          </div>
+        }
+      >
+        <div className="map-wrapper">
+          <LoadScript googleMapsApiKey={apiKey}>
+            <GoogleMap
+              mapContainerStyle={{ height: "400px", width: "100%", borderRadius: "12px" }}
+              center={{ lat: latitude, lng: longitude }}
+              zoom={15}
+              options={{
+                styles: [
+                  {
+                    featureType: "all",
+                    elementType: "geometry.fill",
+                    stylers: [{ weight: "2.00" }]
+                  },
+                  {
+                    featureType: "all",
+                    elementType: "geometry.stroke",
+                    stylers: [{ color: "#9c9c9c" }]
+                  }
+                ]
+              }}
             >
-              <div style={{ maxWidth: "250px", textAlign: "center" }}>
-                <h3 style={{ margin: "5px 0" }}>{placeName}</h3>
-                <a
-                  href={googleMapsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ textDecoration: "none", color: "#1a73e8" }}
+              <Marker
+                position={{ lat: latitude, lng: longitude }}
+                onClick={handleMarkerClick}
+              />
+              {showInfoWindow && (
+                <InfoWindow
+                  position={{ lat: latitude, lng: longitude }}
+                  onCloseClick={handleInfoWindowClose}
                 >
-                  Open in Google Maps
-                </a>
-                <br />
-                <Button
-                  type="primary"
-                  style={{ marginTop: "8px" }}
-                  onClick={() => placeName && navigator.clipboard.writeText(placeName)}
-                >
-                  Copy Location Name
-                </Button>
-              </div>
-            </InfoWindow>
-          )}
-        </GoogleMap>
-      </LoadScript>
-    {/* Address Block Below Map */}
-    {googleMapsUrl && (
-        <div
-          style={{
-            marginTop: "15px",
-            padding: "15px",
-            backgroundColor: "#f0f8ff",
-            borderRadius: "10px",
-            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-            textAlign: "center",
-          }}
-        >
-          <h3 style={{ color: "#1d3557", fontFamily: "Arial, sans-serif" }}>
-            Event Address
-          </h3>
-          <p
-            style={{
-              whiteSpace: "pre-line", // Ensures multiline address
-              color: "#0b1687",
-              fontWeight: "bold",
-              fontSize: "16px",
-            }}
-          >
-            {placeName}
-          </p>
-          <Button
-            type="primary"
-            href={googleMapsUrl}
-            target="_blank"
-            style={{ marginTop: "10px" }}
-          >
-            Get Directions
-          </Button>
+                  <div className="info-window-content">
+                    <h3 className="info-window-title">{placeName}</h3>
+                    <a
+                      href={googleMapsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="info-window-link"
+                    >
+                      Open in Google Maps
+                    </a>
+                    <br />
+                    <Button
+                      type="primary"
+                      className="copy-location-btn"
+                      onClick={() => placeName && navigator.clipboard.writeText(placeName)}
+                    >
+                      Copy Location Name
+                    </Button>
+                  </div>
+                </InfoWindow>
+              )}
+            </GoogleMap>
+          </LoadScript>
         </div>
-      )}
-    </Card>
+        
+        {/* Enhanced Address Block Below Map */}
+        {googleMapsUrl && (
+          <div className="address-block">
+            <div className="address-header">
+              <h3 className="address-title">Event Venue</h3>
+              <div className="address-decoration"></div>
+            </div>
+            <p className="address-text">{placeName}</p>
+            <Button
+              type="primary"
+              href={googleMapsUrl}
+              target="_blank"
+              className="directions-btn"
+              size="large"
+            >
+              <span className="btn-icon">🧭</span>
+              Get Directions
+            </Button>
+          </div>
+        )}
+      </Card>
+    </div>
   );
 };
 

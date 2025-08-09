@@ -2,23 +2,40 @@ import React from "react";
 import { Carousel } from "antd";
 
 interface PhotoSliderProps {
-  photos:  string [];
+  photos: string[];
 }
 
 const PhotoSlider: React.FC<PhotoSliderProps> = ({ photos }) => {
+  if (!photos || photos.length === 0) {
+    return null;
+  }
+
   return (
-    <Carousel autoplay >
-      {photos.map((photo, index) => (
-      <div key={index}>
-        <img
-        src={photo}
-        alt={`photo-${index}`}
-        className="image-full-width-slider"
-        style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain' }}
-        />
+    <div className="photo-slider-container">
+      <div className="slider-header">
+        <h2 className="slider-title">Memorable Moments</h2>
+        <div className="slider-subtitle">Cherish these beautiful memories</div>
       </div>
-      ))}
-    </Carousel>
+      <Carousel 
+        autoplay 
+        dots={{ className: 'custom-dots' }}
+        effect="fade"
+        autoplaySpeed={4000}
+      >
+        {photos.map((photo, index) => (
+          <div key={index} className="slider-item">
+            <div className="image-frame">
+              <img
+                src={photo}
+                alt={`Memory ${index + 1}`}
+                className="slider-image"
+              />
+              <div className="image-shine-effect"></div>
+            </div>
+          </div>
+        ))}
+      </Carousel>
+    </div>
   );
 };
 
